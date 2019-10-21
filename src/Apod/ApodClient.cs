@@ -10,24 +10,57 @@ namespace Apod
     /// <summary>The client that is used to consume the Astronomy Picture of the Day API.</summary>
     public class ApodClient
     {
-        private readonly HttpClient _httpClient;
         private readonly string _apiKey;
+        private readonly HttpClient _httpClient;
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
 
         /// <summary>Create a new instance of an Astronomy Picture of the Day client.</summary>
         /// <param name="apiKey">Your API key from https://api.nasa.gov.</param>
         public ApodClient(string apiKey)
         {
-            _httpClient = new HttpClient();
             _apiKey = apiKey;
+            _httpClient = new HttpClient();
+
+            // Factory pattern necessary?
+            _jsonSerializerOptions = new JsonSerializerOptions();
+            _jsonSerializerOptions.PropertyNameCaseInsensitive = true;
+            _jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         }
 
         public async Task<AstronomyContent> FetchApodAsync()
-            => await FetchApiData();
+        {
+            var responseMessage = await FetchApiDataAsync();
+            return await ResponseToAstronomyContentAsync(responseMessage);
+        }
 
         public async Task<AstronomyContent> FetchApodAsync(DateTime date)
-            => await FetchApiData($"date={date.ToString("yyyy-MM-dd")}");
+        {
+            var queryParameter = $"date={date.ToString("yyyy-MM-dd")}";
+            var responseMessage = await FetchApiDataAsync(queryParameter);
+            return await ResponseToAstronomyContentAsync(responseMessage);
+        }
 
-        private async Task<AstronomyContent> FetchApiData(params string[] queryParameters)
+        private async Task<HttpResponseMessage> FetchApiDataAsync(params string[] queryParameters)
+        {
+            var requestUri = BuildFullQueryString(queryParameters);
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, requestUri);
+            return await _httpClient.SendAsync(requestMessage);
+        }
+
+        private async Task<AstronomyContent> ResponseToAstronomyContentAsync(HttpResponseMessage responseMessage)
+        {
+            var responseContent = await responseMessage.Content.ReadAsStringAsync();
+
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(responseContent, _jsonSerializerOptions);
+                errorResponse.ThrowInformativeError();
+            }
+
+            return JsonSerializer.Deserialize<AstronomyContent>(responseContent, _jsonSerializerOptions);
+        }
+
+        private string BuildFullQueryString(params string[] queryParameters)
         {
             var stringBuilder = new StringBuilder();
 
@@ -41,31 +74,7 @@ namespace Apod
                 stringBuilder.Append(parameter);
             }
 
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, stringBuilder.ToString());
-            var response = await _httpClient.SendAsync(httpRequest);
-
-
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
-            if (!response.IsSuccessStatusCode)
-            {
-                var error = JsonSerializer.Deserialize<ErrorResponse>(responseContent, options);
-                if (error.Error == null)
-                {
-                    throw new ArgumentException("One of the queryParameters were invalid... I think.", nameof(queryParameters));
-                }
-
-                throw new HttpRequestException($"Unsuccessful HTTP request.\nError code: {error.Error.Code}\nError message: {error.Error.Message}\n");
-            }
-
-            options.Converters.Add(new JsonStringEnumConverter());
-
-            return JsonSerializer.Deserialize<AstronomyContent>(responseContent, options);
+            return stringBuilder.ToString();
         }
     }
 }
