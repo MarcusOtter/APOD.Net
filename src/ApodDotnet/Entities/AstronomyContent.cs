@@ -16,19 +16,21 @@ namespace ApodDotnet
         public string Explanation { get; set; }
 
         /// <summary>The URL for the high-definition variant of the content.</summary>
-        [JsonPropertyName("Hdurl")] 
+        [JsonPropertyName("hdurl")] 
         public string ContentUrlHD { get; set; }
 
         /// <summary>The type of media.</summary>
+        [JsonPropertyName("media_type")]
         public MediaType MediaType { get; set; }
 
+        [JsonPropertyName("service_version")]
         public string ServiceVersion { get; set; }
 
         /// <summary>The title of the content.</summary>
         public string Title { get; set; }
 
         /// <summary>The URL for the content. Remember that this can be both image and video content.</summary>
-        [JsonPropertyName("Url")]
+        [JsonPropertyName("url")]
         public string ContentUrl { get; set; }
     }
 }
