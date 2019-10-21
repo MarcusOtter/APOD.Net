@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apod", "ApodDotnet\Apod.csproj", "{C11DE09A-8052-4183-BD76-3CE5775A353B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApodExample", "ExampleUsage\ApodExample.csproj", "{0594AB88-9265-4245-8D43-59258B7ED8E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApodExample", "ExampleUsage\ApodExample.csproj", "{0594AB88-9265-4245-8D43-59258B7ED8E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
