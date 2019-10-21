@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApodDotnet
+namespace Apod
 {
     public class ApodClient
     {

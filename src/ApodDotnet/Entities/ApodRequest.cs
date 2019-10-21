@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApodDotnet.Entities
+namespace Apod
 {
     // I am currently thinking about how to make the usage of a request as frictionless as possible.
     // This whole class is going to change (and maybe be deleted).

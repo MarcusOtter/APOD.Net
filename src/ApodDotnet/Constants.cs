@@ -1,4 +1,4 @@
-﻿namespace ApodDotnet
+﻿namespace Apod
 {
     internal static class Constants
     {

@@ -1,4 +1,4 @@
-﻿namespace ApodDotnet
+﻿namespace Apod
 {
     public enum MediaType
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace ApodDotnet
+namespace Apod
 {
     /// <summary>Contains information about the digital content of an Astronomy Picture of the Day.</summary>
     public class AstronomyContent
