@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apod", "ApodDotnet\Apod.csproj", "{C11DE09A-8052-4183-BD76-3CE5775A353B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApodExample", "ExampleUsage\ApodExample.csproj", "{0594AB88-9265-4245-8D43-59258B7ED8E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apod", "Apod\Apod.csproj", "{E710A69B-0D95-48A3-877E-2A602709804E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C11DE09A-8052-4183-BD76-3CE5775A353B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C11DE09A-8052-4183-BD76-3CE5775A353B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C11DE09A-8052-4183-BD76-3CE5775A353B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C11DE09A-8052-4183-BD76-3CE5775A353B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0594AB88-9265-4245-8D43-59258B7ED8E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0594AB88-9265-4245-8D43-59258B7ED8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0594AB88-9265-4245-8D43-59258B7ED8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0594AB88-9265-4245-8D43-59258B7ED8E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E710A69B-0D95-48A3-877E-2A602709804E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E710A69B-0D95-48A3-877E-2A602709804E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E710A69B-0D95-48A3-877E-2A602709804E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E710A69B-0D95-48A3-877E-2A602709804E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
