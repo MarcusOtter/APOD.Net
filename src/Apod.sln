@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApodExample", "ExampleUsage
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apod", "Apod\Apod.csproj", "{E710A69B-0D95-48A3-877E-2A602709804E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApodTests", "ApodTests\ApodTests.csproj", "{1AA57546-36B8-4137-8539-71FD70D528C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E710A69B-0D95-48A3-877E-2A602709804E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E710A69B-0D95-48A3-877E-2A602709804E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E710A69B-0D95-48A3-877E-2A602709804E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AA57546-36B8-4137-8539-71FD70D528C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA57546-36B8-4137-8539-71FD70D528C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA57546-36B8-4137-8539-71FD70D528C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA57546-36B8-4137-8539-71FD70D528C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
