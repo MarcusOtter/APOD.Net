@@ -11,7 +11,7 @@ namespace Apod
             // I'm pretty sure this condition is only met if there's something wrong in this library, the user should not be able to make this happen
             if (errorResponse.Error == null)
             {
-                // Also happens on timeout
+                // Also happens on timeout or if the link is invalid...
                 throw new ArgumentException("One of the queryParameters were invalid... I think.");
             }
 
