@@ -35,7 +35,7 @@ namespace Apod
         }
 
         /// <summary>Fetch the Astronomy Picture of the Day for a specific date.</summary>
-        /// <param name="date">The date to request the APOD for. Must be between 1995-06-20 and today's date.</param>
+        /// <param name="date">The date to request the APOD for. Must be between June 16th 1995 and today's date.</param>
         public async Task<AstronomyContent> FetchApodAsync(DateTime date)
         {
             // TODO: Error handling for invalid dates
@@ -46,7 +46,7 @@ namespace Apod
         }
 
         /// <summary>Fetch all the Astronomy Pictures of the Day between two dates.</summary>
-        /// <param name="startDate">The start date. Must be between 1995-06-16 and today's date.</param>
+        /// <param name="startDate">The start date. Must be between June 16th 1995 and today's date.</param>
         /// <param name="endDate">The end date. Must be between the <paramref name="startDate"/> and today's date. Defaults to <see cref="DateTime.Today"/>.</param>
         public async Task<AstronomyContent[]> FetchApodAsync(DateTime startDate, DateTime endDate = default)
         {
