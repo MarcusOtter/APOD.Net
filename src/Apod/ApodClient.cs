@@ -65,7 +65,7 @@ namespace Apod
         }
 
         private bool DateIsInRange(DateTime dateTime)
-            => (DateTime.Compare(dateTime, DateTime.Today) < 0) 
+            => (DateTime.Compare(dateTime, DateTime.Today.AddDays(1)) < 0) 
             && (DateTime.Compare(dateTime, Constants.FirstApodDate.AddDays(-1)) > 0);
         
 

@@ -47,7 +47,7 @@ namespace ApodTests
 
             // The end date has to be the same date, because 1995-06-17 is not valid. This shouldn't affect the outcome.
             // In theory, the test should be from the lowerBoundDate to the lowerBoundDate + ~10 days.
-            // In practice we can only test the same date since the api wasn't consistently uploading during the beginning.
+            // In practice we can only test the same date since the api wasn't consistent with daily pictures during the beginning.
             var endDate = new DateTime(1995, 06, 16);
 
             var expectedOutOfRange = lowerBoundDate.AddDays(-1);
@@ -55,6 +55,20 @@ namespace ApodTests
             await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange, endDate));
 
             var result = await _client.FetchApodAsync(lowerBoundDate, endDate);
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async Task ApodClient_FetchApodAsync_DateSpan_EndDateCorrectUpperBound()
+        {
+            var upperBoundDate = DateTime.Today; // Last allowed date
+            var startDate = upperBoundDate.AddDays(-5); // Random date in range
+
+            var expectedOutOfRange = upperBoundDate.AddDays(1);
+
+            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, expectedOutOfRange));
+
+            var result = await _client.FetchApodAsync(startDate, upperBoundDate);
             Assert.NotNull(result);
         }
 
