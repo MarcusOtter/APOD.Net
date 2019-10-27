@@ -104,11 +104,16 @@ namespace ApodTests
         [Fact]
         public async Task ApodClient_FetchApodAsync_DateSpan_ReturnsCorrectAmountOfResults()
         {
+            var startDate = DateTime.Today.AddDays(-2);
+            var endDate = DateTime.Today;
 
+            var result = await _client.FetchApodAsync(startDate, endDate);
+
+            // If the date is 2019-10-27, the start date is 2019-10-27 and the end date is 2019-10-25
+            // There are three expected results, 2019-10-25, 2019-10-26 and 2019-10-27. 
+            const int expectedResults = 3;
+
+            Assert.Equal(expectedResults, result.Length);
         }
-
-        // -- Ideas for future tests --
-        // Same dates not null
-        // Returns correct amount of results
     }
 }
