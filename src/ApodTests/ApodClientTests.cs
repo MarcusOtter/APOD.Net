@@ -91,14 +91,14 @@ namespace ApodTests
         }
 
         [Fact]
-        public async Task ApodClient_FetchApodAsync_DateSpan_SameDateNotNull()
+        public async Task ApodClient_FetchApodAsync_DateSpan_SameDateReturnsOneResult()
         {
             var startDate = new DateTime(2012, 12, 12); // Random date in range
             var endDate = startDate;
 
             var result = await _client.FetchApodAsync(startDate, endDate);
 
-            Assert.NotNull(result);
+            Assert.Single(result);
         }
 
         [Fact]
