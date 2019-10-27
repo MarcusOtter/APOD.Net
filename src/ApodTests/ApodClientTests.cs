@@ -32,15 +32,6 @@ namespace ApodTests
         }
 
         [Fact]
-        public async Task ApodClient_FetchApodAsync_DateSpan_StartDateThrowsWhenOutOfRange()
-        {
-            var startDate = new DateTime(1995, 06, 10); // Random date out of range
-            var endDate = new DateTime(1995, 06, 28); // Random date in range
-
-            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
-        }
-
-        [Fact]
         public async Task ApodClient_FetchApodAsync_DateSpan_StartDateCorrectLowerBound()
         {
             var lowerBoundDate = new DateTime(1995, 06, 16); // First allowed date
@@ -73,15 +64,22 @@ namespace ApodTests
         }
 
         [Fact]
-        public async Task ApodClient_FetchApodAsync_DateSpan_UpperboundThrowsForOutOfRange()
+        public async Task ApodClient_FetchApodAsync_DateSpan_StartDateThrowsWhenOutOfRange()
         {
-            var lowerBound = DateTime.Today.AddDays(-10); // Random date in range
-            var upperBound = DateTime.Today.AddDays(3); // Random date out of range
+            var startDate = new DateTime(1995, 06, 10); // Random date out of range
+            var endDate = new DateTime(1995, 06, 28); // Random date in range
 
-            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(lowerBound, upperBound));
+            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
         }
 
-        
+        [Fact]
+        public async Task ApodClient_FetchApodAsync_DateSpan_EndDateThrowsForOutOfRange()
+        {
+            var startDate = DateTime.Today.AddDays(-10); // Random date in range
+            var endDate = DateTime.Today.AddDays(3); // Random date out of range
+
+            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
+        }
 
         [Fact]
         public async Task ApodClient_FetchApodAsync_DateSpan_ReturnsCorrectAmountOfResults()
