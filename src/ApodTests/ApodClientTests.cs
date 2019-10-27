@@ -82,6 +82,15 @@ namespace ApodTests
         }
 
         [Fact]
+        public async Task ApodClient_FetchApodAsync_DateSpan_EndDateBeforeStartDateThrows()
+        {
+            var startDate = new DateTime(2007, 10, 12); // Random date in range
+            var endDate = new DateTime(2007, 10, 04); // Random date before the startDate
+
+            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
+        }
+
+        [Fact]
         public async Task ApodClient_FetchApodAsync_DateSpan_ReturnsCorrectAmountOfResults()
         {
 
@@ -90,7 +99,5 @@ namespace ApodTests
         // -- Ideas for future tests --
         // Same dates not null
         // Returns correct amount of results
-        // end date before start date throws
-        // upper and lower bounds are exactly like they should (upper bound still untested)
     }
 }
