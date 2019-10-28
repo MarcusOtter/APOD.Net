@@ -8,6 +8,10 @@ namespace ApodTests
     public class ApodClientTests
     {
         private const string testApiKey = "DEMO_KEY";
+
+        private readonly DateTime _firstAllowedDate = new DateTime(1995, 06, 16);
+        private readonly DateTime _lastAllowedDate = DateTime.Today;
+
         private readonly ApodClient _client;
 
         public ApodClientTests()
@@ -32,34 +36,67 @@ namespace ApodTests
         }
 
         [Fact]
+        public async Task ApodClient_FetchApodAsync_SpecificDate_NotNull()
+        {
+            var date = new DateTime(2008, 10, 29); // Random date in range
+            var apodContent = await _client.FetchApodAsync(date);
+            Assert.NotNull(apodContent);
+        }
+
+        [Fact]
+        public async Task ApodClient_FetchApodAsync_SpecificDate_CorrectLowerBound()
+        {
+            var expectedOutOfRange = _firstAllowedDate.AddDays(-1);
+            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange));
+
+            var result = await _client.FetchApodAsync(_firstAllowedDate);
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async Task ApodClient_FetchApodAsync_SpecificDate_CorrectUpperBound()
+        {
+            var expectedOutOfRange = _lastAllowedDate.AddDays(1);
+            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange));
+
+            var result = await _client.FetchApodAsync(_lastAllowedDate);
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async Task ApodClient_FetchApodAsync_SpecificDate_ThrowsForDateOutOfRange()
+        {
+            var dateOutOfRange1 = new DateTime(1993, 06, 14);
+            var dateOutOfRange2 = _lastAllowedDate.AddDays(391);
+
+            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(dateOutOfRange1));
+            await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(dateOutOfRange2));
+        }
+
+        [Fact]
         public async Task ApodClient_FetchApodAsync_DateSpan_StartDateCorrectLowerBound()
         {
-            var lowerBoundDate = new DateTime(1995, 06, 16); // First allowed date
-
-            // The end date has to be the same date, because 1995-06-17 is not valid. This shouldn't affect the outcome.
-            // In theory, the test should be from the lowerBoundDate to the lowerBoundDate + ~10 days.
+            // The end date has to be the same date as the first allowed date, because 1995-06-17 is not valid. This shouldn't affect the outcome.
+            // Ultimately the test should be from the _firstAllowedDate to the _firstAllowedDate += about 5 days.
             // In practice we can only test the same date since the api wasn't consistent with daily pictures during the beginning.
-            var endDate = new DateTime(1995, 06, 16);
+            var endDate = _firstAllowedDate;
 
-            var expectedOutOfRange = lowerBoundDate.AddDays(-1);
-
+            var expectedOutOfRange = _firstAllowedDate.AddDays(-1);
             await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange, endDate));
 
-            var result = await _client.FetchApodAsync(lowerBoundDate, endDate);
+            var result = await _client.FetchApodAsync(_firstAllowedDate, endDate);
             Assert.NotNull(result);
         }
 
         [Fact]
         public async Task ApodClient_FetchApodAsync_DateSpan_EndDateCorrectUpperBound()
         {
-            var upperBoundDate = DateTime.Today; // Last allowed date
-            var startDate = upperBoundDate.AddDays(-5); // Random date in range
+            var startDate = _lastAllowedDate.AddDays(-5); // Random date in range
 
-            var expectedOutOfRange = upperBoundDate.AddDays(1);
-
+            var expectedOutOfRange = _lastAllowedDate.AddDays(1);
             await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, expectedOutOfRange));
 
-            var result = await _client.FetchApodAsync(startDate, upperBoundDate);
+            var result = await _client.FetchApodAsync(startDate, _lastAllowedDate);
             Assert.NotNull(result);
         }
 

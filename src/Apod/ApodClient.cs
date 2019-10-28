@@ -38,7 +38,7 @@ namespace Apod
         /// <param name="date">The date to request the APOD for. Must be between June 16th 1995 and today's date.</param>
         public async Task<AstronomyContent> FetchApodAsync(DateTime date)
         {
-            // TODO: Error handling for invalid dates
+            if (!DateIsInRange(date)) { throw new DateOutOfRangeException(nameof(date), date); }
 
             var queryParameter = $"date={date.ToString("yyyy-MM-dd")}";
             var responseMessage = await FetchApiDataAsync(queryParameter);
