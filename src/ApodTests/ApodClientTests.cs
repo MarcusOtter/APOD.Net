@@ -16,7 +16,7 @@ namespace ApodTests
 
         public ApodClientTests()
         {
-            _client = new ApodClient(testApiKey);
+            _client = new ApodClient(_testApiKey);
         }
 
         [Fact]

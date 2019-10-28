@@ -8,6 +8,6 @@ namespace Apod
         internal const string BaseUrl = "https://api.nasa.gov/planetary/apod";
 
         /// <summary>The publication date of the very first Astronomy Picture of the Day.</summary>
-        internal static readonly DateTime FirstApodDate = DateTime.Parse("1995-06-16");
+        internal static readonly DateTime FirstApodDate = new DateTime(1995, 06, 16);
     }
 }
