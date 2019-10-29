@@ -7,7 +7,7 @@ namespace ApodTests
 {
     public class ApodClientTests
     {
-        private const string _testApiKey = "DEMO_KEY";
+        private readonly string _testApiKey = Environment.GetEnvironmentVariable("NASA_API_KEY") ?? "DEMO_KEY";
 
         private readonly DateTime _firstAllowedDate = new DateTime(1995, 06, 16);
         private readonly DateTime _lastAllowedDate = DateTime.Today;
