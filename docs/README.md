@@ -4,4 +4,6 @@
 </p>
 
 # APOD.Net
+[![Build status](https://github.com/LeMorrow/APOD.Net/workflows/.NET%20Core/badge.svg)](https://github.com/LeMorrow/APOD.Net/actions)
+
 This library is currently being built. Usage and documentation will be found here later.
