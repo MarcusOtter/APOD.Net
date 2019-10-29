@@ -1,13 +1,12 @@
 <p align="center">
   <a href="#"><img alt="A C# wrapper for NASA's Astronomy Picture of the Day API." src="img/banner.jpg" /></a>
-  <em><a href="https://www.nasa.gov/image-feature/revealing-the-milky-way-s-center" target="_blank">Image Credit: NASA, JPL-Caltech, Susan Stolovy (SSC/Caltech) et al.</a></em><br>
+  <em><a href="https://www.nasa.gov/image-feature/revealing-the-milky-way-s-center" target="_blank">Image Credit: NASA, JPL-Caltech, Susan Stolovy (SSC/Caltech) et al.</a></em><br><br>
   <img src="https://github.com/LeMorrow/APOD.Net/workflows/Build/badge.svg" alt="Build status">
 </p>
 
 # APOD.Net
-:warning: This project is still in it's infancy - please understand that many features will be changed in the final product.
+:warning: *This project is still in it's infancy - please understand that many features will be changed in the final product.* :warning:
 
-## What is APOD.Net?
 APOD.Net is an asynchronous .NET library used to interface with [NASA's Astronomy Picture of the Day API](https://api.nasa.gov/).
 
 ## Example usage
