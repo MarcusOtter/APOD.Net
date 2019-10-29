@@ -7,7 +7,7 @@
 # APOD.Net
 :warning: *This project is still in it's infancy - please understand that many features will be changed in the final product.* :warning:
 
-APOD.Net is an asynchronous .NET library used to interface with [NASA's Astronomy Picture of the Day API](https://api.nasa.gov/).
+APOD.Net is a .NET library used to asynchronously interface with [NASA's Astronomy Picture of the Day API](https://api.nasa.gov/).
 
 ## Example usage
 See all example projects [here](../src/ExampleUsage/).
