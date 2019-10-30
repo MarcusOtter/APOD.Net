@@ -1,7 +1,8 @@
 <p align="center">
-  <a href="#"><img alt="A C# wrapper for NASA's Astronomy Picture of the Day API." src="img/banner.jpg" /></a>
-  <em><a href="https://www.nasa.gov/image-feature/revealing-the-milky-way-s-center" target="_blank">Image Credit: NASA, JPL-Caltech, Susan Stolovy (SSC/Caltech) et al.</a></em><br><br>
-  <img src="https://github.com/LeMorrow/APOD.Net/workflows/Build/badge.svg" alt="Build status">
+  <a href="#"><img alt="APOD.Net, an unofficial " src="img/banner.jpg" /></a>
+  <em><a href="https://www.nasa.gov/image-feature/revealing-the-milky-way-s-center">Image Credit: NASA, JPL-Caltech, Susan Stolovy (SSC/Caltech) et al.</a></em><br><br>
+  <a href="https://github.com/LeMorrow/APOD.Net/actions?query=workflow%3ABuild"><img src="https://github.com/LeMorrow/APOD.Net/workflows/Build/badge.svg" alt="Build status"></a>
+  <a href="https://github.com/LeMorrow/APOD.Net/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License badge"></a>
 </p>
 
 # APOD.Net
