@@ -18,7 +18,6 @@ APOD.Net allows you to do many things with the API, for example:
 * Get the an Astronomy Picture of the Day for a specific date
 
 ## Planned
-* Test coverage reports on every push and pull request, using [Coveralls](https://coveralls.io/) and [Coverlet](https://github.com/tonerdo/coverlet).
 * Documentation using [docfx](https://github.com/dotnet/docfx).
 * Nuget package & auto deployment using Github Actions
 
