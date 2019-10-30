@@ -24,9 +24,6 @@ jobs:
       
     - name: Run tests
       run: dotnet test src/ApodTests/ApodTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info
-    
-    - name: List dir items
-      run: dir
       
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.0.1
