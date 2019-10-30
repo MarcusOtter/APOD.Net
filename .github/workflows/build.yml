@@ -20,7 +20,7 @@ jobs:
       run: dotnet build src/Apod.sln --configuration Release
 
     - name: Install coverlet
-      run: dotnet add package coverlet.msbuild
+      run: dotnet add src/ApodTests/ApodTests.csproj package coverlet.msbuild
       
     - name: Run tests
       run: dotnet test src/ApodTests/ApodTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput='./coverage/lcov.info'
