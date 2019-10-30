@@ -4,14 +4,14 @@ on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     env:
       NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
+
     steps:
     - uses: actions/checkout@v1
       
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.100
@@ -23,7 +23,7 @@ jobs:
       run: dotnet add src/ApodTests/ApodTests.csproj package coverlet.msbuild
       
     - name: Run tests
-      run: dotnet test src/ApodTests/ApodTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./coverage/lcov.info
+      run: dotnet test src/ApodTests/ApodTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput='./coverage/lcov.info'
       
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.0.1
