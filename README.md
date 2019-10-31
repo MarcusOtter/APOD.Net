@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="#"><img alt="APOD.Net, an unofficial " src="img/banner.jpg" /></a>
+  <a href="#"><img alt="APOD.Net, an unofficial " src="docs/img/banner.jpg" /></a>
   <em><a href="https://www.nasa.gov/image-feature/revealing-the-milky-way-s-center">Image Credit: NASA, JPL-Caltech, Susan Stolovy (SSC/Caltech) et al.</a></em><br><br>
   <a href="https://github.com/LeMorrow/APOD.Net/actions?query=workflow%3ABuild"><img src="https://github.com/LeMorrow/APOD.Net/workflows/Build/badge.svg" alt="Build status"></a>
   <a href='https://coveralls.io/github/LeMorrow/APOD.Net?branch=master'><img src='https://coveralls.io/repos/github/LeMorrow/APOD.Net/badge.svg?branch=master' alt='Coverage Status' /></a>
@@ -22,7 +22,7 @@ APOD.Net allows you to do many things with the API, for example:
 * Nuget package & auto deployment using Github Actions
 
 ## Example usage
-See all example projects [here](../src/ExampleUsage/).
+See all example projects [here](src/ExampleUsage/).
 ```cs
 using System;
 using System.Threading.Tasks;
