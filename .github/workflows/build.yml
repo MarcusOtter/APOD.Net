@@ -2,8 +2,9 @@ name: Build
 
 on:
   schedule:
-    - cron:  '10/30 * * * *'
-
+    - cron:  '15/30 * * * *'
+      
+jobs:
   build:
     runs-on: ubuntu-latest
     env:
