@@ -1,8 +1,9 @@
 name: Build
 
-on: [push, pull_request]
+on:
+  schedule:
+    - cron:  '10/30 * * * *'
 
-jobs:
   build:
     runs-on: ubuntu-latest
     env:
