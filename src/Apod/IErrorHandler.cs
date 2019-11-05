@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Apod
 {
@@ -8,5 +8,6 @@ namespace Apod
     {
         ApodResponse ValidateDate(DateTime dateTime);
         ApodResponse ValidateDateRange(DateTime startDate, DateTime endDate);
+        Task<ApodResponse> ValidateHttpResponseAsync(HttpResponseMessage httpResponse);
     }
 }

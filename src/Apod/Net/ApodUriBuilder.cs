@@ -16,6 +16,8 @@ namespace Apod.Net
         {
             _apiKey = apiKey;
             _baseUri = baseUri;
+            _dateFormat = dateFormat;
+
             _stringBuilder = new StringBuilder();
         }
 

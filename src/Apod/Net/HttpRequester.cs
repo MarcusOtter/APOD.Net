@@ -9,11 +9,14 @@ namespace Apod.Net
         private readonly IApodUriBuilder _uriBuilder;
         private readonly HttpClient _httpClient;
 
-        public HttpRequester(IApodUriBuilder uriBuilder, HttpClient httpClient)
+        public HttpRequester(IApodUriBuilder uriBuilder, HttpClient httpClient = null)
         {
             _uriBuilder = uriBuilder;
-            _httpClient = httpClient;
+            _httpClient = httpClient ?? GetDefaultHttpClient();
         }
+
+        private HttpClient GetDefaultHttpClient()
+            => new HttpClient();
 
         public async Task<HttpResponseMessage> SendHttpRequestAsync()
         {

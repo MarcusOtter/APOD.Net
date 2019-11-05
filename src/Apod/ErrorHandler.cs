@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Apod
 {
@@ -13,7 +15,6 @@ namespace Apod
 
         public ApodResponse ValidateDate(DateTime dateTime)
         {
-            if (dateTime.Date == DateTime.Today) { } // Should not happen, make sure to check for this in the client
             if (!DateIsInRange(dateTime)) { return _errorBuilder.GetDateOutOfRangeError(); }
             
             return new ApodResponse(ApodStatusCode.OK);
@@ -24,6 +25,20 @@ namespace Apod
             if (!DateIsInRange(startDate)) { return _errorBuilder.GetDateOutOfRangeError(); }
             if (!DateIsInRange(endDate)) { return _errorBuilder.GetDateOutOfRangeError(); }
             if (DateTime.Compare(startDate, endDate) > 0) { return _errorBuilder.GetStartDateAfterEndDateError(); }
+
+            return new ApodResponse(ApodStatusCode.OK);
+        }
+
+        public async Task<ApodResponse> ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
+        {
+            var responseContent = await httpResponse.Content.ReadAsStringAsync();
+
+            if (!httpResponse.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"There was an error with the HTTP request. Error: \n-----\n{responseContent}\n-----");
+                Console.WriteLine($"The ContentType header ToString is: {httpResponse.Content.Headers.ContentType.ToString()}.");
+                return new ApodResponse(ApodStatusCode.Error);
+            }
 
             return new ApodResponse(ApodStatusCode.OK);
         }

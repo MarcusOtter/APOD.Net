@@ -4,7 +4,7 @@ namespace Apod
 {
     public class ErrorBuilder : IErrorBuilder
     {
-        private const string _dateFormat = "MMMM dd, yyyy";
+        private const string _dateFormat = "MMMM dd yyyy";
         private readonly DateTime _firstValidDate;
         private readonly DateTime _lastValidDate;
 

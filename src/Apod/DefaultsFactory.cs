@@ -1,8 +1,5 @@
 ﻿using Apod.Net;
-using System;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System; // Should move dates to error builder
 
 namespace Apod
 {
@@ -10,27 +7,18 @@ namespace Apod
     public static class DefaultsFactory
     {
         public static IHttpRequester GetHttpRequester(string apiKey)
-            => new HttpRequester(GetUriBuilder(apiKey), new HttpClient());
+            => new HttpRequester(GetUriBuilder(apiKey));
 
         public static IErrorHandler GetErrorHandler()
             => new ErrorHandler(GetErrorBuilder());
+
+        public static IHttpResponseParser GetHttpResponseParser()
+            => new HttpResponseParser();
 
         private static IErrorBuilder GetErrorBuilder()
             => new ErrorBuilder(Constants.FirstApodDate, DateTime.Today.AddDays(-1));
 
         private static IApodUriBuilder GetUriBuilder(string apiKey)
             => new ApodUriBuilder(apiKey);
-
-        // Can be private and moved to HttpRequester
-        public static JsonSerializerOptions GetJsonSerializerOptions()
-        {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-            options.Converters.Add(new JsonStringEnumConverter());
-
-            return options;
-        }
     }
 }
