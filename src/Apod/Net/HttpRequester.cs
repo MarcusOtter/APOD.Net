@@ -7,13 +7,13 @@ namespace Apod.Net
 {
     internal class HttpRequester : IHttpRequester
     {
-        private readonly HttpClient _httpClient;
         private readonly string _apiKey;
+        private readonly HttpClient _httpClient;
 
-        public HttpRequester(HttpClient httpClient, string apiKey)
+        public HttpRequester(string apiKey, HttpClient httpClient)
         {
-            _httpClient = httpClient;
             _apiKey = apiKey;
+            _httpClient = httpClient;
         }
     }
 }

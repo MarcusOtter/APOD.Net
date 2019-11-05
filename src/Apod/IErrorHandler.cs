@@ -6,5 +6,7 @@ namespace Apod
 {
     public interface IErrorHandler
     {
+        ApodResponse ValidateDate(DateTime dateTime);
+        ApodResponse ValidateDateRange(DateTime startDate, DateTime endDate);
     }
 }
