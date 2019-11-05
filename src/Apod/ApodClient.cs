@@ -67,7 +67,7 @@ namespace Apod
             var apodResponse = _errorHandler.ValidateDate(dateTime);
             if (apodResponse.StatusCode != ApodStatusCode.OK) { return apodResponse; }
 
-            _httpRequester
+            var httpResponse = await _httpRequester.SendHttpRequestAsync(dateTime);
 
             // apodResponse = _errorHandler.ValidateHttpResponse(httpResponse);
             // return _httpResponseParser.Parse(httpResponse);

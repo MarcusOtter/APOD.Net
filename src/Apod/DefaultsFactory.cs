@@ -9,14 +9,17 @@ namespace Apod
     // Factory used for dependency inversion
     public static class DefaultsFactory
     {
-        public static IHttpRequester GetHttpRequester(string apiKey) 
-            => new HttpRequester(apiKey, new HttpClient());
+        public static IHttpRequester GetHttpRequester(string apiKey)
+            => new HttpRequester(GetUriBuilder(apiKey), new HttpClient());
 
         public static IErrorHandler GetErrorHandler()
             => new ErrorHandler(GetErrorBuilder());
 
         private static IErrorBuilder GetErrorBuilder()
             => new ErrorBuilder(Constants.FirstApodDate, DateTime.Today.AddDays(-1));
+
+        private static IApodUriBuilder GetUriBuilder(string apiKey)
+            => new ApodUriBuilder(apiKey);
 
         // Can be private and moved to HttpRequester
         public static JsonSerializerOptions GetJsonSerializerOptions()
