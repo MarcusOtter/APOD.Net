@@ -1,8 +1,10 @@
-﻿namespace Apod
+﻿using System;
+
+namespace Apod
 {
     public interface IErrorBuilder
     {
-        ApodResponse GetDateOutOfRangeError();
+        ApodResponse GetDateOutOfRangeError(DateTime firstValidDate, DateTime lastValidDate);
         ApodResponse GetStartDateAfterEndDateError();
     }
 }

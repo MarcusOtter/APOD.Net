@@ -1,5 +1,4 @@
 ﻿using Apod.Net;
-using System; // Should move dates to error builder
 
 namespace Apod
 {
@@ -16,7 +15,7 @@ namespace Apod
             => new HttpResponseParser();
 
         private static IErrorBuilder GetErrorBuilder()
-            => new ErrorBuilder(Constants.FirstApodDate, DateTime.Today.AddDays(-1));
+            => new ErrorBuilder();
 
         private static IApodUriBuilder GetUriBuilder(string apiKey)
             => new ApodUriBuilder(apiKey);
