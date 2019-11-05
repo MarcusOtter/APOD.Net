@@ -4,15 +4,18 @@ using System.Text.Json.Serialization;
 namespace Apod
 {
     /// <summary>Contains information about the digital content of an Astronomy Picture of the Day.</summary>
-    public class AstronomyContent
+    public class ApodContent
     {
         /// <summary>The name of the copyright holder.</summary>
+        [JsonPropertyName("copyright")]
         public string Copyright { get; set; }
 
         /// <summary>The date when this was the Astronomy Picture of the Day.</summary>
+        [JsonPropertyName("date")]
         public DateTime Date { get; set; }
 
         /// <summary>A description of the content.</summary>
+        [JsonPropertyName("explanation")]
         public string Explanation { get; set; }
 
         /// <summary>The URL for the high-definition variant of the content.</summary>
@@ -27,6 +30,7 @@ namespace Apod
         public string ServiceVersion { get; set; }
 
         /// <summary>The title of the content.</summary>
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
         /// <summary>The URL for the content. Remember that this can be both image and video content.</summary>

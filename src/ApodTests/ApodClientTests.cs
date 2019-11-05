@@ -19,6 +19,8 @@ namespace ApodTests
             _client = new ApodClient(_testApiKey);
         }
 
+        // TODO: Time zone tests
+
         [Fact]
         public async Task ApodClient_FetchApodAsync_Today_NotNull()
         {
