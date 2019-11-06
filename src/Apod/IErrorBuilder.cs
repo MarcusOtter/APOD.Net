@@ -4,7 +4,7 @@ namespace Apod
 {
     public interface IErrorBuilder
     {
-        ApodResponse GetDateOutOfRangeError(DateTime firstValidDate, DateTime lastValidDate);
-        ApodResponse GetStartDateAfterEndDateError();
+        ApodError GetDateOutOfRangeError(DateTime firstValidDate, DateTime lastValidDate);
+        ApodError GetStartDateAfterEndDateError();
     }
 }

@@ -20,23 +20,23 @@ namespace Apod
         private DateTime GetDefaultFirstValidDate() => new DateTime(1995, 06, 16);
         private DateTime GetDefaultLastValidDate() => DateTime.Today;
 
-        public ApodResponse ValidateDate(DateTime dateTime)
+        public ApodError ValidateDate(DateTime dateTime)
         {
             if (!DateIsInRange(dateTime)) { return _errorBuilder.GetDateOutOfRangeError(_firstValidDate, _lastValidDate); }
             
-            return new ApodResponse(ApodStatusCode.OK);
+            return new ApodError(ApodErrorCode.None);
         }
 
-        public ApodResponse ValidateDateRange(DateTime startDate, DateTime endDate)
+        public ApodError ValidateDateRange(DateTime startDate, DateTime endDate)
         {
             if (!DateIsInRange(startDate)) { return _errorBuilder.GetDateOutOfRangeError(_firstValidDate, _lastValidDate); }
             if (!DateIsInRange(endDate)) { return _errorBuilder.GetDateOutOfRangeError(_firstValidDate, _lastValidDate); }
             if (DateTime.Compare(startDate, endDate) > 0) { return _errorBuilder.GetStartDateAfterEndDateError(); }
 
-            return new ApodResponse(ApodStatusCode.OK);
+            return new ApodError(ApodErrorCode.None);
         }
 
-        public async Task<ApodResponse> ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
+        public async Task<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
         {
             var responseContent = await httpResponse.Content.ReadAsStringAsync();
 
@@ -44,10 +44,10 @@ namespace Apod
             {
                 Console.WriteLine($"There was an error with the HTTP request. Error: \n-----\n{responseContent}\n-----");
                 Console.WriteLine($"The ContentType header ToString is: {httpResponse.Content.Headers.ContentType.ToString()}.");
-                return new ApodResponse(ApodStatusCode.Error);
+                return new ApodError(ApodErrorCode.BadRequest);
             }
 
-            return new ApodResponse(ApodStatusCode.OK);
+            return new ApodError(ApodErrorCode.None);
         }
 
         /// <summary>

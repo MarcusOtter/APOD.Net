@@ -39,8 +39,8 @@ namespace Apod
         {
             var httpResponse = await _httpRequester.SendHttpRequestAsync();
 
-            var apodResponse = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
-            if (apodResponse.StatusCode != ApodStatusCode.OK) { return apodResponse; }
+            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
+            if (responseError.ErrorCode != ApodErrorCode.None) { CreateErrorResponse(responseError); }
 
             return await _httpResponseParser.ParseAsync(httpResponse);
         }
@@ -51,13 +51,13 @@ namespace Apod
         {
             if (dateTime.Date == DateTime.Today) { return await FetchApodAsync(); }
 
-            var apodResponse = _errorHandler.ValidateDate(dateTime);
-            if (apodResponse.StatusCode != ApodStatusCode.OK) { return apodResponse; }
+            var dateError = _errorHandler.ValidateDate(dateTime);
+            if (dateError.ErrorCode != ApodErrorCode.None) { return CreateErrorResponse(dateError); }
 
             var httpResponse = await _httpRequester.SendHttpRequestAsync(dateTime);
 
-            apodResponse = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
-            if (apodResponse.StatusCode != ApodStatusCode.OK) { return apodResponse; }
+            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
+            if (responseError.ErrorCode != ApodErrorCode.None) { return CreateErrorResponse(responseError); }
 
             return await _httpResponseParser.ParseAsync(httpResponse);
 
@@ -67,6 +67,9 @@ namespace Apod
             //var responseMessage = await FetchApiDataAsync(queryParameter);
             //return await GetOneApodResult(responseMessage);
         }
+
+        private ApodResponse CreateErrorResponse(ApodError error)
+            => new ApodResponse(ApodStatusCode.Error, error: error);
 
         ///// <summary>Fetch all the Astronomy Pictures of the Day between two dates.</summary>
         ///// <param name="startDate">The start date. Must be between June 16th 1995 and today's date.</param>

@@ -6,8 +6,8 @@ namespace Apod
 {
     public interface IErrorHandler
     {
-        ApodResponse ValidateDate(DateTime dateTime);
-        ApodResponse ValidateDateRange(DateTime startDate, DateTime endDate);
-        Task<ApodResponse> ValidateHttpResponseAsync(HttpResponseMessage httpResponse);
+        ApodError ValidateDate(DateTime dateTime);
+        ApodError ValidateDateRange(DateTime startDate, DateTime endDate);
+        Task<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse);
     }
 }

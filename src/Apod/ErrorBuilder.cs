@@ -11,20 +11,18 @@ namespace Apod
             _dateFormat = dateFormat;
         }
 
-        public ApodResponse GetDateOutOfRangeError(DateTime firstValidDate, DateTime lastValidDate)
+        public ApodError GetDateOutOfRangeError(DateTime firstValidDate, DateTime lastValidDate)
         {
             var errorMessage = $"Dates must be between {firstValidDate.ToString(_dateFormat)} and {lastValidDate.ToString(_dateFormat)}.";
             var apodError = new ApodError(ApodErrorCode.BadRequest, errorMessage);
-            var apodResponse = new ApodResponse(ApodStatusCode.Error, error: apodError);
-            return apodResponse;
+            return apodError;
         }
 
-        public ApodResponse GetStartDateAfterEndDateError()
+        public ApodError GetStartDateAfterEndDateError()
         {
             var errorMessage = $"The start date cannot be after the end date.";
             var apodError = new ApodError(ApodErrorCode.BadRequest, errorMessage);
-            var apodResponse = new ApodResponse(ApodStatusCode.Error, error: apodError);
-            return apodResponse;
+            return apodError;
         }
     }
 }

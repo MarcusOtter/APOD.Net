@@ -9,7 +9,7 @@ namespace ApodExample
         private static async Task Main()
         {
             var apodClient = new ApodClient();
-            var apodResponse = await apodClient.FetchApodAsync(new DateTime(1995, 06, 13));
+            var apodResponse = await apodClient.FetchApodAsync();
 
             if (apodResponse.StatusCode != ApodStatusCode.OK)
             {
