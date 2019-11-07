@@ -23,7 +23,9 @@ APOD.Net allows you to do many things with the API, for example:
 * Nuget package & auto deployment using Github Actions
 
 ## Example usage
-See all example projects [here](src/ExampleUsage/).
+More example usages will eventually be found [here](src/ExampleUsage/).
+
+### Simple example
 ```cs
 using System;
 using System.Threading.Tasks;
@@ -35,13 +37,91 @@ namespace ApodExample
     {
         private static async Task Main()
         {
-            var apodClient = new ApodClient("YOUR_API_KEY_HERE");
-            var apod = await apodClient.FetchApodAsync();
+            // Set up the client using the default example api key ("DEMO_KEY")
+            var apodClient = new ApodClient();
+
+            // Fetch the current Astronomy Picture of the Day
+            var apodResponse = await apodClient.FetchApodAsync();
+
+            // If an error occurs, stop executing
+            if (apodResponse.StatusCode != ApodStatusCode.OK) { return; }
+
+            // Store the information about the Astronomy Picture of the Day
+            var apod = apodResponse.Content;
 
             Console.WriteLine(apod.Title);
             Console.WriteLine(apod.Explanation);
-            Console.WriteLine(apod.ContentUrlHD);
+            Console.WriteLine(apod.ContentUrl);
+        }
+    }
+}
+``` 
+<details>
+<summary>See output</summary>
+<em>Example from November 6, 2019</em>
+<p>
+
+```
+21st Century M101
+One of the last entries in Charles Messier's famous catalog, big, beautiful spiral galaxy M101 is definitely not one of the least. About 170,000 light-years across, this galaxy is enormous, almost twice the size of our own Milky Way Galaxy. M101 was also one of the original spiral nebulae observed with Lord Rosse's large 19th century telescope, the Leviathan of Parsonstown. In contrast, this multiwavelength view of the large island universe is a composite of images recorded by space-based telescopes in the 21st century. Color coded from X-rays to infrared wavelengths (high to low energies), the image data was taken from the Chandra X-ray Observatory (purple), the Galaxy Evolution Explorer (blue), Hubble Space Telescope(yellow), and the Spitzer Space Telescope(red). While the X-ray data trace the location of multimillion degree gas around M101's exploded stars and neutron star and black hole binary star systems, the lower energy data follow the stars and dust that define M101's grand spiral arms. Also known as the Pinwheel Galaxy, M101 lies within the boundaries of the northern constellation Ursa Major, about 25 million light-years away.
+https://apod.nasa.gov/apod/image/1911/M101_nasaMultiW1024.jpg
+```
+
+</p>
+</details>
+
+### Advanced example
+```cs
+using System;
+using System.Threading.Tasks;
+using Apod;
+
+namespace ApodExample
+{
+    public class Program
+    {
+        private static async Task Main()
+        {
+            // Set up the client using your own API key (recommended)
+            var apodClient = new ApodClient("YOUR_API_KEY_HERE");
+
+            // Ask for the Astronomy Pictures of the Day between October 29, 2008 and November 2, 2008
+            var apodResponse = await apodClient.FetchApodAsync(new DateTime(2008, 10, 29), new DateTime(2008, 11, 02));
+
+            // If an error occurs, write the error code and error message to the console and then stop executing
+            if (apodResponse.StatusCode != ApodStatusCode.OK) 
+            {
+                Console.WriteLine("An error occured.");
+                Console.WriteLine(apodResponse.Error.ErrorCode);
+                Console.WriteLine(apodResponse.Error.ErrorMessage);
+                return; 
+            }
+
+            // Write the title of the most recent APOD (from the results) to the console
+            Console.WriteLine($"The title of the most recent APOD is \"{apodResponse.Content.Title}\".");
+
+            // Iterate through every single returned APOD and write their dates and titles to the console
+            foreach (var apod in apodResponse.AllContent)
+            {
+                var date = apod.Date.ToString("MMMM dd, yyyy");
+                Console.WriteLine($"- {date}: \"{apod.Title}\".");
+            }
         }
     }
 }
 ```
+<details>
+<summary>See output</summary>
+<p>
+
+```
+The title of the most recent APOD is "Spicules: Jets on the Sun".
+- October 29, 2008: "Mirach's Ghost".
+- October 30, 2008: "Haunting the Cepheus Flare".
+- October 31, 2008: "A Witch by Starlight".
+- November 01, 2008: "A Spectre in the Eastern Veil".
+- November 02, 2008: "Spicules: Jets on the Sun".
+```
+
+</p>
+</details>

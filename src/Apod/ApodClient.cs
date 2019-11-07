@@ -14,7 +14,7 @@ namespace Apod
         /// <summary>Creates a new instance of an Astronomy Picture of the Day client, using the demo API key.</summary>
         /// <remarks>
         /// The API key "DEMO_KEY" has an hourly limit of 30 requests per IP adress and a daily limit of 50 requests per IP address.
-        /// To prevent rate limiting, you are encouraged to sign up for your own API key at https://api.nasa.gov and use the other constructor.
+        /// To prevent rate limiting, it is recommended to sign up for your own API key at https://api.nasa.gov and use the other constructor.
         /// </remarks>
         public ApodClient() : this("DEMO_KEY") { }
 
