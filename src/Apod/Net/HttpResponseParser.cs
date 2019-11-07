@@ -31,10 +31,10 @@ namespace Apod.Net
             using (var responseStream = await httpResponse.Content.ReadAsStreamAsync())
             {
                 apodContent = await JsonSerializer.DeserializeAsync<ApodContent>(responseStream, _jsonSerializerOptions);
+                httpResponse.Dispose();
             }
 
             var apodArray = new ApodContent[1] { apodContent };
-
             return new ApodResponse(ApodStatusCode.OK, apodArray);
         }
 
@@ -44,6 +44,7 @@ namespace Apod.Net
             using (var responseStream = await httpResponse.Content.ReadAsStreamAsync())
             {
                 apodContent = await JsonSerializer.DeserializeAsync<ApodContent[]>(responseStream, _jsonSerializerOptions);
+                httpResponse.Dispose();
             }
 
             return new ApodResponse(ApodStatusCode.OK, apodContent);

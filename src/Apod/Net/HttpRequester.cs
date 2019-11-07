@@ -28,22 +28,28 @@ namespace Apod.Net
         public async Task<HttpResponseMessage> SendHttpRequestAsync(DateTime dateTime)
         {
             var uri = _uriBuilder.GetApodUri(dateTime);
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
-            return await _httpClient.SendAsync(requestMessage);
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
+            {
+                return await _httpClient.SendAsync(requestMessage);
+            }
         }
 
         public async Task<HttpResponseMessage> SendHttpRequestAsync(DateTime startDate, DateTime endDate = default)
         {
             var uri = _uriBuilder.GetApodUri(startDate, endDate);
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
-            return await _httpClient.SendAsync(requestMessage);
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
+            {
+                return await _httpClient.SendAsync(requestMessage);
+            }
         }
 
         public async Task<HttpResponseMessage> SendHttpRequestAsync(int count)
         {
             var uri = _uriBuilder.GetApodUri(count);
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
-            return await _httpClient.SendAsync(requestMessage);
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
+            {
+                return await _httpClient.SendAsync(requestMessage);
+            }
         }
     }
 }
