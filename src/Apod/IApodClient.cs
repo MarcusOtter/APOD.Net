@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Apod
 {
     public interface IApodClient
     {
+        Task<ApodResponse> FetchApodAsync();
+        Task<ApodResponse> FetchApodAsync(DateTime dateTime);
+        Task<ApodResponse> FetchApodAsync(DateTime startDate, DateTime endDate);
     }
 }

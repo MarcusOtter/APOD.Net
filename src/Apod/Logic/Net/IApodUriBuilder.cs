@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Apod.Net
+namespace Apod.Logic.Net
 {
     public interface IApodUriBuilder
     {

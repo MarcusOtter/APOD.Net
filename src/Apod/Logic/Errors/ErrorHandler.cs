@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Apod
+namespace Apod.Logic.Errors
 {
     public class ErrorHandler : IErrorHandler
     {

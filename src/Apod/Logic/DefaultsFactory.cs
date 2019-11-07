@@ -1,6 +1,7 @@
-﻿using Apod.Net;
+﻿using Apod.Logic.Errors;
+using Apod.Logic.Net;
 
-namespace Apod
+namespace Apod.Logic
 {
     // Factory used for dependency inversion
     public static class DefaultsFactory

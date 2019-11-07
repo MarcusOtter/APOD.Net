@@ -1,9 +1,10 @@
-﻿using System.Net.Http;
+﻿using Apod.Logic.Net.Dtos;
+using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Apod.Net
+namespace Apod.Logic.Net
 {
     public class HttpResponseParser : IHttpResponseParser
     {

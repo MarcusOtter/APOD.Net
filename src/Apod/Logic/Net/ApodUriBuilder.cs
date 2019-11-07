@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Apod.Net
+namespace Apod.Logic.Net
 {
     public class ApodUriBuilder : IApodUriBuilder
     {

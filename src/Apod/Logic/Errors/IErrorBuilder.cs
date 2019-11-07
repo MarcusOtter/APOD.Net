@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Apod
+namespace Apod.Logic.Errors
 {
     public interface IErrorBuilder
     {

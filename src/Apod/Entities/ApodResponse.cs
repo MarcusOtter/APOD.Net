@@ -1,4 +1,6 @@
-﻿namespace Apod
+﻿using Apod.Logic.Net.Dtos;
+
+namespace Apod
 {
     public class ApodResponse
     {

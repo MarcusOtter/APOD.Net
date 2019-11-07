@@ -1,4 +1,6 @@
-﻿using Apod.Net;
+﻿using Apod.Logic;
+using Apod.Logic.Errors;
+using Apod.Logic.Net;
 using System;
 using System.Threading.Tasks;
 

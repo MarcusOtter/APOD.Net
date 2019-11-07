@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Apod.Net
+namespace Apod.Logic.Net
 {
     public class HttpRequester : IHttpRequester
     {
