@@ -99,6 +99,20 @@ namespace ApodTests
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void GetApodUri_DateRange_DefaultEndDate_CorrectUri()
+        {
+            var startDate = new DateTime(2019, 10, 29);
+
+            var uriBuilder = new ApodUriBuilder("exampleKey");
+
+            var expected = "https://api.nasa.gov/planetary/apod?api_key=exampleKey&start_date=2019-10-29";
+
+            var actual = uriBuilder.GetApodUri(startDate: startDate);
+
+            Assert.Equal(expected, actual);
+        }
+
         [Theory]
         [InlineData(34, "https://api.nasa.gov/planetary/apod?api_key=exampleKey&count=34")]
         [InlineData(0, "https://api.nasa.gov/planetary/apod?api_key=exampleKey&count=0")]
