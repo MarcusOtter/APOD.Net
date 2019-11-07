@@ -86,7 +86,9 @@ namespace ApodExample
             var apodClient = new ApodClient("YOUR_API_KEY_HERE");
 
             // Ask for the Astronomy Pictures of the Day between October 29, 2008 and November 2, 2008
-            var apodResponse = await apodClient.FetchApodAsync(new DateTime(2008, 10, 29), new DateTime(2008, 11, 02));
+            var startDate = new DateTime(2008, 10, 29);
+            var endDate = new DateTime(2008, 11, 02);
+            var apodResponse = await apodClient.FetchApodAsync(startDate, endDate);
 
             // If an error occurs, write the error code and error message to the console and then stop executing
             if (apodResponse.StatusCode != ApodStatusCode.OK) 
@@ -103,7 +105,7 @@ namespace ApodExample
             // Iterate through every single returned APOD and write their dates and titles to the console
             foreach (var apod in apodResponse.AllContent)
             {
-                var date = apod.Date.ToString("MMMM dd, yyyy");
+                var date = apod.Date.ToString("MMMM d, yyyy");
                 Console.WriteLine($"- {date}: \"{apod.Title}\".");
             }
         }
@@ -119,8 +121,8 @@ The title of the most recent APOD is "Spicules: Jets on the Sun".
 - October 29, 2008: "Mirach's Ghost".
 - October 30, 2008: "Haunting the Cepheus Flare".
 - October 31, 2008: "A Witch by Starlight".
-- November 01, 2008: "A Spectre in the Eastern Veil".
-- November 02, 2008: "Spicules: Jets on the Sun".
+- November 1, 2008: "A Spectre in the Eastern Veil".
+- November 2, 2008: "Spicules: Jets on the Sun".
 ```
 
 </p>
