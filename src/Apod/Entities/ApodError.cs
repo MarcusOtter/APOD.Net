@@ -10,5 +10,8 @@
             ErrorCode = errorCode;
             ErrorMessage = errorMessage;
         }
+
+        public ApodResponse ToApodResponse()
+            => new ApodResponse(ApodStatusCode.Error, error: this);
     }
 }

@@ -40,9 +40,9 @@ namespace Apod
             var httpResponse = await _httpRequester.SendHttpRequestAsync();
 
             var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
-            if (responseError.ErrorCode != ApodErrorCode.None) { CreateErrorResponse(responseError); }
+            if (responseError.ErrorCode != ApodErrorCode.None) { responseError.ToApodResponse(); }
 
-            return await _httpResponseParser.ParseAsync(httpResponse);
+            return await _httpResponseParser.ParseSingleApodAsync(httpResponse);
         }
 
         /// <summary>Fetch the Astronomy Picture of the Day for a specific date.</summary>
@@ -52,97 +52,30 @@ namespace Apod
             if (dateTime.Date == DateTime.Today) { return await FetchApodAsync(); }
 
             var dateError = _errorHandler.ValidateDate(dateTime);
-            if (dateError.ErrorCode != ApodErrorCode.None) { return CreateErrorResponse(dateError); }
+            if (dateError.ErrorCode != ApodErrorCode.None) { return dateError.ToApodResponse(); }
 
             var httpResponse = await _httpRequester.SendHttpRequestAsync(dateTime);
 
             var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
-            if (responseError.ErrorCode != ApodErrorCode.None) { return CreateErrorResponse(responseError); }
+            if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
-            return await _httpResponseParser.ParseAsync(httpResponse);
-
-            //if (!DateIsInRange(date)) { throw new DateOutOfRangeException(nameof(date), date); }
-
-            //var queryParameter = $"date={date.ToString("yyyy-MM-dd")}";
-            //var responseMessage = await FetchApiDataAsync(queryParameter);
-            //return await GetOneApodResult(responseMessage);
+            return await _httpResponseParser.ParseSingleApodAsync(httpResponse);
         }
 
-        private ApodResponse CreateErrorResponse(ApodError error)
-            => new ApodResponse(ApodStatusCode.Error, error: error);
+        /// <summary>Fetch all the Astronomy Pictures of the Day between two dates.</summary>
+        /// <param name="startDate">The start date. Must be between June 16th 1995 and today's date.</param>
+        /// <param name="endDate">The end date. Must be between the <paramref name="startDate"/> and today's date. Defaults to <see cref="DateTime.Today"/>.</param>
+        public async Task<ApodResponse> FetchApodAsync(DateTime startDate, DateTime endDate = default)
+        {
+            var dateError = _errorHandler.ValidateDateRange(startDate, endDate);
+            if (dateError.ErrorCode != ApodErrorCode.None) { return dateError.ToApodResponse(); }
 
-        ///// <summary>Fetch all the Astronomy Pictures of the Day between two dates.</summary>
-        ///// <param name="startDate">The start date. Must be between June 16th 1995 and today's date.</param>
-        ///// <param name="endDate">The end date. Must be between the <paramref name="startDate"/> and today's date. Defaults to <see cref="DateTime.Today"/>.</param>
-        //public async Task<ApodContent[]> FetchApodAsync(DateTime startDate, DateTime endDate = default)
-        //{
-        //    if (!DateIsInRange(startDate)) { throw new DateOutOfRangeException(nameof(startDate), startDate); }
-        //    if (endDate != default && !DateIsInRange(endDate)) { throw new DateOutOfRangeException(nameof(endDate), endDate); }
-        //    if (DateTime.Compare(startDate, endDate) > 0) { throw new DateOutOfRangeException("The start date can not be after the end date."); }
+            var httpResponse = await _httpRequester.SendHttpRequestAsync(startDate, endDate);
 
-        //    var startDateString = $"start_date={startDate.ToString("yyyy-MM-dd")}";
+            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
+            if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
-        //    var endDateString = endDate == default
-        //        ? string.Empty
-        //        : $"end_date={endDate.ToString("yyyy-MM-dd")}";
-
-        //    var responseMessage = await FetchApiDataAsync(startDateString, endDateString);
-        //    return await GetMultipleApodResults(responseMessage);
-        //}
-
-        //private async Task<HttpResponseMessage> FetchApiDataAsync(params string[] queryParameters)
-        //{
-        //    var requestUri = BuildFullQueryString(queryParameters);
-        //    var requestMessage = new HttpRequestMessage(HttpMethod.Get, requestUri);
-        //    var date = DateTime.Today;
-        //    var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time"); // Both EDT and EST, automatically checks
-
-        //    return await _httpClient.SendAsync(requestMessage);
-        //}
-
-        //private async Task<ApodContent> GetOneApodResult(HttpResponseMessage responseMessage)
-        //{
-        //    var responseContent = await responseMessage.Content.ReadAsStringAsync();
-
-        //    if (!responseMessage.IsSuccessStatusCode)
-        //    {
-        //        var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(responseContent, _jsonSerializerOptions);
-        //        errorResponse.ThrowInformativeError();
-        //    }
-
-        //    return JsonSerializer.Deserialize<ApodContent>(responseContent, _jsonSerializerOptions);
-        //}
-
-        //private async Task<ApodContent[]> GetMultipleApodResults(HttpResponseMessage responseMessage)
-        //{
-        //    var responseContent = await responseMessage.Content.ReadAsStringAsync();
-        //    Console.WriteLine($"ERROR CONTENT: {responseContent}");
-
-        //    if (!responseMessage.IsSuccessStatusCode)
-        //    {
-        //        var errorResponse = JsonSerializer.Deserialize<ErrorResponse>(responseContent, _jsonSerializerOptions);
-        //        errorResponse.ThrowInformativeError();
-        //    }
-
-        //    return JsonSerializer.Deserialize<ApodContent[]>(responseContent, _jsonSerializerOptions);
-        //}
-
-        //private string BuildFullQueryString(string[] queryParameters)
-        //{
-        //    var stringBuilder = new StringBuilder();
-
-        //    stringBuilder
-        //        .Append(Constants.BaseUrl)
-        //        .Append("?api_key=").Append(_apiKey);
-
-        //    foreach (var parameter in queryParameters)
-        //    {
-        //        if (string.IsNullOrWhiteSpace(parameter)) { continue; }
-        //        stringBuilder.Append("&");
-        //        stringBuilder.Append(parameter);
-        //    }
-
-        //    return stringBuilder.ToString();
-        //}
+            return await _httpResponseParser.ParseMultipleApodAsync(httpResponse);
+        }
     }
 }

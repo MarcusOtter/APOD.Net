@@ -9,18 +9,22 @@ namespace ApodExample
         private static async Task Main()
         {
             var apodClient = new ApodClient();
-            var apodResponse = await apodClient.FetchApodAsync();
+            var apodResponse = await apodClient.FetchApodAsync(DateTime.Today.AddDays(-2), DateTime.Today);
 
             if (apodResponse.StatusCode != ApodStatusCode.OK)
             {
-                var error = apodResponse.Error;
-                Console.WriteLine($"An error occured.\n{error.ErrorCode}: {error.ErrorMessage}");
+                Console.WriteLine($"An error occured.\n{apodResponse.Error.ErrorCode}: {apodResponse.Error.ErrorMessage}");
                 return;
             }
 
-            Console.WriteLine(apodResponse.Content[0].Title);
-            Console.WriteLine(apodResponse.Content[0].Explanation);
-            Console.WriteLine(apodResponse.Content[0].ContentUrlHD);
+            foreach (var apod in apodResponse.Content)
+            {
+                Console.WriteLine(Array.IndexOf(apodResponse.Content, apod));
+                Console.WriteLine(apod.Title);
+                Console.WriteLine(apod.Explanation);
+                Console.WriteLine(apod.ContentUrlHD);
+                Console.WriteLine();
+            }
         }
     }
 }

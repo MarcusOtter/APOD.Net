@@ -27,8 +27,10 @@ namespace Apod
             return new ApodError(ApodErrorCode.None);
         }
 
-        public ApodError ValidateDateRange(DateTime startDate, DateTime endDate)
+        public ApodError ValidateDateRange(DateTime startDate, DateTime endDate = default)
         {
+            endDate = endDate == default ? _lastValidDate : endDate;
+
             if (!DateIsInRange(startDate)) { return _errorBuilder.GetDateOutOfRangeError(_firstValidDate, _lastValidDate); }
             if (!DateIsInRange(endDate)) { return _errorBuilder.GetDateOutOfRangeError(_firstValidDate, _lastValidDate); }
             if (DateTime.Compare(startDate, endDate) > 0) { return _errorBuilder.GetStartDateAfterEndDateError(); }

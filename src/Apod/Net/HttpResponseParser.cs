@@ -25,16 +25,22 @@ namespace Apod.Net
             return options;
         }
 
-        // Might need a ParseMultiple or ParseSingle
-
-        public async Task<ApodResponse> ParseAsync(HttpResponseMessage httpResponse)
+        public async Task<ApodResponse> ParseSingleApodAsync(HttpResponseMessage httpResponse)
         {
-            var responseContent = await httpResponse.Content.ReadAsStringAsync();
-            var apodContent = JsonSerializer.Deserialize<ApodContent>(responseContent, _jsonSerializerOptions);
+            var responseContent = await httpResponse.Content.ReadAsStreamAsync();
+            var apodContent = await JsonSerializer.DeserializeAsync<ApodContent>(responseContent, _jsonSerializerOptions);
 
             var apodArray = new ApodContent[1] { apodContent };
 
             return new ApodResponse(ApodStatusCode.OK, apodArray);
+        }
+
+        public async Task<ApodResponse> ParseMultipleApodAsync(HttpResponseMessage httpResponse)
+        {
+            var responseContent = await httpResponse.Content.ReadAsStreamAsync();
+            var apodContent = await JsonSerializer.DeserializeAsync<ApodContent[]>(responseContent, _jsonSerializerOptions);
+
+            return new ApodResponse(ApodStatusCode.OK, apodContent);
         }
     }
 }
