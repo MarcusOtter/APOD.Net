@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Apod
 {
-    /// <summary>The client that is used to consume the Astronomy Picture of the Day API.</summary>
+    /// <summary>A client for interfacing with NASA's Astronomy Picture of the Day API.</summary>
     public class ApodClient : IApodClient
     {
         private readonly IHttpRequester _httpRequester;
