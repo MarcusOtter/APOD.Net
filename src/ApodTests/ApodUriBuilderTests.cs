@@ -32,29 +32,29 @@ namespace ApodTests
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void GetApodUri_Date_CorrectCustomDateFormat()
+        [Theory]
+        [InlineData("yyyy-dd-MM", "https://api.nasa.gov/planetary/apod?api_key=exampleKey&date=2014-28-01")]
+        [InlineData("ddMMyyyy", "https://api.nasa.gov/planetary/apod?api_key=exampleKey&date=28012014")]
+        [InlineData("MM_dd_yy", "https://api.nasa.gov/planetary/apod?api_key=exampleKey&date=01_28_14")]
+        public void GetApodUri_Date_CorrectCustomDateFormat(string dateFormat, string expected)
         {
             var date = new DateTime(2014, 01, 28);
-            var dateFormat = "yyyy-dd-MM";
             var uriBuilder = new ApodUriBuilder("exampleKey", dateFormat: dateFormat);
-
-            var expected = "https://api.nasa.gov/planetary/apod?api_key=exampleKey&date=2014-28-01";
 
             var actual = uriBuilder.GetApodUri(date);
 
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void GetApodUri_DateRange_CorrectCustomDateFormat()
+        [Theory]
+        [InlineData("yyyy-dd-MM", "https://api.nasa.gov/planetary/apod?api_key=exampleKey&start_date=2000-29-12&end_date=2001-04-01")]
+        [InlineData("ddMMyyyy", "https://api.nasa.gov/planetary/apod?api_key=exampleKey&start_date=29122000&end_date=04012001")]
+        [InlineData("dd-MM_yyyy", "https://api.nasa.gov/planetary/apod?api_key=exampleKey&start_date=29-12_2000&end_date=04-01_2001")]
+        public void GetApodUri_DateRange_CorrectCustomDateFormat(string dateFormat, string expected)
         {
             var startDate = new DateTime(2000, 12, 29);
             var endDate = new DateTime(2001, 01, 04);
-            var dateFormat = "dd-MM_yyyy";
             var uriBuilder = new ApodUriBuilder("exampleKey", dateFormat: dateFormat);
-
-            var expected = "https://api.nasa.gov/planetary/apod?api_key=exampleKey&start_date=29-12_2000&end_date=04-01_2001";
 
             var actual = uriBuilder.GetApodUri(startDate, endDate);
 
