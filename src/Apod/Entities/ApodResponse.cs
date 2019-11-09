@@ -11,10 +11,10 @@ namespace Apod
         public readonly ApodContent Content;
         public readonly ApodError Error;
 
-        public ApodResponse(ApodStatusCode statusCode, ApodContent[] content = null, ApodError error = null)
+        public ApodResponse(ApodStatusCode statusCode, ApodContent[] allContent = null, ApodError error = null)
         {
             StatusCode = statusCode;
-            AllContent = content;
+            AllContent = allContent;
             // Set the Content to the latest entry from AllContent.
             Content = AllContent?[AllContent.Length > 1 ? AllContent.Length - 1 : 0];
             Error = error;
