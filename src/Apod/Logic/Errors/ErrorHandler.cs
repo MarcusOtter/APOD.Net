@@ -17,8 +17,11 @@ namespace Apod.Logic.Errors
             _lastValidDate = lastValidDate == default ? GetDefaultLastValidDate() : lastValidDate;
         }
 
-        private DateTime GetDefaultFirstValidDate() => new DateTime(1995, 06, 16);
-        private DateTime GetDefaultLastValidDate() => DateTime.Today;
+        private DateTime GetDefaultFirstValidDate() 
+            => new DateTime(1995, 06, 16);
+
+        private DateTime GetDefaultLastValidDate() 
+            => DateTime.Today;
 
         public ApodError ValidateDate(DateTime dateTime)
         {
