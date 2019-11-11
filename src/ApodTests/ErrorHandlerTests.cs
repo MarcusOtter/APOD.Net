@@ -21,7 +21,7 @@ namespace ApodTests
             var firstValidDate = new DateTime(1993, 08, 12);
             var lastValidDate = new DateTime(2005, 01, 04);
 
-            var expectedError = new ApodError(ApodErrorCode.BadRequest, $"Dates must be between {firstValidDate} and {lastValidDate}.");
+            var expectedError = new ApodError(ApodErrorCode.DateOutOfRange, $"Dates must be between {firstValidDate} and {lastValidDate}.");
 
             var errorBuilderMock = new Mock<IErrorBuilder>();
             errorBuilderMock
@@ -33,6 +33,8 @@ namespace ApodTests
             var actual = errorHandler.ValidateDate(inputDate);
 
             Assert.Equal(expectedError.ErrorCode, actual.ErrorCode);
+            Assert.Equal(expectedError.ErrorMessage, actual.ErrorMessage);
+            errorBuilderMock.Verify(x => x.GetDateOutOfRangeError(firstValidDate, lastValidDate), Times.Once);
         }
 
         [Theory]
@@ -47,18 +49,14 @@ namespace ApodTests
             var firstValidDate = new DateTime(2003, 02, 26);
             var lastValidDate = new DateTime(2010, 10, 25);
 
-            var expectedError = new ApodError(ApodErrorCode.None);
-
             var errorBuilderMock = new Mock<IErrorBuilder>();
-            errorBuilderMock
-                .Setup(x => x.GetDateOutOfRangeError(firstValidDate, lastValidDate))
-                .Returns(expectedError);
-
             var errorHandler = new ErrorHandler(errorBuilderMock.Object, firstValidDate, lastValidDate);
 
+            var expectedError = new ApodError(ApodErrorCode.None);
             var actual = errorHandler.ValidateDate(inputDate);
 
             Assert.Equal(expectedError.ErrorCode, actual.ErrorCode);
+            Assert.Equal(expectedError.ErrorMessage, actual.ErrorMessage);
         }
     }
 }

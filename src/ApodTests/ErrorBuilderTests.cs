@@ -46,7 +46,7 @@ namespace ApodTests
             var lastValidDate = new DateTime(2005, 07, 01);
             var errorBuilder = new ErrorBuilder();
 
-            var expected = ApodErrorCode.BadRequest;
+            var expected = ApodErrorCode.DateOutOfRange;
 
             var actual = errorBuilder.GetDateOutOfRangeError(firstValidDate, lastValidDate);
 
