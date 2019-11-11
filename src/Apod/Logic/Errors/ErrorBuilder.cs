@@ -20,7 +20,7 @@ namespace Apod.Logic.Errors
 
         public ApodError GetStartDateAfterEndDateError()
         {
-            var errorMessage = $"The start date cannot be after the end date.";
+            var errorMessage = "The start date cannot be after the end date.";
             var apodError = new ApodError(ApodErrorCode.BadRequest, errorMessage);
             return apodError;
         }
