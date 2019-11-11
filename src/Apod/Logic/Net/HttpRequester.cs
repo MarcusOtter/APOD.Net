@@ -21,8 +21,10 @@ namespace Apod.Logic.Net
         public async Task<HttpResponseMessage> SendHttpRequestAsync()
         {
             var uri = _uriBuilder.GetApodUri();
-            var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
-            return await _httpClient.SendAsync(requestMessage);
+            using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
+            {
+                return await _httpClient.SendAsync(requestMessage);
+            }
         }
 
         public async Task<HttpResponseMessage> SendHttpRequestAsync(DateTime dateTime)
