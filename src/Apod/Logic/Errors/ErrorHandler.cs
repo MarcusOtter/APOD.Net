@@ -56,7 +56,7 @@ namespace Apod.Logic.Errors
         }
 
         /// <summary>
-        /// Checks if the <paramref name="dateTime"/> is after or equal to the first valid date and before or equal to the last valid date.
+        /// Checks if the <paramref name="dateTime"/> is between the first valid date and the last valid date (inclusive).
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> to check.</param>
         /// <returns>Whether or not the <paramref name="dateTime"/> is within the allowed range.</returns>
