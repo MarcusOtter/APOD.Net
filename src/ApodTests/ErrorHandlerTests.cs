@@ -108,20 +108,30 @@ namespace ApodTests
         [Theory]
         [InlineData("2019-08-20", "2019-09-01")] // Random valid dates within default range
         [InlineData("2014-05-21", "2014-05-21")] // Same valid dates within default range
-        public void ValidateDateRange_NoErrorOnValidDates(string startDate, string endDate)
+        public void ValidateDateRange_NoErrorOnValidDates(string startDate, string endDate = default)
         {
             var startInputDate = DateTime.Parse(startDate, CultureInfo.InvariantCulture.DateTimeFormat);
             var endInputDate = DateTime.Parse(endDate, CultureInfo.InvariantCulture.DateTimeFormat);
 
             var errorBuilderMock = new Mock<IErrorBuilder>();
-            errorBuilderMock
-                .Setup(x => x.GetStartDateAfterEndDateError())
-                .Returns(new ApodError(ApodErrorCode.StartDateAfterEndDate));
-
             var errorHandler = new ErrorHandler(errorBuilderMock.Object);
 
             var expectedErrorCode = ApodErrorCode.None;
             var actualErrorCode = errorHandler.ValidateDateRange(startInputDate, endInputDate).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        [Fact]
+        public void ValidateDateRange_NoErrorOnDefaultEndDate()
+        {
+            var startInputDate = new DateTime(2007, 07, 10);
+
+            var errorBuilderMock = new Mock<IErrorBuilder>();
+            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+
+            var expectedErrorCode = ApodErrorCode.None;
+            var actualErrorCode = errorHandler.ValidateDateRange(startInputDate).ErrorCode;
 
             Assert.Equal(expectedErrorCode, actualErrorCode);
         }
