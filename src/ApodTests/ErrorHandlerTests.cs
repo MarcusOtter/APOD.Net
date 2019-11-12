@@ -81,6 +81,7 @@ namespace ApodTests
             var actualErrorCode = errorHandler.ValidateDateRange(startInputDate, endInputDate).ErrorCode;
 
             Assert.Equal(expectedErrorCode, actualErrorCode);
+            errorBuilderMock.Verify(x => x.GetDateOutOfRangeError(firstValidDate, lastValidDate), Times.Once);
         }
 
         [Theory]
@@ -105,6 +106,7 @@ namespace ApodTests
             var actualErrorCode = errorHandler.ValidateDateRange(startInputDate, endInputDate).ErrorCode;
 
             Assert.Equal(expectedErrorCode, actualErrorCode);
+            errorBuilderMock.Verify(x => x.GetStartDateAfterEndDateError(), Times.Once);
         }
 
         [Theory]
@@ -166,8 +168,9 @@ namespace ApodTests
 
             var expectedErrorCode = ApodErrorCode.Timeout;
             var actualErrorCode = (await errorHandler.ValidateHttpResponseAsync(response)).ErrorCode;
-
+            
             Assert.Equal(expectedErrorCode, actualErrorCode);
+            errorBuilderMock.Verify(x => x.GetTimeoutError(), Times.Once);
         }
 
         // Returns an exact copy of what would be returned when the api times out, incorrect indentations included.
