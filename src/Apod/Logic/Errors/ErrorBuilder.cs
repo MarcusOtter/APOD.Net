@@ -31,5 +31,12 @@ namespace Apod.Logic.Errors
             var apodError = new ApodError(ApodErrorCode.Timeout, errorMessage);
             return apodError;
         }
+
+        public ApodError GetCountOutOfRangeError()
+        {
+            var errorMessage = "The count must be positive and cannot exceed 100.";
+            var apodError = new ApodError(ApodErrorCode.CountOutOfRange, errorMessage);
+            return apodError;
+        }
     }
 }
