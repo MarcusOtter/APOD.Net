@@ -43,17 +43,20 @@ namespace Apod.Logic.Errors
 
         public async Task<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
         {
+            if (httpResponse.IsSuccessStatusCode) { return new ApodError(ApodErrorCode.None); }
+
+            if (IsTimeoutError(httpResponse)) { return _errorBuilder.GetTimeoutError(); }
+
             var responseContent = await httpResponse.Content.ReadAsStringAsync();
+            Console.WriteLine($"There was an error with the HTTP request. Error: \n-----\n{responseContent}\n-----");
+            Console.WriteLine($"The ContentType header ToString is: {httpResponse.Content.Headers.ContentType.ToString()}.");
 
-            if (!httpResponse.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"There was an error with the HTTP request. Error: \n-----\n{responseContent}\n-----");
-                Console.WriteLine($"The ContentType header ToString is: {httpResponse.Content.Headers.ContentType.ToString()}.");
-                return new ApodError(ApodErrorCode.BadRequest);
-            }
-
-            return new ApodError(ApodErrorCode.None);
+            return new ApodError(ApodErrorCode.BadRequest);
         }
+
+        // If the application times out, it returns html content instead of json.
+        private bool IsTimeoutError(HttpResponseMessage httpResponse)
+            => httpResponse.Content.Headers.ContentType.ToString().Contains("text/html");
 
         /// <summary>
         /// Checks if the <paramref name="dateTime"/> is between the first valid date and the last valid date (inclusive).
