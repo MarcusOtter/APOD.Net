@@ -4,6 +4,9 @@ using Apod.Logic.Errors;
 using Moq;
 using Apod;
 using System.Globalization;
+using System.Net.Http;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace ApodTests
 {
@@ -47,8 +50,7 @@ namespace ApodTests
             var firstValidDate = new DateTime(2003, 02, 26);
             var lastValidDate = new DateTime(2010, 10, 25);
 
-            var errorBuilderMock = new Mock<IErrorBuilder>();
-            var errorHandler = new ErrorHandler(errorBuilderMock.Object, firstValidDate, lastValidDate);
+            var errorHandler = new ErrorHandler(null, firstValidDate, lastValidDate);
 
             var expectedErrorCode = ApodErrorCode.None;
             var actualErrorCode = errorHandler.ValidateDate(inputDate).ErrorCode;
@@ -113,8 +115,7 @@ namespace ApodTests
             var startInputDate = DateTime.Parse(startDate, CultureInfo.InvariantCulture.DateTimeFormat);
             var endInputDate = DateTime.Parse(endDate, CultureInfo.InvariantCulture.DateTimeFormat);
 
-            var errorBuilderMock = new Mock<IErrorBuilder>();
-            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+            var errorHandler = new ErrorHandler(null);
 
             var expectedErrorCode = ApodErrorCode.None;
             var actualErrorCode = errorHandler.ValidateDateRange(startInputDate, endInputDate).ErrorCode;
@@ -127,13 +128,75 @@ namespace ApodTests
         {
             var startInputDate = new DateTime(2007, 07, 10);
 
-            var errorBuilderMock = new Mock<IErrorBuilder>();
-            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+            var errorHandler = new ErrorHandler(null);
 
             var expectedErrorCode = ApodErrorCode.None;
             var actualErrorCode = errorHandler.ValidateDateRange(startInputDate).ErrorCode;
 
             Assert.Equal(expectedErrorCode, actualErrorCode);
         }
+
+        [Fact]
+        public async Task ValidateHttpResponseAsync_NoErrorOnValidHttpResponse()
+        {
+            var errorHandler = new ErrorHandler(null);
+            using var response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            var expectedErrorCode = ApodErrorCode.None;
+            var actualErrorCode = (await errorHandler.ValidateHttpResponseAsync(response)).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        [Fact]
+        public async Task ValidateHttpResponseAsync_CorrectErrorOnTimeoutHttpResponse()
+        {
+            using var response = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.InternalServerError,
+                Content = new StringContent(GetTimeoutContent(), System.Text.Encoding.UTF8, "text/html")
+            };
+
+            var errorBuilderMock = new Mock<IErrorBuilder>();
+            errorBuilderMock
+                .Setup(x => x.GetTimeoutError())
+                .Returns(new ApodError(ApodErrorCode.Timeout));
+
+            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+
+            var expectedErrorCode = ApodErrorCode.Timeout;
+            var actualErrorCode = (await errorHandler.ValidateHttpResponseAsync(response)).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        // Returns an exact copy of what would be returned when the api times out, incorrect indentations included.
+        private string GetTimeoutContent() => @"
+<!DOCTYPE html>
+        <html>
+          <head>
+                <meta name=""viewport"" content=""width=device-width, initial-scale=1"" >
+                <meta charset=""utf-8"" >
+                <title>Application Error</title>
+                <style media=""screen"" >
+                  html,body,iframe {
+                        margin: 0;
+                        padding: 0;
+                  }
+                  html,body {
+                        height: 100%;
+                        overflow: hidden;
+                  }
+                  iframe {
+                        width: 100%;
+                        height: 100%;
+                        border: 0;
+                  }
+                </style>
+          </head>
+          <body>
+                <iframe src=""//www.herokucdn.com/error-pages/application-error.html"" ></iframe>
+          </body>
+        </html>";
     }
 }

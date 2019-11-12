@@ -6,5 +6,6 @@ namespace Apod.Logic.Errors
     {
         ApodError GetDateOutOfRangeError(DateTime firstValidDate, DateTime lastValidDate);
         ApodError GetStartDateAfterEndDateError();
+        ApodError GetTimeoutError();
     }
 }

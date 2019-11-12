@@ -46,11 +46,10 @@ namespace ApodTests
             var lastValidDate = new DateTime(2005, 07, 01);
             var errorBuilder = new ErrorBuilder();
 
-            var expected = ApodErrorCode.DateOutOfRange;
+            var expectedErrorCode = ApodErrorCode.DateOutOfRange;
+            var actualErrorCode = errorBuilder.GetDateOutOfRangeError(firstValidDate, lastValidDate).ErrorCode;
 
-            var actual = errorBuilder.GetDateOutOfRangeError(firstValidDate, lastValidDate);
-
-            Assert.Equal(expected, actual.ErrorCode);
+            Assert.Equal(expectedErrorCode, actualErrorCode);
         }
 
         [Fact]
@@ -58,11 +57,21 @@ namespace ApodTests
         {
             var errorBuilder = new ErrorBuilder();
 
-            var expected = ApodErrorCode.BadRequest;
+            var expectedErrorCode = ApodErrorCode.BadRequest;
+            var actualErrorCode = errorBuilder.GetStartDateAfterEndDateError().ErrorCode;
 
-            var actual = errorBuilder.GetStartDateAfterEndDateError();
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
 
-            Assert.Equal(expected, actual.ErrorCode);
+        [Fact]
+        public void GetTimeoutError_CorrectErrorCode()
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorCode = ApodErrorCode.Timeout;
+            var actualErrorCode = errorBuilder.GetTimeoutError().ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
         }
     }
 }

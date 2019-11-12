@@ -24,5 +24,12 @@ namespace Apod.Logic.Errors
             var apodError = new ApodError(ApodErrorCode.BadRequest, errorMessage);
             return apodError;
         }
+
+        public ApodError GetTimeoutError()
+        {
+            var errorMessage = "The API timed out.";
+            var apodError = new ApodError(ApodErrorCode.Timeout, errorMessage);
+            return apodError;
+        }
     }
 }
