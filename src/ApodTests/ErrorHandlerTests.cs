@@ -47,8 +47,7 @@ namespace ApodTests
             var firstValidDate = new DateTime(2003, 02, 26);
             var lastValidDate = new DateTime(2010, 10, 25);
 
-            var errorBuilderMock = new Mock<IErrorBuilder>();
-            var errorHandler = new ErrorHandler(errorBuilderMock.Object, firstValidDate, lastValidDate);
+            var errorHandler = new ErrorHandler(null, firstValidDate, lastValidDate);
 
             var expectedErrorCode = ApodErrorCode.None;
             var actualErrorCode = errorHandler.ValidateDate(inputDate).ErrorCode;
@@ -113,8 +112,7 @@ namespace ApodTests
             var startInputDate = DateTime.Parse(startDate, CultureInfo.InvariantCulture.DateTimeFormat);
             var endInputDate = DateTime.Parse(endDate, CultureInfo.InvariantCulture.DateTimeFormat);
 
-            var errorBuilderMock = new Mock<IErrorBuilder>();
-            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+            var errorHandler = new ErrorHandler(null);
 
             var expectedErrorCode = ApodErrorCode.None;
             var actualErrorCode = errorHandler.ValidateDateRange(startInputDate, endInputDate).ErrorCode;
@@ -127,8 +125,7 @@ namespace ApodTests
         {
             var startInputDate = new DateTime(2007, 07, 10);
 
-            var errorBuilderMock = new Mock<IErrorBuilder>();
-            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+            var errorHandler = new ErrorHandler(null);
 
             var expectedErrorCode = ApodErrorCode.None;
             var actualErrorCode = errorHandler.ValidateDateRange(startInputDate).ErrorCode;
