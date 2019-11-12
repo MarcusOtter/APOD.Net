@@ -26,7 +26,6 @@ namespace Apod.Logic.Errors
         public ApodError ValidateDate(DateTime dateTime)
         {
             if (!DateIsInRange(dateTime)) { return _errorBuilder.GetDateOutOfRangeError(_firstValidDate, _lastValidDate); }
-            
             return new ApodError(ApodErrorCode.None);
         }
 
@@ -38,6 +37,12 @@ namespace Apod.Logic.Errors
             if (!DateIsInRange(endDate)) { return _errorBuilder.GetDateOutOfRangeError(_firstValidDate, _lastValidDate); }
             if (DateTime.Compare(startDate, endDate) > 0) { return _errorBuilder.GetStartDateAfterEndDateError(); }
 
+            return new ApodError(ApodErrorCode.None);
+        }
+
+        public ApodError ValidateCount(int count)
+        {
+            if (!CountIsInRange(count)) { return _errorBuilder.GetCountOutOfRangeError(); }
             return new ApodError(ApodErrorCode.None);
         }
 
@@ -66,5 +71,8 @@ namespace Apod.Logic.Errors
         private bool DateIsInRange(DateTime dateTime)
             => (DateTime.Compare(dateTime, _lastValidDate.AddDays(1)) < 0) // The date is before or equal to the last valid date
             && (DateTime.Compare(dateTime, _firstValidDate.AddDays(-1)) > 0); // The date is after or equal to the first valid date
+
+        private bool CountIsInRange(int count)
+            => count > 0 && count <= 100;
     }
 }

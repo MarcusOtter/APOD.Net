@@ -79,5 +79,20 @@ namespace Apod
 
             return await _httpResponseParser.ParseMultipleApodAsync(httpResponse);
         }
+
+        /// <summary>Fetch an amount of random Astronomy Pictures of the Day.</summary>
+        /// <param name="count">The amount of APODs to fetch. Must be positive and cannot exceed 100.</param>
+        public async Task<ApodResponse> FetchApodAsync(int count)
+        {
+            var countError = _errorHandler.ValidateCount(count);
+            if (countError.ErrorCode != ApodErrorCode.None) { return countError.ToApodResponse(); }
+
+            var httpResponse = await _httpRequester.SendHttpRequestAsync(count);
+
+            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
+            if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
+
+            return await _httpResponseParser.ParseMultipleApodAsync(httpResponse);
+        }
     }
 }

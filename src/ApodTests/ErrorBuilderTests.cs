@@ -73,5 +73,16 @@ namespace ApodTests
 
             Assert.Equal(expectedErrorCode, actualErrorCode);
         }
+
+        [Fact]
+        public void GetCountOutOfrangeError_CorrectErrorCode()
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorCode = ApodErrorCode.CountOutOfRange;
+            var actualErrorCode = errorBuilder.GetCountOutOfRangeError().ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
     }
 }

@@ -138,6 +138,40 @@ namespace ApodTests
             Assert.Equal(expectedErrorCode, actualErrorCode);
         }
 
+        [Theory]
+        [InlineData(1)] // First valid number
+        [InlineData(100)] // Last valid number
+        [InlineData(37)] // Random valid number
+        public void ValidateCount_NoErrorOnValidCount(int count)
+        {
+            var errorHandler = new ErrorHandler(null);
+
+            var expectedErrorCode = ApodErrorCode.None;
+            var actualErrorCode = errorHandler.ValidateCount(count).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        [Theory]
+        [InlineData(0)] // First valid number minus 1
+        [InlineData(101)] // Last valid number plus 1
+        [InlineData(-34)] // Random invalid negative number
+        [InlineData(145)] // Random invalid positive number
+        public void ValidateCount_CorrectErrorOnInvalidCount(int count)
+        {
+            var errorBuilderMock = new Mock<IErrorBuilder>();
+            errorBuilderMock
+                .Setup(x => x.GetCountOutOfRangeError())
+                .Returns(new ApodError(ApodErrorCode.CountOutOfRange));
+
+            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+
+            var expectedErrorCode = ApodErrorCode.CountOutOfRange;
+            var actualErrorCode = errorHandler.ValidateCount(count).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
         [Fact]
         public async Task ValidateHttpResponseAsync_NoErrorOnValidHttpResponse()
         {
