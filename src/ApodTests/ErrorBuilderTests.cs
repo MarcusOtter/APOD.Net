@@ -122,7 +122,6 @@ namespace ApodTests
 
         [Theory]
         [InlineData("Internal Service Error")]
-        [InlineData("")]
         public void GetInternalServiceError_ContainsErrorMessage(string errorMessage)
         {
             var errorBuilder = new ErrorBuilder();
@@ -146,7 +145,6 @@ namespace ApodTests
 
         [Theory]
         [InlineData("Something unexpected happened somewhere...")]
-        [InlineData("")]
         public void GetUnknownError_ContainsErrorMessage(string errorMessage)
         {
             var errorBuilder = new ErrorBuilder();
@@ -155,6 +153,39 @@ namespace ApodTests
             var actualErrorMessage = errorBuilder.GetUnknownError(errorMessage).ErrorMessage;
 
             Assert.Contains(expectedErrorMessage, actualErrorMessage);
+        }
+
+        [Fact]
+        public void GetApiKeyMissingError_CorrectErrorCode()
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorCode = ApodErrorCode.ApiKeyMissing;
+            var actualErrorCode = errorBuilder.GetApiKeyMissingError().ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        [Fact]
+        public void GetApiKeyInvalidError_CorrectErrorCode()
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorCode = ApodErrorCode.ApiKeyInvalid;
+            var actualErrorCode = errorBuilder.GetApiKeyInvalidError().ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        [Fact]
+        public void GetOverRateLimitError_CorrectErrorCode()
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorCode = ApodErrorCode.OverRateLimit;
+            var actualErrorCode = errorBuilder.GetOverRateLimitError().ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
         }
     }
 }

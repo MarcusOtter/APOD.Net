@@ -11,5 +11,8 @@ namespace Apod.Logic.Errors
         ApodError GetBadRequestError(string errorMessage = "");
         ApodError GetInternalServiceError(string errorMessage = "");
         ApodError GetUnknownError(string errorMessage = "");
+        ApodError GetApiKeyMissingError();
+        ApodError GetApiKeyInvalidError();
+        ApodError GetOverRateLimitError();
     }
 }

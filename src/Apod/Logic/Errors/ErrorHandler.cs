@@ -77,41 +77,29 @@ namespace Apod.Logic.Errors
             if (ErrorHasServiceVersionProperty(errorObject))
             {
                 var code = int.Parse(errorObject.GetProperty("code").ToString());
-                var message = errorObject.GetProperty("msg").ToString();
+                var errorMessage = errorObject.GetProperty("msg").ToString();
 
                 switch (code)
                 {
-                    case 400: return _errorBuilder.GetBadRequestError(message);
-                    case 500: return _errorBuilder.GetInternalServiceError(message);
-                    default: return _errorBuilder.GetUnknownError(message);
+                    case 400: return _errorBuilder.GetBadRequestError(errorMessage);
+                    case 500: return _errorBuilder.GetInternalServiceError(errorMessage);
+                    default:  return _errorBuilder.GetUnknownError(errorMessage);
                 }
             }
-            else
+            
+            var hasError = errorObject.TryGetProperty("error", out var error);
+            if (!hasError) { return _errorBuilder.GetUnknownError("An unknown error occured."); }
+
+            var errorCode = error.GetProperty("code").ToString();
+            var apodErrorCode = GetApodErrorCode(errorCode);
+
+            switch (apodErrorCode)
             {
-                var hasError = errorObject.TryGetProperty("error", out var error);
-
-                if (!hasError) { return _errorBuilder.GetUnknownError("An unknown error occured."); }
-
-                var errorCode = error.GetProperty("code").ToString();
-                var message = error.GetProperty("message").ToString();
-
-                var apodErrorCode = GetApodErrorCode(errorCode);
-
-                switch (apodErrorCode)
-                {
-                    //case ApodErrorCode.ApiKeyMissing: return 
-                }
-
-                Console.WriteLine("This error does not have a service version.");
-                Console.WriteLine($"Code: {errorCode}");
-                Console.WriteLine($"Message: {message}");
+                case ApodErrorCode.ApiKeyMissing: return _errorBuilder.GetApiKeyMissingError();
+                case ApodErrorCode.ApiKeyInvalid: return _errorBuilder.GetApiKeyInvalidError();
+                case ApodErrorCode.OverRateLimit: return _errorBuilder.GetOverRateLimitError();
+                default:                          return _errorBuilder.GetUnknownError();
             }
-
-            var responseContent = await httpResponse.Content.ReadAsStringAsync();
-            Console.WriteLine($"There was an error with the HTTP request. Error: \n-----\n{responseContent}\n-----");
-            Console.WriteLine($"The ContentType header ToString is: {httpResponse.Content.Headers.ContentType.ToString()}.");
-
-            return new ApodError(ApodErrorCode.BadRequest);
         }
 
         private ApodErrorCode GetApodErrorCode(string errorCode)

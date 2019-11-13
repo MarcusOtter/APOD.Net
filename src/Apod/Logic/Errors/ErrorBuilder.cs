@@ -6,6 +6,7 @@ namespace Apod.Logic.Errors
     {
         private readonly string _dateFormat;
         private readonly string _unknownErrorIssueUrl = "https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&labels=bug&template=unknown-error.md&title=Unknown+error";
+        private readonly string _apiUrl = "https://api.nasa.gov/";
 
         public ErrorBuilder(string dateFormat = "MMMM dd yyyy")
         {
@@ -54,7 +55,30 @@ namespace Apod.Logic.Errors
 
         public ApodError GetUnknownError(string errorMessage = "")
         {
-            var apodError = new ApodError(ApodErrorCode.Unknown, $"{errorMessage} Please open an issue at {_unknownErrorIssueUrl}.");
+            var fullErrorMessage = $"{errorMessage} Please open an issue at {_unknownErrorIssueUrl}.";
+            var apodError = new ApodError(ApodErrorCode.Unknown, fullErrorMessage);
+            return apodError;
+        }
+
+        public ApodError GetApiKeyMissingError()
+        {
+            var errorMessage = $"You must provide an API key. Get one at {_apiUrl}.";
+            var apodError = new ApodError(ApodErrorCode.ApiKeyMissing, errorMessage);
+            return apodError;
+        }
+
+        public ApodError GetApiKeyInvalidError()
+        {
+            var errorMessage = $"The API key you provided was invalid. Get one at {_apiUrl}.";
+            var apodError = new ApodError(ApodErrorCode.ApiKeyInvalid, errorMessage);
+            return apodError;
+        }
+
+        public ApodError GetOverRateLimitError()
+        {
+            // If/when this library provides caching in the future, information about that should be added here.
+            var errorMessage = $"You have exceeded your rate limit. Try again later or go to {_apiUrl}/contact/ for assistance.";
+            var apodError = new ApodError(ApodErrorCode.OverRateLimit, errorMessage);
             return apodError;
         }
     }
