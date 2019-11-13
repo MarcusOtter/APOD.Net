@@ -1,6 +1,6 @@
 ---
 name: Unknown error
-about: Report an error with code ApodErrorCode.Unknown
+about: Report an ApodError with error code ApodErrorCode.Unknown
 title: Unknown error
 labels: bug
 assignees: LeMorrow
@@ -15,5 +15,5 @@ Explain briefly what you are trying to accomplish. Ex. I'm trying to get all the
 // insert your code on this line
 ```
 
-**Other information**
+**Additional context**
 Any other context or screenshots about the error you're getting.
