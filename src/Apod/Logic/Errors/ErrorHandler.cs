@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.Http;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Apod.Logic.Errors
@@ -9,12 +11,14 @@ namespace Apod.Logic.Errors
         private readonly IErrorBuilder _errorBuilder;
         private readonly DateTime _firstValidDate;
         private readonly DateTime _lastValidDate;
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-        public ErrorHandler(IErrorBuilder errorBuilder, DateTime firstValidDate = default, DateTime lastValidDate = default)
+        public ErrorHandler(IErrorBuilder errorBuilder, DateTime firstValidDate = default, DateTime lastValidDate = default, JsonSerializerOptions jsonSerializerOptions = default)
         {
             _errorBuilder = errorBuilder;
             _firstValidDate = firstValidDate == default ? GetDefaultFirstValidDate() : firstValidDate;
             _lastValidDate = lastValidDate == default ? GetDefaultLastValidDate() : lastValidDate;
+            _jsonSerializerOptions = jsonSerializerOptions == default ? GetDefaultJsonSerializerOptions() : jsonSerializerOptions;
         }
 
         private DateTime GetDefaultFirstValidDate() 
@@ -22,6 +26,17 @@ namespace Apod.Logic.Errors
 
         private DateTime GetDefaultLastValidDate() 
             => DateTime.Today;
+
+        private JsonSerializerOptions GetDefaultJsonSerializerOptions()
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            options.Converters.Add(new JsonStringEnumConverter());
+
+            return options;
+        }
 
         public ApodError ValidateDate(DateTime dateTime)
         {
@@ -52,12 +67,67 @@ namespace Apod.Logic.Errors
 
             if (IsTimeoutError(httpResponse)) { return _errorBuilder.GetTimeoutError(); }
 
+
+            JsonElement errorObject = default;
+            using (var responseStream = await httpResponse.Content.ReadAsStreamAsync())
+            {
+                errorObject = await JsonSerializer.DeserializeAsync<JsonElement>(responseStream, _jsonSerializerOptions);
+            }
+
+            if (ErrorHasServiceVersionProperty(errorObject))
+            {
+                var code = int.Parse(errorObject.GetProperty("code").ToString());
+                var message = errorObject.GetProperty("msg").ToString();
+
+                switch (code)
+                {
+                    case 400: return _errorBuilder.GetBadRequestError(message);
+                    case 500: return _errorBuilder.GetInternalServiceError(message);
+                    default: return _errorBuilder.GetUnknownError(message);
+                }
+            }
+            else
+            {
+                var hasError = errorObject.TryGetProperty("error", out var error);
+
+                if (!hasError) { return _errorBuilder.GetUnknownError("An unknown error occured."); }
+
+                var errorCode = error.GetProperty("code").ToString();
+                var message = error.GetProperty("message").ToString();
+
+                var apodErrorCode = GetApodErrorCode(errorCode);
+
+                switch (apodErrorCode)
+                {
+                    //case ApodErrorCode.ApiKeyMissing: return 
+                }
+
+                Console.WriteLine("This error does not have a service version.");
+                Console.WriteLine($"Code: {errorCode}");
+                Console.WriteLine($"Message: {message}");
+            }
+
             var responseContent = await httpResponse.Content.ReadAsStringAsync();
             Console.WriteLine($"There was an error with the HTTP request. Error: \n-----\n{responseContent}\n-----");
             Console.WriteLine($"The ContentType header ToString is: {httpResponse.Content.Headers.ContentType.ToString()}.");
 
             return new ApodError(ApodErrorCode.BadRequest);
         }
+
+        private ApodErrorCode GetApodErrorCode(string errorCode)
+        {
+            switch (errorCode)
+            {
+                case "API_KEY_MISSING": return ApodErrorCode.ApiKeyMissing;
+                case "API_KEY_INVALID": return ApodErrorCode.ApiKeyInvalid;
+                case "OVER_RATE_LIMIT": return ApodErrorCode.OverRateLimit;
+                default:                return ApodErrorCode.Unknown;
+            }
+        }
+
+        private bool ErrorHasServiceVersionProperty(JsonElement errorObject)
+            => errorObject.TryGetProperty("service_version", out var _);
+
 
         // If the application times out, it returns html content instead of json.
         private bool IsTimeoutError(HttpResponseMessage httpResponse)

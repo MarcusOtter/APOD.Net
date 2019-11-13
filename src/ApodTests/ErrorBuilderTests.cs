@@ -84,5 +84,77 @@ namespace ApodTests
 
             Assert.Equal(expectedErrorCode, actualErrorCode);
         }
+
+        [Fact]
+        public void GetBadRequestError_CorrectErrorCode()
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorCode = ApodErrorCode.BadRequest;
+            var actualErrorCode = errorBuilder.GetBadRequestError().ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        [Theory]
+        [InlineData("Bad Request: incorrect field passed. Allowed request fields for apod method are 'concept_tags', 'date', 'hd', 'count', 'start_date', 'end_date'")]
+        [InlineData("")]
+        public void GetBadRequestError_ContainsErrorMessage(string errorMessage)
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorMessage = errorMessage;
+            var actualErrorMessage = errorBuilder.GetBadRequestError(errorMessage).ErrorMessage;
+
+            Assert.Contains(expectedErrorMessage, actualErrorMessage);
+        }
+
+        [Fact]
+        public void GetInternalServiceError_CorrectErrorCode()
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorCode = ApodErrorCode.InternalServiceError;
+            var actualErrorCode = errorBuilder.GetInternalServiceError().ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        [Theory]
+        [InlineData("Internal Service Error")]
+        [InlineData("")]
+        public void GetInternalServiceError_ContainsErrorMessage(string errorMessage)
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorMessage = errorMessage;
+            var actualErrorMessage = errorBuilder.GetInternalServiceError(errorMessage).ErrorMessage;
+
+            Assert.Contains(expectedErrorMessage, actualErrorMessage);
+        }
+
+        [Fact]
+        public void GetUnknownError_CorrectErrorCode()
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorCode = ApodErrorCode.Unknown;
+            var actualErrorCode = errorBuilder.GetUnknownError().ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+        }
+
+        [Theory]
+        [InlineData("Something unexpected happened somewhere...")]
+        [InlineData("")]
+        public void GetUnknownError_ContainsErrorMessage(string errorMessage)
+        {
+            var errorBuilder = new ErrorBuilder();
+
+            var expectedErrorMessage = errorMessage;
+            var actualErrorMessage = errorBuilder.GetUnknownError(errorMessage).ErrorMessage;
+
+            Assert.Contains(expectedErrorMessage, actualErrorMessage);
+        }
     }
 }

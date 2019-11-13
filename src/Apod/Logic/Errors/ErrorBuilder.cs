@@ -5,6 +5,7 @@ namespace Apod.Logic.Errors
     public class ErrorBuilder : IErrorBuilder
     {
         private readonly string _dateFormat;
+        private readonly string _unknownErrorIssueUrl = "https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&labels=bug&template=unknown-error.md&title=Unknown+error";
 
         public ErrorBuilder(string dateFormat = "MMMM dd yyyy")
         {
@@ -36,6 +37,24 @@ namespace Apod.Logic.Errors
         {
             var errorMessage = "The count must be positive and cannot exceed 100.";
             var apodError = new ApodError(ApodErrorCode.CountOutOfRange, errorMessage);
+            return apodError;
+        }
+
+        public ApodError GetBadRequestError(string errorMessage = "")
+        {
+            var apodError = new ApodError(ApodErrorCode.BadRequest, errorMessage);
+            return apodError;
+        }
+
+        public ApodError GetInternalServiceError(string errorMessage = "")
+        {
+            var apodError = new ApodError(ApodErrorCode.InternalServiceError, errorMessage);
+            return apodError;
+        }
+
+        public ApodError GetUnknownError(string errorMessage = "")
+        {
+            var apodError = new ApodError(ApodErrorCode.Unknown, $"{errorMessage} Please open an issue at {_unknownErrorIssueUrl}.");
             return apodError;
         }
     }
