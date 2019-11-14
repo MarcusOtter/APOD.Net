@@ -13,12 +13,12 @@ namespace Apod.Logic.Errors
         private readonly DateTime _lastValidDate;
         private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-        public ErrorHandler(IErrorBuilder errorBuilder, DateTime firstValidDate = default, DateTime lastValidDate = default, JsonSerializerOptions jsonSerializerOptions = default)
+        public ErrorHandler(IErrorBuilder errorBuilder, DateTime firstValidDate = default, DateTime lastValidDate = default)
         {
             _errorBuilder = errorBuilder;
             _firstValidDate = firstValidDate == default ? GetDefaultFirstValidDate() : firstValidDate;
             _lastValidDate = lastValidDate == default ? GetDefaultLastValidDate() : lastValidDate;
-            _jsonSerializerOptions = jsonSerializerOptions == default ? GetDefaultJsonSerializerOptions() : jsonSerializerOptions;
+            _jsonSerializerOptions = GetDefaultJsonSerializerOptions();
         }
 
         private DateTime GetDefaultFirstValidDate() 

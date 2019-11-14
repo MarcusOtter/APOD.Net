@@ -10,9 +10,9 @@ namespace Apod.Logic.Net
     {
         private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-        public HttpResponseParser(JsonSerializerOptions jsonSerializerOptions = null)
+        public HttpResponseParser()
         {
-            _jsonSerializerOptions = jsonSerializerOptions ?? GetDefaultJsonSerializerOptions();
+            _jsonSerializerOptions = GetDefaultJsonSerializerOptions();
         }
 
         private JsonSerializerOptions GetDefaultJsonSerializerOptions()
