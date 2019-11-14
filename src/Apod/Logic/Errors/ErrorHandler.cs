@@ -65,8 +65,12 @@ namespace Apod.Logic.Errors
         {
             if (httpResponse.IsSuccessStatusCode) { return new ApodError(ApodErrorCode.None); }
 
-            if (IsTimeoutError(httpResponse)) { return _errorBuilder.GetTimeoutError(); }
+            Console.WriteLine($"The http status code is {httpResponse.StatusCode}");
+            Console.WriteLine("----------");
+            Console.WriteLine(await httpResponse.Content.ReadAsStringAsync());
+            Console.WriteLine("----------");
 
+            if (IsTimeoutError(httpResponse)) { return _errorBuilder.GetTimeoutError(); }
 
             JsonElement errorObject = default;
             using (var responseStream = await httpResponse.Content.ReadAsStreamAsync())
