@@ -10,6 +10,8 @@
         InternalServiceError,
         ApiKeyMissing,
         ApiKeyInvalid,
-        Timeout
+        Timeout,
+        OverRateLimit,
+        Unknown
     }
 }

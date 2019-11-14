@@ -8,5 +8,11 @@ namespace Apod.Logic.Errors
         ApodError GetStartDateAfterEndDateError();
         ApodError GetTimeoutError();
         ApodError GetCountOutOfRangeError();
+        ApodError GetBadRequestError(string errorMessage = "");
+        ApodError GetInternalServiceError(string errorMessage = "");
+        ApodError GetUnknownError(string errorMessage = "");
+        ApodError GetApiKeyMissingError();
+        ApodError GetApiKeyInvalidError();
+        ApodError GetOverRateLimitError();
     }
 }
