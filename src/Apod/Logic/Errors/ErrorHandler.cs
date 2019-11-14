@@ -78,31 +78,35 @@ namespace Apod.Logic.Errors
                 errorObject = await JsonSerializer.DeserializeAsync<JsonElement>(responseStream, _jsonSerializerOptions);
             }
 
+            if (errorObject.ValueKind != JsonValueKind.Object) { return _errorBuilder.GetUnknownError(); }
+
             if (ErrorHasServiceVersionProperty(errorObject))
             {
                 var code = int.Parse(errorObject.GetProperty("code").ToString());
-                var errorMessage = errorObject.GetProperty("msg").ToString();
+                var message = errorObject.GetProperty("msg").ToString();
 
                 switch (code)
                 {
-                    case 400: return _errorBuilder.GetBadRequestError(errorMessage);
-                    case 500: return _errorBuilder.GetInternalServiceError(errorMessage);
-                    default:  return _errorBuilder.GetUnknownError(errorMessage);
+                    case 400: return _errorBuilder.GetBadRequestError(message);
+                    case 500: return _errorBuilder.GetInternalServiceError(message);
+                    default:  return _errorBuilder.GetUnknownError(message);
                 }
             }
             
             var hasError = errorObject.TryGetProperty("error", out var error);
-            if (!hasError) { return _errorBuilder.GetUnknownError("An unknown error occured."); }
+            if (!hasError) { return _errorBuilder.GetUnknownError(); }
 
             var errorCode = error.GetProperty("code").ToString();
             var apodErrorCode = GetApodErrorCode(errorCode);
+
+            var errorMessage = error.GetProperty("message").ToString();
 
             switch (apodErrorCode)
             {
                 case ApodErrorCode.ApiKeyMissing: return _errorBuilder.GetApiKeyMissingError();
                 case ApodErrorCode.ApiKeyInvalid: return _errorBuilder.GetApiKeyInvalidError();
                 case ApodErrorCode.OverRateLimit: return _errorBuilder.GetOverRateLimitError();
-                default:                          return _errorBuilder.GetUnknownError();
+                default:                          return _errorBuilder.GetUnknownError(errorMessage);
             }
         }
 
@@ -119,7 +123,6 @@ namespace Apod.Logic.Errors
 
         private bool ErrorHasServiceVersionProperty(JsonElement errorObject)
             => errorObject.TryGetProperty("service_version", out var _);
-
 
         // If the application times out, it returns html content instead of json.
         private bool IsTimeoutError(HttpResponseMessage httpResponse)

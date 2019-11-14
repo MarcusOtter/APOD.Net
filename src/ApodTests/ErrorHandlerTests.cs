@@ -271,17 +271,28 @@ namespace ApodTests
         }
 
         [Theory]
-        [InlineData(@"{""code"":401,""msg"":""Undiscovered with unauthorized status code"",""service_version"":""v1""}")]
-        public async Task ValidateHttpResponseAsync_CorrectErrorOnUnknownErrorHttpResponse(string errorResponseContent)
+        [InlineData(@"{""code"":401,""msg"":""An error with this error code is not expected."",""service_version"":""v1""}", HttpStatusCode.Unauthorized)]
+        [InlineData(@"{""code"":409,""msg"":""An error with this error code is not expected."",""service_version"":""v1""}", HttpStatusCode.Conflict)]
+        [InlineData(@"{""error"":{""code"":""MOVED_URL"",""message"":""An error with this error code is not expected.""}}", HttpStatusCode.MovedPermanently)]
+        [InlineData(@"{""error"":{""code"":""METHOD_NOT_ALLOWED"",""message"":""An error with this error code is not expected.""}}", HttpStatusCode.MethodNotAllowed)]
+        public async Task ValidateHttpResponseAsync_CorrectErrorOnUnknownErrorCodeHttpResponse(string errorResponseContent, HttpStatusCode errorResponseStatusCode)
         {
             using var response = new HttpResponseMessage()
             {
-                StatusCode = HttpStatusCode.Unauthorized,
+                StatusCode = errorResponseStatusCode,
                 Content = new StringContent(errorResponseContent, Encoding.UTF8, "application/json")
             };
 
-            // The value of the "msg" parameter.
-            var errorMessage = errorResponseContent.Remove(errorResponseContent.Length - 25).Remove(0, 19);
+            // The value of the "msg" or "message" parameter.
+            var errorMessage = string.Empty;
+            if (errorResponseContent.Contains("service_version"))
+            {
+                errorMessage = errorResponseContent.Remove(errorResponseContent.Length - 25).Remove(0, 19);
+            }
+            else
+            {
+                errorMessage = errorResponseContent.Remove(errorResponseContent.Length - 3).Substring(errorResponseContent.IndexOf("\"message\":\"") + 11);
+            }
 
             var errorBuilderMock = new Mock<IErrorBuilder>();
             errorBuilderMock
@@ -295,6 +306,106 @@ namespace ApodTests
 
             Assert.Equal(expectedErrorCode, actualErrorCode);
             errorBuilderMock.Verify(x => x.GetUnknownError(errorMessage), Times.Once);
+        }
+
+        [Theory]
+        [InlineData(@"[{""errorCode"": 501,""errorMessage"": ""This is an undiscovered error object""}]", HttpStatusCode.NotImplemented)]
+        [InlineData(@"{""errorCode"": 404,""errorMessage"": ""This is another undiscovered error object""}", HttpStatusCode.NotFound)]
+        public async Task ValidateHttpResponseAsync_CorrectErrorOnUnknownErrorObjectHttpResponse(string errorResponseContent, HttpStatusCode errorResponseStatusCode)
+        {
+            using var response = new HttpResponseMessage()
+            {
+                StatusCode = errorResponseStatusCode,
+                Content = new StringContent(errorResponseContent, Encoding.UTF8, "application/json")
+            };
+
+            var errorBuilderMock = new Mock<IErrorBuilder>();
+            errorBuilderMock
+                .Setup(x => x.GetUnknownError(""))
+                .Returns(new ApodError(ApodErrorCode.Unknown));
+
+            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+
+            var expectedErrorCode = ApodErrorCode.Unknown;
+            var actualErrorCode = (await errorHandler.ValidateHttpResponseAsync(response)).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+            errorBuilderMock.Verify(x => x.GetUnknownError(""), Times.Once);
+        }
+
+        [Fact]
+        public async Task ValidateHttpResponseAsync_CorrectErrorOnApiKeyMissingHttpResponse()
+        {
+            var errorResponseContent = @"{""error"":{""code"":""API_KEY_MISSING"",""message"":""No api_key was supplied. Get one at https://api.nasa.gov:443""}}";
+
+            using var response = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.Forbidden,
+                Content = new StringContent(errorResponseContent, Encoding.UTF8, "application/json")
+            };
+
+            var errorBuilderMock = new Mock<IErrorBuilder>();
+            errorBuilderMock
+                .Setup(x => x.GetApiKeyMissingError())
+                .Returns(new ApodError(ApodErrorCode.ApiKeyMissing));
+
+            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+
+            var expectedErrorCode = ApodErrorCode.ApiKeyMissing;
+            var actualErrorCode = (await errorHandler.ValidateHttpResponseAsync(response)).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+            errorBuilderMock.Verify(x => x.GetApiKeyMissingError(), Times.Once);
+        }
+
+        [Fact]
+        public async Task ValidateHttpResponseAsync_CorrectErrorOnApiKeyInvalidHttpResponse()
+        {
+            var errorResponseContent = @"{""error"":{""code"":""API_KEY_INVALID"",""message"":""An invalid api_key was supplied.Get one at https://api.nasa.gov:443""}}";
+
+            using var response = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.Forbidden,
+                Content = new StringContent(errorResponseContent, Encoding.UTF8, "application/json")
+            };
+
+            var errorBuilderMock = new Mock<IErrorBuilder>();
+            errorBuilderMock
+                .Setup(x => x.GetApiKeyInvalidError())
+                .Returns(new ApodError(ApodErrorCode.ApiKeyInvalid));
+
+            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+
+            var expectedErrorCode = ApodErrorCode.ApiKeyInvalid;
+            var actualErrorCode = (await errorHandler.ValidateHttpResponseAsync(response)).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+            errorBuilderMock.Verify(x => x.GetApiKeyInvalidError(), Times.Once);
+        }
+
+        [Fact]
+        public async Task ValidateHttpResponseAsync_CorrectErrorOnOverRateLimitHttpResponse()
+        {
+            var errorResponseContent = @"{""error"":{""code"":""OVER_RATE_LIMIT"",""message"":""You have exceeded your rate limit. Try again later or contact us at https://api.nasa.gov:443/contact/ for assistance""}}";
+
+            using var response = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.TooManyRequests,
+                Content = new StringContent(errorResponseContent, Encoding.UTF8, "application/json")
+            };
+
+            var errorBuilderMock = new Mock<IErrorBuilder>();
+            errorBuilderMock
+                .Setup(x => x.GetOverRateLimitError())
+                .Returns(new ApodError(ApodErrorCode.OverRateLimit));
+
+            var errorHandler = new ErrorHandler(errorBuilderMock.Object);
+
+            var expectedErrorCode = ApodErrorCode.OverRateLimit;
+            var actualErrorCode = (await errorHandler.ValidateHttpResponseAsync(response)).ErrorCode;
+
+            Assert.Equal(expectedErrorCode, actualErrorCode);
+            errorBuilderMock.Verify(x => x.GetOverRateLimitError(), Times.Once);
         }
 
         // An exact copy of what would be returned when the api times out, incorrect indentations included.
