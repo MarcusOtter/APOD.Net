@@ -10,15 +10,11 @@ namespace Apod.Logic.Net
         private readonly string _baseUri;
         private readonly string _dateFormat;
 
-        private readonly StringBuilder _stringBuilder;
-
         public ApodUriBuilder(string apiKey, string baseUri = "https://api.nasa.gov/planetary/apod", string dateFormat = "yyyy-MM-dd")
         {
             _apiKey = apiKey;
             _baseUri = baseUri;
             _dateFormat = dateFormat;
-
-            _stringBuilder = new StringBuilder();
         }
 
         public string GetApodUri() 
@@ -36,16 +32,18 @@ namespace Apod.Logic.Net
 
         private string BuildUri(params string[] queryParameters)
         {
-            _stringBuilder.Append(_baseUri).Append("?api_key=").Append(_apiKey);
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.Append(_baseUri).Append("?api_key=").Append(_apiKey);
 
             foreach (var parameter in queryParameters)
             {
                 if (string.IsNullOrWhiteSpace(parameter)) { continue; }
-                _stringBuilder.Append("&");
-                _stringBuilder.Append(parameter);
+                stringBuilder.Append("&");
+                stringBuilder.Append(parameter);
             }
 
-            return _stringBuilder.ToString();
+            return stringBuilder.ToString();
         }
     }
 }
