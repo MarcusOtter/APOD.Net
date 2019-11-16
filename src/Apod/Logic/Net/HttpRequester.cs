@@ -22,7 +22,7 @@ namespace Apod.Logic.Net
 
         public async Task<HttpResponseMessage> SendHttpRequestAsync()
         {
-            if (_disposed) { throw new ObjectDisposedException(GetType().FullName); }
+            ThrowExceptionIfDisposed();
 
             var uri = _uriBuilder.GetApodUri();
 
@@ -34,7 +34,7 @@ namespace Apod.Logic.Net
 
         public async Task<HttpResponseMessage> SendHttpRequestAsync(DateTime dateTime)
         {
-            if (_disposed) { throw new ObjectDisposedException(GetType().FullName); }
+            ThrowExceptionIfDisposed();
 
             var uri = _uriBuilder.GetApodUri(dateTime);
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
@@ -45,7 +45,7 @@ namespace Apod.Logic.Net
 
         public async Task<HttpResponseMessage> SendHttpRequestAsync(DateTime startDate, DateTime endDate = default)
         {
-            if (_disposed) { throw new ObjectDisposedException(GetType().FullName); }
+            ThrowExceptionIfDisposed();
 
             var uri = _uriBuilder.GetApodUri(startDate, endDate);
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
@@ -56,13 +56,18 @@ namespace Apod.Logic.Net
 
         public async Task<HttpResponseMessage> SendHttpRequestAsync(int count)
         {
-            if (_disposed) { throw new ObjectDisposedException(GetType().FullName); }
+            ThrowExceptionIfDisposed();
 
             var uri = _uriBuilder.GetApodUri(count);
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
             {
                 return await _httpClient.SendAsync(requestMessage);
             }
+        }
+
+        private void ThrowExceptionIfDisposed()
+        {
+            if (_disposed) { throw new ObjectDisposedException(GetType().FullName); }
         }
 
         public void Dispose()

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Apod.Logic.Net
 {
-    public interface IHttpRequester
+    public interface IHttpRequester : IDisposable
     {
         Task<HttpResponseMessage> SendHttpRequestAsync();
         Task<HttpResponseMessage> SendHttpRequestAsync(DateTime dateTime);

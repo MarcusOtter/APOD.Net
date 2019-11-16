@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Apod
 {
-    public interface IApodClient
+    public interface IApodClient : IDisposable
     {
         Task<ApodResponse> FetchApodAsync();
         Task<ApodResponse> FetchApodAsync(DateTime dateTime);

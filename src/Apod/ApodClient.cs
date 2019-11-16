@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace Apod
 {
     /// <summary>A client for interfacing with NASA's Astronomy Picture of the Day API.</summary>
-    public class ApodClient : IApodClient
+    public class ApodClient : IApodClient, IDisposable
     {
+        private bool _disposed;
+
         private readonly IHttpRequester _httpRequester;
         private readonly IHttpResponseParser _httpResponseParser;
         private readonly IErrorHandler _errorHandler;
@@ -39,6 +41,8 @@ namespace Apod
         /// <summary>Fetch the current Astronomy Picture of the Day.</summary>
         public async Task<ApodResponse> FetchApodAsync()
         {
+            ThrowExceptionIfDisposed();
+
             var httpResponse = await _httpRequester.SendHttpRequestAsync();
 
             var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
@@ -51,6 +55,8 @@ namespace Apod
         /// <param name="dateTime">The date to request the APOD for. Must be between June 16th 1995 and today's date.</param>
         public async Task<ApodResponse> FetchApodAsync(DateTime dateTime)
         {
+            ThrowExceptionIfDisposed();
+
             if (dateTime.Date == DateTime.Today) { return await FetchApodAsync(); }
 
             var dateError = _errorHandler.ValidateDate(dateTime);
@@ -69,6 +75,8 @@ namespace Apod
         /// <param name="endDate">The end date. Must be between the <paramref name="startDate"/> and today's date. Defaults to <see cref="DateTime.Today"/>.</param>
         public async Task<ApodResponse> FetchApodAsync(DateTime startDate, DateTime endDate = default)
         {
+            ThrowExceptionIfDisposed();
+
             var dateError = _errorHandler.ValidateDateRange(startDate, endDate);
             if (dateError.ErrorCode != ApodErrorCode.None) { return dateError.ToApodResponse(); }
 
@@ -84,6 +92,8 @@ namespace Apod
         /// <param name="count">The amount of APODs to fetch. Must be positive and cannot exceed 100.</param>
         public async Task<ApodResponse> FetchApodAsync(int count)
         {
+            ThrowExceptionIfDisposed();
+
             var countError = _errorHandler.ValidateCount(count);
             if (countError.ErrorCode != ApodErrorCode.None) { return countError.ToApodResponse(); }
 
@@ -93,6 +103,22 @@ namespace Apod
             if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
             return await _httpResponseParser.ParseMultipleApodAsync(httpResponse);
+        }
+
+        private void ThrowExceptionIfDisposed()
+        {
+            if (_disposed) { throw new ObjectDisposedException(GetType().FullName); }
+        }
+
+        /// <summary>
+        /// Releases the unmanaged resources and disposes of the managed resources used by the System.Net.Http.HttpMessageInvoker.
+        /// </summary>
+        public void Dispose()
+        {
+            if (_disposed) { return; }
+            _httpRequester.Dispose();
+            GC.SuppressFinalize(this);
+            _disposed = true;
         }
     }
 }
