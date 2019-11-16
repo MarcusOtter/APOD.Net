@@ -125,5 +125,20 @@ namespace ApodTests
 
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void GetApodUri_SameResultEveryTime()
+        {
+            var uriBuilder = new ApodUriBuilder("exampleKey");
+
+            var expected = "https://api.nasa.gov/planetary/apod?api_key=exampleKey";
+
+            // Run 3 times and make sure the result doesn't change
+            for (int i = 0; i < 3; i++)
+            {
+                var actual = uriBuilder.GetApodUri();
+                Assert.Equal(expected, actual);
+            }            
+        }
     }
 }
