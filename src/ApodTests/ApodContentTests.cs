@@ -22,6 +22,17 @@ namespace ApodTests
         }
 
         [Fact]
+        public void Equals_Object_SameApodObjectReturnsTrue()
+        {
+            var inputA = _exampleContent;
+            var inputB = (object) _exampleContentCopy;
+
+            var result = inputA.Equals(inputB);
+
+            Assert.True(result);
+        }
+
+        [Fact]
         public void Equals_ApodContent_NullReturnsFalse()
         {
             var input = _exampleContent;
