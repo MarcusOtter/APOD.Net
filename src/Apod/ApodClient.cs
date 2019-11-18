@@ -85,7 +85,7 @@ namespace Apod
             var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
             if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
-            return await _httpResponseParser.ParseMultipleApodAsync(httpResponse);
+            return await _httpResponseParser.ParseMultipleApodsAsync(httpResponse);
         }
 
         /// <summary>Fetch an amount of random Astronomy Pictures of the Day.</summary>
@@ -102,7 +102,7 @@ namespace Apod
             var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
             if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
-            return await _httpResponseParser.ParseMultipleApodAsync(httpResponse);
+            return await _httpResponseParser.ParseMultipleApodsAsync(httpResponse);
         }
 
         private void ThrowExceptionIfDisposed()
