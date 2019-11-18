@@ -40,7 +40,7 @@ namespace Apod.Logic.Net
             return new ApodResponse(ApodStatusCode.OK, apodArray);
         }
 
-        public async Task<ApodResponse> ParseMultipleApodAsync(HttpResponseMessage httpResponse)
+        public async Task<ApodResponse> ParseMultipleApodsAsync(HttpResponseMessage httpResponse)
         {
             ApodContent[] apodContent = null;
             using (var responseStream = await httpResponse.Content.ReadAsStreamAsync())
