@@ -46,7 +46,7 @@ namespace Apod
             var httpResponse = await _httpRequester.SendHttpRequestAsync();
 
             var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
-            if (responseError.ErrorCode != ApodErrorCode.None) { responseError.ToApodResponse(); }
+            if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
             return await _httpResponseParser.ParseSingleApodAsync(httpResponse);
         }
