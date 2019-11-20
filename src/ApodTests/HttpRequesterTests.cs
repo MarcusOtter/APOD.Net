@@ -55,5 +55,13 @@ namespace ApodTests
 
             await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _httpRequester.SendHttpRequestAsync(exampleInput));
         }
+
+        [Fact]
+        public void Dispose_CanCallMultipleTimes()
+        {
+            _httpRequester.Dispose();
+            _httpRequester.Dispose();
+            _httpRequester.Dispose();
+        }
     }
 }
