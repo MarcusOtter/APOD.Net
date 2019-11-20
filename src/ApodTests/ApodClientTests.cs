@@ -2,9 +2,91 @@ using Apod;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using Moq;
+using Apod.Logic.Net;
+using Apod.Logic.Errors;
 
 namespace ApodTests
 {
+    public class ApodClientTests
+    {
+        private const string _apiKey = "DEMO_KEY";
+
+        private readonly Mock<IHttpRequester> _httpRequester;
+        private readonly Mock<IHttpResponseParser> _httpResponseParser;
+        private readonly Mock<IErrorHandler> _errorHandler;
+
+        private readonly IApodClient _client;
+
+        public ApodClientTests()
+        {
+            _httpRequester = new Mock<IHttpRequester>();
+            _httpResponseParser = new Mock<IHttpResponseParser>();
+            _errorHandler = new Mock<IErrorHandler>();
+
+            _client = new ApodClient(_apiKey, _httpRequester.Object, _httpResponseParser.Object, _errorHandler.Object);
+        }
+
+        [Fact]
+        public void Constructor_NoArguments_NotNull()
+        {
+            var result = new ApodClient();
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void Contructor_WithApiKey_NotNull()
+        {
+            var result = new ApodClient(_apiKey);
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void Constructor_WithAllArguments_NotNull()
+        {
+            var result = new ApodClient(_apiKey, _httpRequester.Object, _httpResponseParser.Object, _errorHandler.Object);
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Today_ThrowsIfDisposed()
+        {
+            _client.Dispose();
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync());
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Date_ThrowsIfDisposed()
+        {
+            var date = new DateTime(2015, 02, 16);
+
+            _client.Dispose();
+
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync(date));
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_DateRange_ThrowsIfDisposed()
+        {
+            var startDate = new DateTime(2013, 10, 10);
+            var endDate = new DateTime(2013, 10, 20);
+
+            _client.Dispose();
+            
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync(startDate, endDate));
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Count_ThrowsIfDisposed()
+        {
+            var count = 14;
+
+            _client.Dispose();
+
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync(count));
+        }
+    }
+
     // Temporarily disabled integration tests.
     //public class ApodClientTests
     //{
