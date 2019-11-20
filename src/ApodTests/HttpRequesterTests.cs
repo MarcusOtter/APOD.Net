@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Moq.Protected;
 using System.Threading;
+using System.Net;
 
 namespace ApodTests
 {
@@ -25,53 +26,57 @@ namespace ApodTests
         }
 
         [Fact]
-        public void SendHttpRequestAsync_Today_CorrectHttpRequest()
+        public async Task SendHttpRequestAsync_Today_CorrectHttpRequest()
         {
             var uri = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
 
-            SetUriBuilderApodUri(uri);
+            SetupHttpMessageHandler(uri);
+            SetupUriBuilder(uri);
 
-            _httpRequester.SendHttpRequestAsync();
+            await _httpRequester.SendHttpRequestAsync();
 
             AssertSendAsyncWasCalledWithUri(uri);
         }
 
         [Fact]
-        public void SendHttpRequestAsync_Date_CorrectHttpRequest()
+        public async Task SendHttpRequestAsync_Date_CorrectHttpRequest()
         {
             var date = new DateTime(2019, 11, 06);
             var uri = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=2019-11-06";
 
-            SetUriBuilderApodUri(uri);
+            SetupHttpMessageHandler(uri);
+            SetupUriBuilder(uri);
 
-            _httpRequester.SendHttpRequestAsync(date);
+            await _httpRequester.SendHttpRequestAsync(date);
 
             AssertSendAsyncWasCalledWithUri(uri);
         }
 
         [Fact]
-        public void SendHttpRequestAsync_DateRange_CorrectHttpRequest()
+        public async Task SendHttpRequestAsync_DateRange_CorrectHttpRequest()
         {
             var startDate = new DateTime(2007, 06, 25);
             var endDate = new DateTime(2007, 08, 09);
             var uri = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2007-06-25&end_date=2007-08-09";
 
-            SetUriBuilderApodUri(uri);
+            SetupHttpMessageHandler(uri);
+            SetupUriBuilder(uri);
 
-            _httpRequester.SendHttpRequestAsync(startDate, endDate);
+            await _httpRequester.SendHttpRequestAsync(startDate, endDate);
 
             AssertSendAsyncWasCalledWithUri(uri);
         }
 
         [Fact]
-        public void SendHttpRequestAsync_Count_CorrectHttpRequest()
+        public async Task SendHttpRequestAsync_Count_CorrectHttpRequest()
         {
             var count = 10;
             var uri = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=10";
 
-            SetUriBuilderApodUri(uri);
+            SetupHttpMessageHandler(uri);
+            SetupUriBuilder(uri);
 
-            _httpRequester.SendHttpRequestAsync(count);
+            await _httpRequester.SendHttpRequestAsync(count);
 
             AssertSendAsyncWasCalledWithUri(uri);
         }
@@ -80,11 +85,21 @@ namespace ApodTests
         {
             _httpMessageHandler
                 .Protected()
-                .Verify("SendAsync", Times.Once(), ItExpr.Is<HttpRequestMessage>(x => x.Method == HttpMethod.Get
+                .Verify<Task<HttpResponseMessage>>("SendAsync", Times.Once(), ItExpr.Is<HttpRequestMessage>(x => x.Method == HttpMethod.Get
                     && x.RequestUri.ToString() == uri), ItExpr.IsAny<CancellationToken>());
         }
 
-        private void SetUriBuilderApodUri(string uri)
+        private void SetupHttpMessageHandler(string uri)
+        {
+            _httpMessageHandler
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>("SendAsync", 
+                    ItExpr.Is<HttpRequestMessage>(x => x.Method == HttpMethod.Get && x.RequestUri.ToString() == uri), 
+                    ItExpr.IsAny<CancellationToken>())
+                .Returns(Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)));
+        }
+
+        private void SetupUriBuilder(string uri)
         {
             _uriBuilder.Setup(x => x.GetApodUri()).Returns(uri);
             _uriBuilder.Setup(x => x.GetApodUri(It.IsAny<DateTime>())).Returns(uri);
