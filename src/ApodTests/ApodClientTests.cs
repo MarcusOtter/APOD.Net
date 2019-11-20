@@ -5,10 +5,12 @@ using Xunit;
 using Moq;
 using Apod.Logic.Net;
 using Apod.Logic.Errors;
+using System.Net.Http;
+using System.Net;
 
 namespace ApodTests
 {
-    public class ApodClientTests
+    public class ApodClientTests : IDisposable
     {
         private const string _apiKey = "DEMO_KEY";
 
@@ -18,13 +20,123 @@ namespace ApodTests
 
         private readonly IApodClient _client;
 
+        private readonly HttpResponseMessage _errorExample;
+        private readonly HttpResponseMessage _validContentExample;
+
         public ApodClientTests()
         {
             _httpRequester = new Mock<IHttpRequester>();
             _httpResponseParser = new Mock<IHttpResponseParser>();
             _errorHandler = new Mock<IErrorHandler>();
 
+            _errorExample = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.BadRequest,
+                Content = new StringContent(@"{""code"":400,""msg"":""Bad Request: incorrect field passed. Allowed request fields for apod method are 'concept_tags', 'date', 'hd', 'count', 'start_date', 'end_date'"",""service_version"":""v1""}")
+            };
+
+            _validContentExample = new HttpResponseMessage()
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(@"{""copyright"":""R Jay Gabany"",""date"":""2019-11-16"",""explanation"":""Grand tidal streams of stars seem to surround galaxy NGC 5907. The arcing structures form tenuous loops extending more than 150,000 light-years from the narrow, edge-on spiral, also known as the Splinter or Knife Edge Galaxy.Recorded only in very deep exposures, the streams likely represent the ghostly trail of a dwarf galaxy - debris left along the orbit of a smaller satellite galaxy that was gradually torn apart and merged with NGC 5907 over four billion years ago.Ultimately this remarkable discovery image, from a small robotic observatory in New Mexico, supports the cosmological scenario in which large spiral galaxies, including our own Milky Way, were formed by the accretion of smaller ones. NGC 5907 lies about 40 million light-years distant in the northern constellation Draco."",""hdurl"":""https://apod.nasa.gov/apod/image/1911/ngc5907_gabany_rcl.jpg"",""media_type"":""image"",""service_version"":""v1"",""title"":""The Star Streams of NGC 5907"",""url"":""https://apod.nasa.gov/apod/image/1911/ngc5907_gabany_rcl1024.jpg""}")
+            };
+
             _client = new ApodClient(_apiKey, _httpRequester.Object, _httpResponseParser.Object, _errorHandler.Object);
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Today_SendHttpRequestAsyncWasCalled()
+        {
+            HttpResponseIsValid(true);
+
+            await _client.FetchApodAsync();
+
+            _httpRequester.Verify(x => x.SendHttpRequestAsync(), Times.Once);
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Date_SendHttpRequestAsyncWasCalled()
+        {
+            var date = new DateTime(1999, 12, 10);
+            HttpResponseIsValid(true);
+            ValidateDateReturns(ApodErrorCode.None);
+
+            await _client.FetchApodAsync(date);
+
+            _httpRequester.Verify(x => x.SendHttpRequestAsync(date), Times.Once);
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_DateRange_SendHttpRequestAsyncWasCalled()
+        {
+            var startDate = new DateTime(2001, 11, 08);
+            var endDate = new DateTime(2002, 01, 02);
+
+            HttpResponseIsValid(true);
+            ValidateDateRangeReturns(ApodErrorCode.None);
+
+            await _client.FetchApodAsync(startDate, endDate);
+
+            _httpRequester.Verify(x => x.SendHttpRequestAsync(startDate, endDate), Times.Once);
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Count_SendHttpRequestAsyncWasCalled()
+        {
+            var count = 5;
+
+            HttpResponseIsValid(true);
+            ValidateCountReturns(ApodErrorCode.None);
+
+            await _client.FetchApodAsync(count);
+
+            _httpRequester.Verify(x => x.SendHttpRequestAsync(count), Times.Once);
+        }
+
+        private void SendHttpRequestShouldReturnError(bool shouldReturnError)
+        {
+            var responseMessage = shouldReturnError ? _errorExample : _validContentExample;
+
+            _httpRequester
+                .Setup(x => x.SendHttpRequestAsync())
+                .ReturnsAsync(() => responseMessage);
+        }
+
+        private void HttpResponseIsValid(bool responseIsValid)
+        {
+            var errorCode = responseIsValid ? ApodErrorCode.None : ApodErrorCode.BadRequest;
+            var error = new ApodError(errorCode);
+
+            _errorHandler
+                .Setup(x => x.ValidateHttpResponseAsync(It.IsAny<HttpResponseMessage>()))
+                .ReturnsAsync(() => error);
+        }
+
+        private void ValidateDateReturns(ApodErrorCode errorCode)
+        {
+            var error = new ApodError(errorCode);
+
+            _errorHandler
+                .Setup(x => x.ValidateDate(It.IsAny<DateTime>()))
+                .Returns(error);
+        }
+
+        private void ValidateDateRangeReturns(ApodErrorCode errorCode)
+        {
+            var error = new ApodError(errorCode);
+
+            _errorHandler
+                .Setup(x => x.ValidateDateRange(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
+                .Returns(error);
+        }
+
+        private void ValidateCountReturns(ApodErrorCode errorCode)
+        {
+            var error = new ApodError(errorCode);
+
+            _errorHandler
+                .Setup(x => x.ValidateCount(It.IsAny<int>()))
+                .Returns(error);
         }
 
         [Fact]
@@ -85,155 +197,20 @@ namespace ApodTests
 
             await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync(count));
         }
+
+        [Fact]
+        public void Dispose_CanCallMultipleTimes()
+        {
+            _client.Dispose();
+            _client.Dispose();
+            _client.Dispose();
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
+            _errorExample.Dispose();
+            _validContentExample.Dispose();
+        }
     }
-
-    // Temporarily disabled integration tests.
-    //public class ApodClientTests
-    //{
-    //    private readonly string _testApiKey = Environment.GetEnvironmentVariable("NASA_API_KEY");
-
-    //    private readonly DateTime _firstAllowedDate = new DateTime(1995, 06, 16);
-    //    private readonly DateTime _lastAllowedDate = DateTime.Today;
-
-    //    private readonly ApodClient _client;
-
-    //    public ApodClientTests()
-    //    {
-    //        _client = new ApodClient(_testApiKey);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_Today_NotNull()
-    //    {
-    //        var apodContent = await _client.FetchApodAsync();
-    //        Assert.NotNull(apodContent);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_Today_IsDateTimeToday()
-    //    {
-    //        var apodContent = await _client.FetchApodAsync();
-    //        var expected = DateTime.Today;
-
-    //        Assert.Equal(expected, apodContent.Date);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_SpecificDate_NotNull()
-    //    {
-    //        var date = new DateTime(2008, 10, 29); // Random date in range
-    //        var apodContent = await _client.FetchApodAsync(date);
-    //        Assert.NotNull(apodContent);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_SpecificDate_CorrectLowerBound()
-    //    {
-    //        var expectedOutOfRange = _firstAllowedDate.AddDays(-1);
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange));
-
-    //        var result = await _client.FetchApodAsync(_firstAllowedDate);
-    //        Assert.NotNull(result);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_SpecificDate_CorrectUpperBound()
-    //    {
-    //        var expectedOutOfRange = _lastAllowedDate.AddDays(1);
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange));
-
-    //        var result = await _client.FetchApodAsync(_lastAllowedDate);
-    //        Assert.NotNull(result);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_SpecificDate_ThrowsForDateOutOfRange()
-    //    {
-    //        var dateOutOfRange1 = new DateTime(1993, 06, 14);
-    //        var dateOutOfRange2 = _lastAllowedDate.AddDays(391);
-
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(dateOutOfRange1));
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(dateOutOfRange2));
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_StartDateCorrectLowerBound()
-    //    {
-    //        // The end date has to be the same date as the first allowed date, because 1995-06-17 is not valid. This shouldn't affect the outcome.
-    //        // Ultimately the test should be from the _firstAllowedDate to the _firstAllowedDate += about 5 days.
-    //        // In practice we can only test the same date since the api wasn't consistent with daily pictures during the beginning.
-    //        var endDate = _firstAllowedDate;
-
-    //        var expectedOutOfRange = _firstAllowedDate.AddDays(-1);
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange, endDate));
-
-    //        var result = await _client.FetchApodAsync(_firstAllowedDate, endDate);
-    //        Assert.NotNull(result);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_EndDateCorrectUpperBound()
-    //    {
-    //        var startDate = _lastAllowedDate.AddDays(-5); // Random date in range
-
-    //        var expectedOutOfRange = _lastAllowedDate.AddDays(1);
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, expectedOutOfRange));
-
-    //        var result = await _client.FetchApodAsync(startDate, _lastAllowedDate);
-    //        Assert.NotNull(result);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_StartDateThrowsWhenOutOfRange()
-    //    {
-    //        var startDate = new DateTime(1995, 06, 10); // Random date out of range
-    //        var endDate = new DateTime(1995, 06, 28); // Random date in range
-
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_EndDateThrowsForOutOfRange()
-    //    {
-    //        var startDate = DateTime.Today.AddDays(-10); // Random date in range
-    //        var endDate = DateTime.Today.AddDays(3); // Random date out of range
-
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_EndDateBeforeStartDateThrows()
-    //    {
-    //        var startDate = new DateTime(2007, 10, 12); // Random date in range
-    //        var endDate = new DateTime(2007, 10, 04); // Random date before the startDate
-
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_SameDateReturnsOneResult()
-    //    {
-    //        var startDate = new DateTime(2012, 12, 12); // Random date in range
-    //        var endDate = startDate;
-
-    //        var result = await _client.FetchApodAsync(startDate, endDate);
-
-    //        Assert.Single(result);
-    //    }
-
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_ReturnsCorrectAmountOfResults()
-    //    {
-    //        var startDate = DateTime.Today.AddDays(-2);
-    //        var endDate = DateTime.Today;
-
-    //        var result = await _client.FetchApodAsync(startDate, endDate);
-
-    //        // If the date is 2019-10-27, the start date is 2019-10-27 and the end date is 2019-10-25
-    //        // There are three expected results, 2019-10-25, 2019-10-26 and 2019-10-27. 
-    //        const int expectedResults = 3;
-
-    //        Assert.Equal(expectedResults, result.Length);
-    //    }
-    //}
 }
