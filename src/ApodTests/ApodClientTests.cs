@@ -6,8 +6,6 @@ using Moq;
 using Apod.Logic.Net;
 using Apod.Logic.Errors;
 using System.Net.Http;
-using System.Net;
-using Apod.Logic.Net.Dtos;
 
 namespace ApodTests
 {
@@ -19,13 +17,6 @@ namespace ApodTests
         private readonly Mock<IHttpResponseParser> _httpResponseParser;
         private readonly Mock<IErrorHandler> _errorHandler;
 
-
-        // Data used in tests
-        private readonly HttpResponseMessage _errorResponseMessageExample;
-        private readonly HttpResponseMessage _successResponseMessageExample;
-
-        private readonly ApodResponse _errorApodResponseExample;
-        private readonly ApodResponse _successApodResponseExample;
         private readonly ApodClient _client;
 
         public ApodClientTests()
@@ -35,147 +26,185 @@ namespace ApodTests
             _httpResponseParser = new Mock<IHttpResponseParser>();
             _errorHandler = new Mock<IErrorHandler>();
 
-            // Setup testing data
-            _errorResponseMessageExample = GetErrorResponseMessageExample();
-            _errorApodResponseExample = GetErrorApodResponseExample();
-            _successResponseMessageExample = GetSuccessResponseMessageExample();
-            _successApodResponseExample = GetSuccessApodResponseExample();
-
             // Initialize client
             _client = new ApodClient(_apiKey, _httpRequester.Object, _httpResponseParser.Object, _errorHandler.Object);
         }
 
-
         [Fact]
-        public async Task FetchApodAsync_Today_CorrectResult()
+        public async Task FetchApodAsync_Today_DoesNotValidateInput() 
         {
-            HttpResponseIsValid(true);
-            ParseSingleApodAsyncReturns(_successApodResponseExample);
+            InputHasError(ApodErrorCode.None);
+            HttpResponseHasError(ApodErrorCode.None);
 
-            var expected = _successApodResponseExample;
-            var actual = await _client.FetchApodAsync();
+            await _client.FetchApodAsync();
 
-            Assert.Equal(expected.StatusCode, actual.StatusCode);
-            Assert.Equal(expected.Content, actual.Content);
+            // The method doesn't have any input, so nothing should be validated.
+            AssertInputWasNotValidated();
         }
 
         [Fact]
-        public async Task FetchApodAsync_Date_CorrectResult()
+        public async Task FetchApodAsync_Date_TodayDoesNotValidateInput()
         {
-            var date = new DateTime(2002, 06, 25);
-
-            HttpResponseIsValid(true);
-            ValidateDateReturns(ApodErrorCode.None); // date is valid (true)
-            ParseSingleApodAsyncReturns(_successApodResponseExample);
-
-            var expected = _successApodResponseExample;
-            var actual = await _client.FetchApodAsync(date);
-
-            Assert.Equal(expected.StatusCode, actual.StatusCode);
-            Assert.Equal(expected.Content, actual.Content);
-        }
-
-        [Fact]
-        public async Task FetchApodAsync_Date_SendHttpRequestAsyncWasCalled()
-        {
-            var date = new DateTime(1999, 12, 10);
-            HttpResponseIsValid(true);
-            ValidateDateReturns(ApodErrorCode.None);
+            var date = DateTime.Now;
+            InputHasError(ApodErrorCode.None);
+            HttpResponseHasError(ApodErrorCode.None);
 
             await _client.FetchApodAsync(date);
 
-            _httpRequester.Verify(x => x.SendHttpRequestAsync(date), Times.Once);
+            // The method has input, but the date of the input is DateTime.Today 
+            // which is always valid so it should not be validated.
+            AssertInputWasNotValidated();
         }
 
         [Fact]
-        public async Task FetchApodAsync_DateRange_SendHttpRequestAsyncWasCalled()
+        public async Task FetchApodAsync_Date_DoesNotSendHttpRequestOnInputError()
         {
-            var startDate = new DateTime(2001, 11, 08);
-            var endDate = new DateTime(2002, 01, 02);
+            var date = default(DateTime);
+            InputHasError(ApodErrorCode.DateOutOfRange);
+            HttpResponseHasError(ApodErrorCode.None);
 
-            HttpResponseIsValid(true);
-            ValidateDateRangeReturns(ApodErrorCode.None);
+            await _client.FetchApodAsync(date);
+
+            AssertHttpRequestNotSent();
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_DateRange_DoesNotSendHttpRequestOnInputError()
+        {
+            var startDate = default(DateTime);
+            var endDate = default(DateTime);
+            InputHasError(ApodErrorCode.DateOutOfRange);
+            HttpResponseHasError(ApodErrorCode.None);
 
             await _client.FetchApodAsync(startDate, endDate);
 
-            _httpRequester.Verify(x => x.SendHttpRequestAsync(startDate, endDate), Times.Once);
+            AssertHttpRequestNotSent();
         }
 
         [Fact]
-        public async Task FetchApodAsync_Count_SendHttpRequestAsyncWasCalled()
+        public async Task FetchApodAsync_Count_DoesNotSendHttpRequestOnInputError()
         {
-            var count = 5;
-
-            HttpResponseIsValid(true);
-            ValidateCountReturns(ApodErrorCode.None);
+            var count = default(int);
+            InputHasError(ApodErrorCode.CountOutOfRange);
+            HttpResponseHasError(ApodErrorCode.None);
 
             await _client.FetchApodAsync(count);
 
-            _httpRequester.Verify(x => x.SendHttpRequestAsync(count), Times.Once);
+            AssertHttpRequestNotSent();
         }
 
-        private void HttpResponseIsValid(bool responseIsValid)
+        //          Input error                   HttpResponse error           Expected status code
+        [Theory]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.None,          ApodStatusCode.OK)]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.OverRateLimit, ApodStatusCode.Error)]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
+        public async Task FetchApodAsync_Today_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
         {
-            var errorCode = responseIsValid ? ApodErrorCode.None : ApodErrorCode.BadRequest;
-            var error = new ApodError(errorCode);
+            var date = default(DateTime);
+            InputHasError(inputError);
+            HttpResponseHasError(httpResponseError);
 
+            var actualStatusCode = (await _client.FetchApodAsync(date)).StatusCode;
+
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
+
+        //          Input error                   HttpResponse error           Expected status code
+        [Theory]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.None,          ApodStatusCode.OK)]
+        [InlineData(ApodErrorCode.DateOutOfRange, ApodErrorCode.None,          ApodStatusCode.Error)]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
+        public async Task FetchApodAsync_Date_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
+        {
+            var date = default(DateTime);
+            InputHasError(inputError);
+            HttpResponseHasError(httpResponseError);
+
+            var actualStatusCode = (await _client.FetchApodAsync(date)).StatusCode;
+
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
+
+        //          Input error                   HttpResponse error           Expected status code
+        [Theory]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.None,          ApodStatusCode.OK)]
+        [InlineData(ApodErrorCode.DateOutOfRange, ApodErrorCode.None,          ApodStatusCode.Error)]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
+        public async Task FetchApodAsync_DateRange_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
+        {
+            var startDate = default(DateTime);
+            var endDate = default(DateTime);
+            InputHasError(inputError);
+            HttpResponseHasError(httpResponseError);
+
+            var actualStatusCode = (await _client.FetchApodAsync(startDate, endDate)).StatusCode;
+
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
+
+        //          Input error                    HttpResponse error           Expected status code
+        [Theory]
+        [InlineData(ApodErrorCode.None,            ApodErrorCode.None,          ApodStatusCode.OK)]
+        [InlineData(ApodErrorCode.CountOutOfRange, ApodErrorCode.None,          ApodStatusCode.Error)]
+        [InlineData(ApodErrorCode.None,            ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
+        public async Task FetchApodAsync_Count_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
+        {
+            var count = default(int);
+            InputHasError(inputError);
+            HttpResponseHasError(httpResponseError);
+
+            var actualStatusCode = (await _client.FetchApodAsync(count)).StatusCode;
+
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
+
+        private void AssertInputWasNotValidated()
+        {
+            _errorHandler.Verify(x => x.ValidateDate(It.IsAny<DateTime>()), Times.Never);
+            _errorHandler.Verify(x => x.ValidateDateRange(It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Never);
+            _errorHandler.Verify(x => x.ValidateCount(It.IsAny<int>()), Times.Never);
+        }
+
+        private void AssertHttpRequestNotSent()
+        {
+            _httpRequester.VerifyNoOtherCalls();
+        }
+
+        private void InputHasError(ApodErrorCode errorCode)
+        {
+            var error = new ApodError(errorCode);
+            _errorHandler.Setup(x => x.ValidateCount(It.IsAny<int>())).Returns(error);
+            _errorHandler.Setup(x => x.ValidateDate(It.IsAny<DateTime>())).Returns(error);
+            _errorHandler.Setup(x => x.ValidateDateRange(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(error);
+        }
+
+        private void HttpResponseHasError(ApodErrorCode errorCode)
+        {
+            var error = new ApodError(errorCode);
             _errorHandler
                 .Setup(x => x.ValidateHttpResponseAsync(It.IsAny<HttpResponseMessage>()))
                 .ReturnsAsync(() => error);
-        }
 
-        private void ValidateDateReturns(ApodErrorCode errorCode)
-        {
-            var error = new ApodError(errorCode);
+            if (errorCode is ApodErrorCode.None)
+            {
+                var apodResponse = new ApodResponse(ApodStatusCode.OK);
 
-            _errorHandler
-                .Setup(x => x.ValidateDate(It.IsAny<DateTime>()))
-                .Returns(error);
-        }
+                _httpResponseParser
+                    .Setup(x => x.ParseSingleApodAsync(It.IsAny<HttpResponseMessage>()))
+                    .ReturnsAsync(() => apodResponse);
 
-        private void ValidateDateRangeReturns(ApodErrorCode errorCode)
-        {
-            var error = new ApodError(errorCode);
-
-            _errorHandler
-                .Setup(x => x.ValidateDateRange(It.IsAny<DateTime>(), It.IsAny<DateTime>()))
-                .Returns(error);
-        }
-
-        private void ValidateCountReturns(ApodErrorCode errorCode)
-        {
-            var error = new ApodError(errorCode);
-
-            _errorHandler
-                .Setup(x => x.ValidateCount(It.IsAny<int>()))
-                .Returns(error);
-        }
-
-        private void ParseSingleApodAsyncReturns(ApodResponse response)
-        {
-            _httpResponseParser
-                .Setup(x => x.ParseSingleApodAsync(It.IsAny<HttpResponseMessage>()))
-                .ReturnsAsync(() => response);
+                _httpResponseParser
+                    .Setup(x => x.ParseMultipleApodsAsync(It.IsAny<HttpResponseMessage>()))
+                    .ReturnsAsync(() => apodResponse);
+            }
         }
 
         [Fact]
         public void Constructor_NoArguments_NotNull()
         {
+            // Pretty unecessary test, but there's not really
+            // a way for me to validate that the empty ctor "works"
             var result = new ApodClient();
-            Assert.NotNull(result);
-        }
-
-        [Fact]
-        public void Contructor_WithApiKey_NotNull()
-        {
-            var result = new ApodClient(_apiKey);
-            Assert.NotNull(result);
-        }
-
-        [Fact]
-        public void Constructor_WithAllArguments_NotNull()
-        {
-            var result = new ApodClient(_apiKey, _httpRequester.Object, _httpResponseParser.Object, _errorHandler.Object);
             Assert.NotNull(result);
         }
 
@@ -225,54 +254,9 @@ namespace ApodTests
             _client.Dispose();
         }
 
-        private HttpResponseMessage GetErrorResponseMessageExample()
-        {
-            return new HttpResponseMessage()
-            {
-                StatusCode = HttpStatusCode.BadRequest,
-                Content = new StringContent(@"{""code"":400,""msg"":""Bad Request: incorrect field passed. Allowed request fields for apod method are 'concept_tags', 'date', 'hd', 'count', 'start_date', 'end_date'"",""service_version"":""v1""}")
-            };
-        }
-
-        private ApodResponse GetErrorApodResponseExample()
-        {
-            var error = new ApodError(ApodErrorCode.BadRequest, "Bad Request: incorrect field passed. Allowed request fields for apod method are 'concept_tags', 'date', 'hd', 'count', 'start_date', 'end_date'");
-            return new ApodResponse(ApodStatusCode.Error, error: error);
-        }
-
-        private HttpResponseMessage GetSuccessResponseMessageExample()
-        {
-            return new HttpResponseMessage()
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(@"{""copyright"":""R Jay Gabany"",""date"":""2019-11-16"",""explanation"":""Grand tidal streams of stars seem to surround galaxy NGC 5907. The arcing structures form tenuous loops extending more than 150,000 light-years from the narrow, edge-on spiral, also known as the Splinter or Knife Edge Galaxy.Recorded only in very deep exposures, the streams likely represent the ghostly trail of a dwarf galaxy - debris left along the orbit of a smaller satellite galaxy that was gradually torn apart and merged with NGC 5907 over four billion years ago.Ultimately this remarkable discovery image, from a small robotic observatory in New Mexico, supports the cosmological scenario in which large spiral galaxies, including our own Milky Way, were formed by the accretion of smaller ones. NGC 5907 lies about 40 million light-years distant in the northern constellation Draco."",""hdurl"":""https://apod.nasa.gov/apod/image/1911/ngc5907_gabany_rcl.jpg"",""media_type"":""image"",""service_version"":""v1"",""title"":""The Star Streams of NGC 5907"",""url"":""https://apod.nasa.gov/apod/image/1911/ngc5907_gabany_rcl1024.jpg""}")
-            };
-        }
-
-        private ApodResponse GetSuccessApodResponseExample()
-        {
-            var content = new ApodContent()
-            {
-                Copyright = "R Jay Gabany",
-                Date = new DateTime(2019, 11, 16),
-                Explanation = "Grand tidal streams of stars seem to surround galaxy NGC 5907. The arcing structures form tenuous loops extending more than 150,000 light-years from the narrow, edge-on spiral, also known as the Splinter or Knife Edge Galaxy.Recorded only in very deep exposures, the streams likely represent the ghostly trail of a dwarf galaxy - debris left along the orbit of a smaller satellite galaxy that was gradually torn apart and merged with NGC 5907 over four billion years ago.Ultimately this remarkable discovery image, from a small robotic observatory in New Mexico, supports the cosmological scenario in which large spiral galaxies, including our own Milky Way, were formed by the accretion of smaller ones. NGC 5907 lies about 40 million light-years distant in the northern constellation Draco.",
-                ContentUrlHD = "https://apod.nasa.gov/apod/image/1911/ngc5907_gabany_rcl.jpg",
-                MediaType = MediaType.Image,
-                ServiceVersion = "v1",
-                Title = "The Star Streams of NGC 5907",
-                ContentUrl = "https://apod.nasa.gov/apod/image/1911/ngc5907_gabany_rcl1024.jpg"
-            };
-
-            var allContent = new ApodContent[] { content };
-
-            return new ApodResponse(ApodStatusCode.OK, allContent);
-        }
-
         public void Dispose()
         {
             _client.Dispose();
-            _errorResponseMessageExample.Dispose();
-            _successResponseMessageExample.Dispose();
         }
     }
 }
