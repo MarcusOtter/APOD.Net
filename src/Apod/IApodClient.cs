@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Apod
 {
-    public interface IApodClient : IDisposable
+    public interface IApodClient
     {
         /// <summary>Fetch the current Astronomy Picture of the Day.</summary>
         Task<ApodResponse> FetchApodAsync();

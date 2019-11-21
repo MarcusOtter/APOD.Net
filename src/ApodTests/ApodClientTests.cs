@@ -19,7 +19,6 @@ namespace ApodTests
         private readonly Mock<IHttpResponseParser> _httpResponseParser;
         private readonly Mock<IErrorHandler> _errorHandler;
 
-        private readonly IApodClient _client;
 
         // Data used in tests
         private readonly HttpResponseMessage _errorResponseMessageExample;
@@ -27,6 +26,7 @@ namespace ApodTests
 
         private readonly ApodResponse _errorApodResponseExample;
         private readonly ApodResponse _successApodResponseExample;
+        private readonly ApodClient _client;
 
         public ApodClientTests()
         {
