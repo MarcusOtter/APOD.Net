@@ -46,7 +46,7 @@ namespace Apod
             var httpResponse = await _httpRequester.SendHttpRequestAsync();
 
             var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
-            if (responseError.ErrorCode != ApodErrorCode.None) { responseError.ToApodResponse(); }
+            if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
             return await _httpResponseParser.ParseSingleApodAsync(httpResponse);
         }
@@ -55,9 +55,9 @@ namespace Apod
         /// <param name="dateTime">The date to request the APOD for. Must be between June 16th 1995 and today's date.</param>
         public async Task<ApodResponse> FetchApodAsync(DateTime dateTime)
         {
-            ThrowExceptionIfDisposed();
-
             if (dateTime.Date == DateTime.Today) { return await FetchApodAsync(); }
+
+            ThrowExceptionIfDisposed();
 
             var dateError = _errorHandler.ValidateDate(dateTime);
             if (dateError.ErrorCode != ApodErrorCode.None) { return dateError.ToApodResponse(); }

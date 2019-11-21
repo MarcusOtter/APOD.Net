@@ -2,156 +2,261 @@ using Apod;
 using System;
 using System.Threading.Tasks;
 using Xunit;
+using Moq;
+using Apod.Logic.Net;
+using Apod.Logic.Errors;
+using System.Net.Http;
 
 namespace ApodTests
 {
-    // Temporarily disabled integration tests.
-    //public class ApodClientTests
-    //{
-    //    private readonly string _testApiKey = Environment.GetEnvironmentVariable("NASA_API_KEY");
+    public class ApodClientTests : IDisposable
+    {
+        private const string _apiKey = "DEMO_KEY";
 
-    //    private readonly DateTime _firstAllowedDate = new DateTime(1995, 06, 16);
-    //    private readonly DateTime _lastAllowedDate = DateTime.Today;
+        private readonly Mock<IHttpRequester> _httpRequester;
+        private readonly Mock<IHttpResponseParser> _httpResponseParser;
+        private readonly Mock<IErrorHandler> _errorHandler;
 
-    //    private readonly ApodClient _client;
+        private readonly ApodClient _client;
 
-    //    public ApodClientTests()
-    //    {
-    //        _client = new ApodClient(_testApiKey);
-    //    }
+        public ApodClientTests()
+        {
+            // Initialize mocks
+            _httpRequester = new Mock<IHttpRequester>();
+            _httpResponseParser = new Mock<IHttpResponseParser>();
+            _errorHandler = new Mock<IErrorHandler>();
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_Today_NotNull()
-    //    {
-    //        var apodContent = await _client.FetchApodAsync();
-    //        Assert.NotNull(apodContent);
-    //    }
+            // Initialize client
+            _client = new ApodClient(_apiKey, _httpRequester.Object, _httpResponseParser.Object, _errorHandler.Object);
+        }
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_Today_IsDateTimeToday()
-    //    {
-    //        var apodContent = await _client.FetchApodAsync();
-    //        var expected = DateTime.Today;
+        [Fact]
+        public async Task FetchApodAsync_Today_DoesNotValidateInput() 
+        {
+            InputHasError(ApodErrorCode.None);
+            HttpResponseHasError(ApodErrorCode.None);
 
-    //        Assert.Equal(expected, apodContent.Date);
-    //    }
+            await _client.FetchApodAsync();
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_SpecificDate_NotNull()
-    //    {
-    //        var date = new DateTime(2008, 10, 29); // Random date in range
-    //        var apodContent = await _client.FetchApodAsync(date);
-    //        Assert.NotNull(apodContent);
-    //    }
+            // The method doesn't have any input, so nothing should be validated.
+            AssertInputWasNotValidated();
+        }
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_SpecificDate_CorrectLowerBound()
-    //    {
-    //        var expectedOutOfRange = _firstAllowedDate.AddDays(-1);
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange));
+        [Fact]
+        public async Task FetchApodAsync_Date_TodayDoesNotValidateInput()
+        {
+            var date = DateTime.Now;
+            InputHasError(ApodErrorCode.None);
+            HttpResponseHasError(ApodErrorCode.None);
 
-    //        var result = await _client.FetchApodAsync(_firstAllowedDate);
-    //        Assert.NotNull(result);
-    //    }
+            await _client.FetchApodAsync(date);
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_SpecificDate_CorrectUpperBound()
-    //    {
-    //        var expectedOutOfRange = _lastAllowedDate.AddDays(1);
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange));
+            // The method has input, but the date of the input is DateTime.Today 
+            // which is always valid so it should not be validated.
+            AssertInputWasNotValidated();
+        }
 
-    //        var result = await _client.FetchApodAsync(_lastAllowedDate);
-    //        Assert.NotNull(result);
-    //    }
+        [Fact]
+        public async Task FetchApodAsync_Date_DoesNotSendHttpRequestOnInputError()
+        {
+            var date = default(DateTime);
+            InputHasError(ApodErrorCode.DateOutOfRange);
+            HttpResponseHasError(ApodErrorCode.None);
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_SpecificDate_ThrowsForDateOutOfRange()
-    //    {
-    //        var dateOutOfRange1 = new DateTime(1993, 06, 14);
-    //        var dateOutOfRange2 = _lastAllowedDate.AddDays(391);
+            await _client.FetchApodAsync(date);
 
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(dateOutOfRange1));
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(dateOutOfRange2));
-    //    }
+            AssertHttpRequestNotSent();
+        }
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_StartDateCorrectLowerBound()
-    //    {
-    //        // The end date has to be the same date as the first allowed date, because 1995-06-17 is not valid. This shouldn't affect the outcome.
-    //        // Ultimately the test should be from the _firstAllowedDate to the _firstAllowedDate += about 5 days.
-    //        // In practice we can only test the same date since the api wasn't consistent with daily pictures during the beginning.
-    //        var endDate = _firstAllowedDate;
+        [Fact]
+        public async Task FetchApodAsync_DateRange_DoesNotSendHttpRequestOnInputError()
+        {
+            var startDate = default(DateTime);
+            var endDate = default(DateTime);
+            InputHasError(ApodErrorCode.DateOutOfRange);
+            HttpResponseHasError(ApodErrorCode.None);
 
-    //        var expectedOutOfRange = _firstAllowedDate.AddDays(-1);
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(expectedOutOfRange, endDate));
+            await _client.FetchApodAsync(startDate, endDate);
 
-    //        var result = await _client.FetchApodAsync(_firstAllowedDate, endDate);
-    //        Assert.NotNull(result);
-    //    }
+            AssertHttpRequestNotSent();
+        }
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_EndDateCorrectUpperBound()
-    //    {
-    //        var startDate = _lastAllowedDate.AddDays(-5); // Random date in range
+        [Fact]
+        public async Task FetchApodAsync_Count_DoesNotSendHttpRequestOnInputError()
+        {
+            var count = default(int);
+            InputHasError(ApodErrorCode.CountOutOfRange);
+            HttpResponseHasError(ApodErrorCode.None);
 
-    //        var expectedOutOfRange = _lastAllowedDate.AddDays(1);
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, expectedOutOfRange));
+            await _client.FetchApodAsync(count);
 
-    //        var result = await _client.FetchApodAsync(startDate, _lastAllowedDate);
-    //        Assert.NotNull(result);
-    //    }
+            AssertHttpRequestNotSent();
+        }
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_StartDateThrowsWhenOutOfRange()
-    //    {
-    //        var startDate = new DateTime(1995, 06, 10); // Random date out of range
-    //        var endDate = new DateTime(1995, 06, 28); // Random date in range
+        //          Input error                   HttpResponse error           Expected status code
+        [Theory]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.None,          ApodStatusCode.OK)]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.OverRateLimit, ApodStatusCode.Error)]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
+        public async Task FetchApodAsync_Today_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
+        {
+            var date = default(DateTime);
+            InputHasError(inputError);
+            HttpResponseHasError(httpResponseError);
 
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
-    //    }
+            var actualStatusCode = (await _client.FetchApodAsync(date)).StatusCode;
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_EndDateThrowsForOutOfRange()
-    //    {
-    //        var startDate = DateTime.Today.AddDays(-10); // Random date in range
-    //        var endDate = DateTime.Today.AddDays(3); // Random date out of range
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
 
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
-    //    }
+        //          Input error                   HttpResponse error           Expected status code
+        [Theory]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.None,          ApodStatusCode.OK)]
+        [InlineData(ApodErrorCode.DateOutOfRange, ApodErrorCode.None,          ApodStatusCode.Error)]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
+        public async Task FetchApodAsync_Date_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
+        {
+            var date = default(DateTime);
+            InputHasError(inputError);
+            HttpResponseHasError(httpResponseError);
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_EndDateBeforeStartDateThrows()
-    //    {
-    //        var startDate = new DateTime(2007, 10, 12); // Random date in range
-    //        var endDate = new DateTime(2007, 10, 04); // Random date before the startDate
+            var actualStatusCode = (await _client.FetchApodAsync(date)).StatusCode;
 
-    //        await Assert.ThrowsAsync<DateOutOfRangeException>(async () => await _client.FetchApodAsync(startDate, endDate));
-    //    }
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_SameDateReturnsOneResult()
-    //    {
-    //        var startDate = new DateTime(2012, 12, 12); // Random date in range
-    //        var endDate = startDate;
+        //          Input error                   HttpResponse error           Expected status code
+        [Theory]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.None,          ApodStatusCode.OK)]
+        [InlineData(ApodErrorCode.DateOutOfRange, ApodErrorCode.None,          ApodStatusCode.Error)]
+        [InlineData(ApodErrorCode.None,           ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
+        public async Task FetchApodAsync_DateRange_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
+        {
+            var startDate = default(DateTime);
+            var endDate = default(DateTime);
+            InputHasError(inputError);
+            HttpResponseHasError(httpResponseError);
 
-    //        var result = await _client.FetchApodAsync(startDate, endDate);
+            var actualStatusCode = (await _client.FetchApodAsync(startDate, endDate)).StatusCode;
 
-    //        Assert.Single(result);
-    //    }
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
 
-    //    [Fact]
-    //    public async Task ApodClient_FetchApodAsync_DateSpan_ReturnsCorrectAmountOfResults()
-    //    {
-    //        var startDate = DateTime.Today.AddDays(-2);
-    //        var endDate = DateTime.Today;
+        //          Input error                    HttpResponse error           Expected status code
+        [Theory]
+        [InlineData(ApodErrorCode.None,            ApodErrorCode.None,          ApodStatusCode.OK)]
+        [InlineData(ApodErrorCode.CountOutOfRange, ApodErrorCode.None,          ApodStatusCode.Error)]
+        [InlineData(ApodErrorCode.None,            ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
+        public async Task FetchApodAsync_Count_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
+        {
+            var count = default(int);
+            InputHasError(inputError);
+            HttpResponseHasError(httpResponseError);
 
-    //        var result = await _client.FetchApodAsync(startDate, endDate);
+            var actualStatusCode = (await _client.FetchApodAsync(count)).StatusCode;
 
-    //        // If the date is 2019-10-27, the start date is 2019-10-27 and the end date is 2019-10-25
-    //        // There are three expected results, 2019-10-25, 2019-10-26 and 2019-10-27. 
-    //        const int expectedResults = 3;
+            Assert.Equal(expectedStatusCode, actualStatusCode);
+        }
 
-    //        Assert.Equal(expectedResults, result.Length);
-    //    }
-    //}
+        private void AssertInputWasNotValidated()
+        {
+            _errorHandler.Verify(x => x.ValidateDate(It.IsAny<DateTime>()), Times.Never);
+            _errorHandler.Verify(x => x.ValidateDateRange(It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Never);
+            _errorHandler.Verify(x => x.ValidateCount(It.IsAny<int>()), Times.Never);
+        }
+
+        private void AssertHttpRequestNotSent()
+        {
+            _httpRequester.VerifyNoOtherCalls();
+        }
+
+        private void InputHasError(ApodErrorCode errorCode)
+        {
+            var error = new ApodError(errorCode);
+            _errorHandler.Setup(x => x.ValidateCount(It.IsAny<int>())).Returns(error);
+            _errorHandler.Setup(x => x.ValidateDate(It.IsAny<DateTime>())).Returns(error);
+            _errorHandler.Setup(x => x.ValidateDateRange(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(error);
+        }
+
+        private void HttpResponseHasError(ApodErrorCode errorCode)
+        {
+            var error = new ApodError(errorCode);
+            _errorHandler
+                .Setup(x => x.ValidateHttpResponseAsync(It.IsAny<HttpResponseMessage>()))
+                .ReturnsAsync(() => error);
+
+            if (errorCode is ApodErrorCode.None)
+            {
+                var apodResponse = new ApodResponse(ApodStatusCode.OK);
+
+                _httpResponseParser
+                    .Setup(x => x.ParseSingleApodAsync(It.IsAny<HttpResponseMessage>()))
+                    .ReturnsAsync(() => apodResponse);
+
+                _httpResponseParser
+                    .Setup(x => x.ParseMultipleApodsAsync(It.IsAny<HttpResponseMessage>()))
+                    .ReturnsAsync(() => apodResponse);
+            }
+        }
+
+        [Fact]
+        public void Constructor_NoArguments_NotNull()
+        {
+            // Pretty unecessary test, but there's not really
+            // a way for me to validate that the empty ctor "works"
+            var result = new ApodClient();
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Today_ThrowsIfDisposed()
+        {
+            _client.Dispose();
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync());
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Date_ThrowsIfDisposed()
+        {
+            var date = new DateTime(2015, 02, 16);
+
+            _client.Dispose();
+
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync(date));
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_DateRange_ThrowsIfDisposed()
+        {
+            var startDate = new DateTime(2013, 10, 10);
+            var endDate = new DateTime(2013, 10, 20);
+
+            _client.Dispose();
+            
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync(startDate, endDate));
+        }
+
+        [Fact]
+        public async Task FetchApodAsync_Count_ThrowsIfDisposed()
+        {
+            var count = 14;
+
+            _client.Dispose();
+
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () => await _client.FetchApodAsync(count));
+        }
+
+        [Fact]
+        public void Dispose_CanCallMultipleTimes()
+        {
+            _client.Dispose();
+            _client.Dispose();
+            _client.Dispose();
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
+        }
+    }
 }
