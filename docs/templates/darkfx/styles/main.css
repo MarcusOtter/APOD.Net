@@ -244,9 +244,9 @@ code{
 }
 
 .breadcrumb > li + li:before {
-    content: "⯈";
+    content: "/";
     font-size: 75%;
-    color: #1e1e1e;
+    color: #ccc;
     padding: 0;
 }
 
