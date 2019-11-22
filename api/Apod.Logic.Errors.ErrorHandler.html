@@ -84,52 +84,28 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Apod.Logic.Errors.IErrorHandler.html">IErrorHandler</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apod.Logic.Errors.html">Apod.Logic.Errors</a></h6>
   <h6><strong>Assembly</strong>: Apod.dll</h6>
   <h5 id="Apod_Logic_Errors_ErrorHandler_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ErrorHandler : IErrorHandler</code></pre>
+    <pre><code class="lang-csharp hljs">public class ErrorHandler : object, IErrorHandler</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/docfx-implementation/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler__ctor_Apod_Logic_Errors_IErrorBuilder_System_DateTime_System_DateTime_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.%23ctor(Apod.Logic.Errors.IErrorBuilder%2CSystem.DateTime%2CSystem.DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/master/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler__ctor_Apod_Logic_Errors_IErrorBuilder_DateTime_DateTime_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.%23ctor(Apod.Logic.Errors.IErrorBuilder%2CDateTime%2CDateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/docfx-implementation/src/Apod/Logic/Errors/ErrorHandler.cs/#L16">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/master/src/Apod/Logic/Errors/ErrorHandler.cs/#L16">View Source</a>
   </span>
   <a id="Apod_Logic_Errors_ErrorHandler__ctor_" data-uid="Apod.Logic.Errors.ErrorHandler.#ctor*"></a>
-  <h4 id="Apod_Logic_Errors_ErrorHandler__ctor_Apod_Logic_Errors_IErrorBuilder_System_DateTime_System_DateTime_" data-uid="Apod.Logic.Errors.ErrorHandler.#ctor(Apod.Logic.Errors.IErrorBuilder,System.DateTime,System.DateTime)">ErrorHandler(IErrorBuilder, DateTime, DateTime)</h4>
+  <h4 id="Apod_Logic_Errors_ErrorHandler__ctor_Apod_Logic_Errors_IErrorBuilder_DateTime_DateTime_" data-uid="Apod.Logic.Errors.ErrorHandler.#ctor(Apod.Logic.Errors.IErrorBuilder,DateTime,DateTime)">ErrorHandler(IErrorBuilder, DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ErrorHandler(IErrorBuilder errorBuilder, DateTime firstValidDate = default(DateTime), DateTime lastValidDate = default(DateTime))</code></pre>
+    <pre><code class="lang-csharp hljs">public ErrorHandler(IErrorBuilder errorBuilder, DateTime firstValidDate = null, DateTime lastValidDate = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -147,12 +123,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.DateTime</span></td>
+        <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">firstValidDate</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.DateTime</span></td>
+        <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">lastValidDate</span></td>
         <td></td>
       </tr>
@@ -162,10 +138,10 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/docfx-implementation/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler_ValidateCount_System_Int32_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.ValidateCount(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/master/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler_ValidateCount_System_Int32_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.ValidateCount(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/docfx-implementation/src/Apod/Logic/Errors/ErrorHandler.cs/#L58">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/master/src/Apod/Logic/Errors/ErrorHandler.cs/#L58">View Source</a>
   </span>
   <a id="Apod_Logic_Errors_ErrorHandler_ValidateCount_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateCount*"></a>
   <h4 id="Apod_Logic_Errors_ErrorHandler_ValidateCount_System_Int32_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateCount(System.Int32)">ValidateCount(Int32)</h4>
@@ -209,13 +185,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/docfx-implementation/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler_ValidateDate_System_DateTime_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.ValidateDate(System.DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/master/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler_ValidateDate_DateTime_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.ValidateDate(DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/docfx-implementation/src/Apod/Logic/Errors/ErrorHandler.cs/#L41">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/master/src/Apod/Logic/Errors/ErrorHandler.cs/#L41">View Source</a>
   </span>
   <a id="Apod_Logic_Errors_ErrorHandler_ValidateDate_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateDate*"></a>
-  <h4 id="Apod_Logic_Errors_ErrorHandler_ValidateDate_System_DateTime_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateDate(System.DateTime)">ValidateDate(DateTime)</h4>
+  <h4 id="Apod_Logic_Errors_ErrorHandler_ValidateDate_DateTime_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateDate(DateTime)">ValidateDate(DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -233,7 +209,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.DateTime</span></td>
+        <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">dateTime</span></td>
         <td></td>
       </tr>
@@ -256,18 +232,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/docfx-implementation/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler_ValidateDateRange_System_DateTime_System_DateTime_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.ValidateDateRange(System.DateTime%2CSystem.DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/master/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler_ValidateDateRange_DateTime_DateTime_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.ValidateDateRange(DateTime%2CDateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/docfx-implementation/src/Apod/Logic/Errors/ErrorHandler.cs/#L47">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/master/src/Apod/Logic/Errors/ErrorHandler.cs/#L47">View Source</a>
   </span>
   <a id="Apod_Logic_Errors_ErrorHandler_ValidateDateRange_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateDateRange*"></a>
-  <h4 id="Apod_Logic_Errors_ErrorHandler_ValidateDateRange_System_DateTime_System_DateTime_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateDateRange(System.DateTime,System.DateTime)">ValidateDateRange(DateTime, DateTime)</h4>
+  <h4 id="Apod_Logic_Errors_ErrorHandler_ValidateDateRange_DateTime_DateTime_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateDateRange(DateTime,DateTime)">ValidateDateRange(DateTime, DateTime)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ApodError ValidateDateRange(DateTime startDate, DateTime endDate = default(DateTime))</code></pre>
+    <pre><code class="lang-csharp hljs">public ApodError ValidateDateRange(DateTime startDate, DateTime endDate = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -280,12 +256,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.DateTime</span></td>
+        <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">startDate</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.DateTime</span></td>
+        <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">endDate</span></td>
         <td></td>
       </tr>
@@ -308,13 +284,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/docfx-implementation/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler_ValidateHttpResponseAsync_System_Net_Http_HttpResponseMessage_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(System.Net.Http.HttpResponseMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/master/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler_ValidateHttpResponseAsync_HttpResponseMessage_.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/docfx-implementation/src/Apod/Logic/Errors/ErrorHandler.cs/#L64">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/master/src/Apod/Logic/Errors/ErrorHandler.cs/#L64">View Source</a>
   </span>
   <a id="Apod_Logic_Errors_ErrorHandler_ValidateHttpResponseAsync_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync*"></a>
-  <h4 id="Apod_Logic_Errors_ErrorHandler_ValidateHttpResponseAsync_System_Net_Http_HttpResponseMessage_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(System.Net.Http.HttpResponseMessage)">ValidateHttpResponseAsync(HttpResponseMessage)</h4>
+  <h4 id="Apod_Logic_Errors_ErrorHandler_ValidateHttpResponseAsync_HttpResponseMessage_" data-uid="Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)">ValidateHttpResponseAsync(HttpResponseMessage)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -332,7 +308,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Net.Http.HttpResponseMessage</span></td>
+        <td><span class="xref">HttpResponseMessage</span></td>
         <td><span class="parametername">httpResponse</span></td>
         <td></td>
       </tr>
@@ -348,7 +324,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Apod.ApodError.html">ApodError</a>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodError.html">ApodError</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -365,10 +341,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/new/docfx-implementation/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/new/master/apiSpec/new?filename=Apod_Logic_Errors_ErrorHandler.md&amp;value=---%0Auid%3A%20Apod.Logic.Errors.ErrorHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/blob/docfx-implementation/src/Apod/Logic/Errors/ErrorHandler.cs/#L9" class="contribution-link">View Source</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/master/src/Apod/Logic/Errors/ErrorHandler.cs/#L9" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

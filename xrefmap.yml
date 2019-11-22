@@ -57,17 +57,17 @@ references:
   commentId: M:Apod.ApodClient.FetchApodAsync
   fullName: Apod.ApodClient.FetchApodAsync()
   nameWithType: ApodClient.FetchApodAsync()
-- uid: Apod.ApodClient.FetchApodAsync(System.DateTime)
+- uid: Apod.ApodClient.FetchApodAsync(DateTime)
   name: FetchApodAsync(DateTime)
-  href: api/Apod.ApodClient.html#Apod_ApodClient_FetchApodAsync_System_DateTime_
-  commentId: M:Apod.ApodClient.FetchApodAsync(System.DateTime)
-  fullName: Apod.ApodClient.FetchApodAsync(System.DateTime)
+  href: api/Apod.ApodClient.html#Apod_ApodClient_FetchApodAsync_DateTime_
+  commentId: M:Apod.ApodClient.FetchApodAsync(DateTime)
+  fullName: Apod.ApodClient.FetchApodAsync(DateTime)
   nameWithType: ApodClient.FetchApodAsync(DateTime)
-- uid: Apod.ApodClient.FetchApodAsync(System.DateTime,System.DateTime)
+- uid: Apod.ApodClient.FetchApodAsync(DateTime,DateTime)
   name: FetchApodAsync(DateTime, DateTime)
-  href: api/Apod.ApodClient.html#Apod_ApodClient_FetchApodAsync_System_DateTime_System_DateTime_
-  commentId: M:Apod.ApodClient.FetchApodAsync(System.DateTime,System.DateTime)
-  fullName: Apod.ApodClient.FetchApodAsync(System.DateTime, System.DateTime)
+  href: api/Apod.ApodClient.html#Apod_ApodClient_FetchApodAsync_DateTime_DateTime_
+  commentId: M:Apod.ApodClient.FetchApodAsync(DateTime,DateTime)
+  fullName: Apod.ApodClient.FetchApodAsync(DateTime, DateTime)
   nameWithType: ApodClient.FetchApodAsync(DateTime, DateTime)
 - uid: Apod.ApodClient.FetchApodAsync(System.Int32)
   name: FetchApodAsync(Int32)
@@ -274,17 +274,17 @@ references:
   commentId: M:Apod.IApodClient.FetchApodAsync
   fullName: Apod.IApodClient.FetchApodAsync()
   nameWithType: IApodClient.FetchApodAsync()
-- uid: Apod.IApodClient.FetchApodAsync(System.DateTime)
+- uid: Apod.IApodClient.FetchApodAsync(DateTime)
   name: FetchApodAsync(DateTime)
-  href: api/Apod.IApodClient.html#Apod_IApodClient_FetchApodAsync_System_DateTime_
-  commentId: M:Apod.IApodClient.FetchApodAsync(System.DateTime)
-  fullName: Apod.IApodClient.FetchApodAsync(System.DateTime)
+  href: api/Apod.IApodClient.html#Apod_IApodClient_FetchApodAsync_DateTime_
+  commentId: M:Apod.IApodClient.FetchApodAsync(DateTime)
+  fullName: Apod.IApodClient.FetchApodAsync(DateTime)
   nameWithType: IApodClient.FetchApodAsync(DateTime)
-- uid: Apod.IApodClient.FetchApodAsync(System.DateTime,System.DateTime)
+- uid: Apod.IApodClient.FetchApodAsync(DateTime,DateTime)
   name: FetchApodAsync(DateTime, DateTime)
-  href: api/Apod.IApodClient.html#Apod_IApodClient_FetchApodAsync_System_DateTime_System_DateTime_
-  commentId: M:Apod.IApodClient.FetchApodAsync(System.DateTime,System.DateTime)
-  fullName: Apod.IApodClient.FetchApodAsync(System.DateTime, System.DateTime)
+  href: api/Apod.IApodClient.html#Apod_IApodClient_FetchApodAsync_DateTime_DateTime_
+  commentId: M:Apod.IApodClient.FetchApodAsync(DateTime,DateTime)
+  fullName: Apod.IApodClient.FetchApodAsync(DateTime, DateTime)
   nameWithType: IApodClient.FetchApodAsync(DateTime, DateTime)
 - uid: Apod.IApodClient.FetchApodAsync(System.Int32)
   name: FetchApodAsync(Int32)
@@ -427,11 +427,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Errors.ErrorBuilder.GetCountOutOfRangeError
   nameWithType: ErrorBuilder.GetCountOutOfRangeError
-- uid: Apod.Logic.Errors.ErrorBuilder.GetDateOutOfRangeError(System.DateTime,System.DateTime)
+- uid: Apod.Logic.Errors.ErrorBuilder.GetDateOutOfRangeError(DateTime,DateTime)
   name: GetDateOutOfRangeError(DateTime, DateTime)
-  href: api/Apod.Logic.Errors.ErrorBuilder.html#Apod_Logic_Errors_ErrorBuilder_GetDateOutOfRangeError_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Errors.ErrorBuilder.GetDateOutOfRangeError(System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Errors.ErrorBuilder.GetDateOutOfRangeError(System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Errors.ErrorBuilder.html#Apod_Logic_Errors_ErrorBuilder_GetDateOutOfRangeError_DateTime_DateTime_
+  commentId: M:Apod.Logic.Errors.ErrorBuilder.GetDateOutOfRangeError(DateTime,DateTime)
+  fullName: Apod.Logic.Errors.ErrorBuilder.GetDateOutOfRangeError(DateTime, DateTime)
   nameWithType: ErrorBuilder.GetDateOutOfRangeError(DateTime, DateTime)
 - uid: Apod.Logic.Errors.ErrorBuilder.GetDateOutOfRangeError*
   name: GetDateOutOfRangeError
@@ -511,11 +511,11 @@ references:
   commentId: T:Apod.Logic.Errors.ErrorHandler
   fullName: Apod.Logic.Errors.ErrorHandler
   nameWithType: ErrorHandler
-- uid: Apod.Logic.Errors.ErrorHandler.#ctor(Apod.Logic.Errors.IErrorBuilder,System.DateTime,System.DateTime)
+- uid: Apod.Logic.Errors.ErrorHandler.#ctor(Apod.Logic.Errors.IErrorBuilder,DateTime,DateTime)
   name: ErrorHandler(IErrorBuilder, DateTime, DateTime)
-  href: api/Apod.Logic.Errors.ErrorHandler.html#Apod_Logic_Errors_ErrorHandler__ctor_Apod_Logic_Errors_IErrorBuilder_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Errors.ErrorHandler.#ctor(Apod.Logic.Errors.IErrorBuilder,System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Errors.ErrorHandler.ErrorHandler(Apod.Logic.Errors.IErrorBuilder, System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Errors.ErrorHandler.html#Apod_Logic_Errors_ErrorHandler__ctor_Apod_Logic_Errors_IErrorBuilder_DateTime_DateTime_
+  commentId: M:Apod.Logic.Errors.ErrorHandler.#ctor(Apod.Logic.Errors.IErrorBuilder,DateTime,DateTime)
+  fullName: Apod.Logic.Errors.ErrorHandler.ErrorHandler(Apod.Logic.Errors.IErrorBuilder, DateTime, DateTime)
   nameWithType: ErrorHandler.ErrorHandler(IErrorBuilder, DateTime, DateTime)
 - uid: Apod.Logic.Errors.ErrorHandler.#ctor*
   name: ErrorHandler
@@ -537,11 +537,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Errors.ErrorHandler.ValidateCount
   nameWithType: ErrorHandler.ValidateCount
-- uid: Apod.Logic.Errors.ErrorHandler.ValidateDate(System.DateTime)
+- uid: Apod.Logic.Errors.ErrorHandler.ValidateDate(DateTime)
   name: ValidateDate(DateTime)
-  href: api/Apod.Logic.Errors.ErrorHandler.html#Apod_Logic_Errors_ErrorHandler_ValidateDate_System_DateTime_
-  commentId: M:Apod.Logic.Errors.ErrorHandler.ValidateDate(System.DateTime)
-  fullName: Apod.Logic.Errors.ErrorHandler.ValidateDate(System.DateTime)
+  href: api/Apod.Logic.Errors.ErrorHandler.html#Apod_Logic_Errors_ErrorHandler_ValidateDate_DateTime_
+  commentId: M:Apod.Logic.Errors.ErrorHandler.ValidateDate(DateTime)
+  fullName: Apod.Logic.Errors.ErrorHandler.ValidateDate(DateTime)
   nameWithType: ErrorHandler.ValidateDate(DateTime)
 - uid: Apod.Logic.Errors.ErrorHandler.ValidateDate*
   name: ValidateDate
@@ -550,11 +550,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Errors.ErrorHandler.ValidateDate
   nameWithType: ErrorHandler.ValidateDate
-- uid: Apod.Logic.Errors.ErrorHandler.ValidateDateRange(System.DateTime,System.DateTime)
+- uid: Apod.Logic.Errors.ErrorHandler.ValidateDateRange(DateTime,DateTime)
   name: ValidateDateRange(DateTime, DateTime)
-  href: api/Apod.Logic.Errors.ErrorHandler.html#Apod_Logic_Errors_ErrorHandler_ValidateDateRange_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Errors.ErrorHandler.ValidateDateRange(System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Errors.ErrorHandler.ValidateDateRange(System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Errors.ErrorHandler.html#Apod_Logic_Errors_ErrorHandler_ValidateDateRange_DateTime_DateTime_
+  commentId: M:Apod.Logic.Errors.ErrorHandler.ValidateDateRange(DateTime,DateTime)
+  fullName: Apod.Logic.Errors.ErrorHandler.ValidateDateRange(DateTime, DateTime)
   nameWithType: ErrorHandler.ValidateDateRange(DateTime, DateTime)
 - uid: Apod.Logic.Errors.ErrorHandler.ValidateDateRange*
   name: ValidateDateRange
@@ -563,11 +563,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Errors.ErrorHandler.ValidateDateRange
   nameWithType: ErrorHandler.ValidateDateRange
-- uid: Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(System.Net.Http.HttpResponseMessage)
+- uid: Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)
   name: ValidateHttpResponseAsync(HttpResponseMessage)
-  href: api/Apod.Logic.Errors.ErrorHandler.html#Apod_Logic_Errors_ErrorHandler_ValidateHttpResponseAsync_System_Net_Http_HttpResponseMessage_
-  commentId: M:Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(System.Net.Http.HttpResponseMessage)
-  fullName: Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(System.Net.Http.HttpResponseMessage)
+  href: api/Apod.Logic.Errors.ErrorHandler.html#Apod_Logic_Errors_ErrorHandler_ValidateHttpResponseAsync_HttpResponseMessage_
+  commentId: M:Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)
+  fullName: Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)
   nameWithType: ErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)
 - uid: Apod.Logic.Errors.ErrorHandler.ValidateHttpResponseAsync*
   name: ValidateHttpResponseAsync
@@ -634,11 +634,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Errors.IErrorBuilder.GetCountOutOfRangeError
   nameWithType: IErrorBuilder.GetCountOutOfRangeError
-- uid: Apod.Logic.Errors.IErrorBuilder.GetDateOutOfRangeError(System.DateTime,System.DateTime)
+- uid: Apod.Logic.Errors.IErrorBuilder.GetDateOutOfRangeError(DateTime,DateTime)
   name: GetDateOutOfRangeError(DateTime, DateTime)
-  href: api/Apod.Logic.Errors.IErrorBuilder.html#Apod_Logic_Errors_IErrorBuilder_GetDateOutOfRangeError_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Errors.IErrorBuilder.GetDateOutOfRangeError(System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Errors.IErrorBuilder.GetDateOutOfRangeError(System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Errors.IErrorBuilder.html#Apod_Logic_Errors_IErrorBuilder_GetDateOutOfRangeError_DateTime_DateTime_
+  commentId: M:Apod.Logic.Errors.IErrorBuilder.GetDateOutOfRangeError(DateTime,DateTime)
+  fullName: Apod.Logic.Errors.IErrorBuilder.GetDateOutOfRangeError(DateTime, DateTime)
   nameWithType: IErrorBuilder.GetDateOutOfRangeError(DateTime, DateTime)
 - uid: Apod.Logic.Errors.IErrorBuilder.GetDateOutOfRangeError*
   name: GetDateOutOfRangeError
@@ -731,11 +731,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Errors.IErrorHandler.ValidateCount
   nameWithType: IErrorHandler.ValidateCount
-- uid: Apod.Logic.Errors.IErrorHandler.ValidateDate(System.DateTime)
+- uid: Apod.Logic.Errors.IErrorHandler.ValidateDate(DateTime)
   name: ValidateDate(DateTime)
-  href: api/Apod.Logic.Errors.IErrorHandler.html#Apod_Logic_Errors_IErrorHandler_ValidateDate_System_DateTime_
-  commentId: M:Apod.Logic.Errors.IErrorHandler.ValidateDate(System.DateTime)
-  fullName: Apod.Logic.Errors.IErrorHandler.ValidateDate(System.DateTime)
+  href: api/Apod.Logic.Errors.IErrorHandler.html#Apod_Logic_Errors_IErrorHandler_ValidateDate_DateTime_
+  commentId: M:Apod.Logic.Errors.IErrorHandler.ValidateDate(DateTime)
+  fullName: Apod.Logic.Errors.IErrorHandler.ValidateDate(DateTime)
   nameWithType: IErrorHandler.ValidateDate(DateTime)
 - uid: Apod.Logic.Errors.IErrorHandler.ValidateDate*
   name: ValidateDate
@@ -744,11 +744,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Errors.IErrorHandler.ValidateDate
   nameWithType: IErrorHandler.ValidateDate
-- uid: Apod.Logic.Errors.IErrorHandler.ValidateDateRange(System.DateTime,System.DateTime)
+- uid: Apod.Logic.Errors.IErrorHandler.ValidateDateRange(DateTime,DateTime)
   name: ValidateDateRange(DateTime, DateTime)
-  href: api/Apod.Logic.Errors.IErrorHandler.html#Apod_Logic_Errors_IErrorHandler_ValidateDateRange_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Errors.IErrorHandler.ValidateDateRange(System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Errors.IErrorHandler.ValidateDateRange(System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Errors.IErrorHandler.html#Apod_Logic_Errors_IErrorHandler_ValidateDateRange_DateTime_DateTime_
+  commentId: M:Apod.Logic.Errors.IErrorHandler.ValidateDateRange(DateTime,DateTime)
+  fullName: Apod.Logic.Errors.IErrorHandler.ValidateDateRange(DateTime, DateTime)
   nameWithType: IErrorHandler.ValidateDateRange(DateTime, DateTime)
 - uid: Apod.Logic.Errors.IErrorHandler.ValidateDateRange*
   name: ValidateDateRange
@@ -757,11 +757,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Errors.IErrorHandler.ValidateDateRange
   nameWithType: IErrorHandler.ValidateDateRange
-- uid: Apod.Logic.Errors.IErrorHandler.ValidateHttpResponseAsync(System.Net.Http.HttpResponseMessage)
+- uid: Apod.Logic.Errors.IErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)
   name: ValidateHttpResponseAsync(HttpResponseMessage)
-  href: api/Apod.Logic.Errors.IErrorHandler.html#Apod_Logic_Errors_IErrorHandler_ValidateHttpResponseAsync_System_Net_Http_HttpResponseMessage_
-  commentId: M:Apod.Logic.Errors.IErrorHandler.ValidateHttpResponseAsync(System.Net.Http.HttpResponseMessage)
-  fullName: Apod.Logic.Errors.IErrorHandler.ValidateHttpResponseAsync(System.Net.Http.HttpResponseMessage)
+  href: api/Apod.Logic.Errors.IErrorHandler.html#Apod_Logic_Errors_IErrorHandler_ValidateHttpResponseAsync_HttpResponseMessage_
+  commentId: M:Apod.Logic.Errors.IErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)
+  fullName: Apod.Logic.Errors.IErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)
   nameWithType: IErrorHandler.ValidateHttpResponseAsync(HttpResponseMessage)
 - uid: Apod.Logic.Errors.IErrorHandler.ValidateHttpResponseAsync*
   name: ValidateHttpResponseAsync
@@ -801,17 +801,17 @@ references:
   commentId: M:Apod.Logic.Net.ApodUriBuilder.GetApodUri
   fullName: Apod.Logic.Net.ApodUriBuilder.GetApodUri()
   nameWithType: ApodUriBuilder.GetApodUri()
-- uid: Apod.Logic.Net.ApodUriBuilder.GetApodUri(System.DateTime)
+- uid: Apod.Logic.Net.ApodUriBuilder.GetApodUri(DateTime)
   name: GetApodUri(DateTime)
-  href: api/Apod.Logic.Net.ApodUriBuilder.html#Apod_Logic_Net_ApodUriBuilder_GetApodUri_System_DateTime_
-  commentId: M:Apod.Logic.Net.ApodUriBuilder.GetApodUri(System.DateTime)
-  fullName: Apod.Logic.Net.ApodUriBuilder.GetApodUri(System.DateTime)
+  href: api/Apod.Logic.Net.ApodUriBuilder.html#Apod_Logic_Net_ApodUriBuilder_GetApodUri_DateTime_
+  commentId: M:Apod.Logic.Net.ApodUriBuilder.GetApodUri(DateTime)
+  fullName: Apod.Logic.Net.ApodUriBuilder.GetApodUri(DateTime)
   nameWithType: ApodUriBuilder.GetApodUri(DateTime)
-- uid: Apod.Logic.Net.ApodUriBuilder.GetApodUri(System.DateTime,System.DateTime)
+- uid: Apod.Logic.Net.ApodUriBuilder.GetApodUri(DateTime,DateTime)
   name: GetApodUri(DateTime, DateTime)
-  href: api/Apod.Logic.Net.ApodUriBuilder.html#Apod_Logic_Net_ApodUriBuilder_GetApodUri_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Net.ApodUriBuilder.GetApodUri(System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Net.ApodUriBuilder.GetApodUri(System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Net.ApodUriBuilder.html#Apod_Logic_Net_ApodUriBuilder_GetApodUri_DateTime_DateTime_
+  commentId: M:Apod.Logic.Net.ApodUriBuilder.GetApodUri(DateTime,DateTime)
+  fullName: Apod.Logic.Net.ApodUriBuilder.GetApodUri(DateTime, DateTime)
   nameWithType: ApodUriBuilder.GetApodUri(DateTime, DateTime)
 - uid: Apod.Logic.Net.ApodUriBuilder.GetApodUri(System.Int32)
   name: GetApodUri(Int32)
@@ -1024,11 +1024,11 @@ references:
   commentId: T:Apod.Logic.Net.HttpRequester
   fullName: Apod.Logic.Net.HttpRequester
   nameWithType: HttpRequester
-- uid: Apod.Logic.Net.HttpRequester.#ctor(Apod.Logic.Net.IApodUriBuilder,System.Net.Http.HttpClient)
+- uid: Apod.Logic.Net.HttpRequester.#ctor(Apod.Logic.Net.IApodUriBuilder,HttpClient)
   name: HttpRequester(IApodUriBuilder, HttpClient)
-  href: api/Apod.Logic.Net.HttpRequester.html#Apod_Logic_Net_HttpRequester__ctor_Apod_Logic_Net_IApodUriBuilder_System_Net_Http_HttpClient_
-  commentId: M:Apod.Logic.Net.HttpRequester.#ctor(Apod.Logic.Net.IApodUriBuilder,System.Net.Http.HttpClient)
-  fullName: Apod.Logic.Net.HttpRequester.HttpRequester(Apod.Logic.Net.IApodUriBuilder, System.Net.Http.HttpClient)
+  href: api/Apod.Logic.Net.HttpRequester.html#Apod_Logic_Net_HttpRequester__ctor_Apod_Logic_Net_IApodUriBuilder_HttpClient_
+  commentId: M:Apod.Logic.Net.HttpRequester.#ctor(Apod.Logic.Net.IApodUriBuilder,HttpClient)
+  fullName: Apod.Logic.Net.HttpRequester.HttpRequester(Apod.Logic.Net.IApodUriBuilder, HttpClient)
   nameWithType: HttpRequester.HttpRequester(IApodUriBuilder, HttpClient)
 - uid: Apod.Logic.Net.HttpRequester.#ctor*
   name: HttpRequester
@@ -1056,17 +1056,17 @@ references:
   commentId: M:Apod.Logic.Net.HttpRequester.SendHttpRequestAsync
   fullName: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync()
   nameWithType: HttpRequester.SendHttpRequestAsync()
-- uid: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(System.DateTime)
+- uid: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(DateTime)
   name: SendHttpRequestAsync(DateTime)
-  href: api/Apod.Logic.Net.HttpRequester.html#Apod_Logic_Net_HttpRequester_SendHttpRequestAsync_System_DateTime_
-  commentId: M:Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(System.DateTime)
-  fullName: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(System.DateTime)
+  href: api/Apod.Logic.Net.HttpRequester.html#Apod_Logic_Net_HttpRequester_SendHttpRequestAsync_DateTime_
+  commentId: M:Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(DateTime)
+  fullName: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(DateTime)
   nameWithType: HttpRequester.SendHttpRequestAsync(DateTime)
-- uid: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(System.DateTime,System.DateTime)
+- uid: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(DateTime,DateTime)
   name: SendHttpRequestAsync(DateTime, DateTime)
-  href: api/Apod.Logic.Net.HttpRequester.html#Apod_Logic_Net_HttpRequester_SendHttpRequestAsync_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Net.HttpRequester.html#Apod_Logic_Net_HttpRequester_SendHttpRequestAsync_DateTime_DateTime_
+  commentId: M:Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(DateTime,DateTime)
+  fullName: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(DateTime, DateTime)
   nameWithType: HttpRequester.SendHttpRequestAsync(DateTime, DateTime)
 - uid: Apod.Logic.Net.HttpRequester.SendHttpRequestAsync(System.Int32)
   name: SendHttpRequestAsync(Int32)
@@ -1100,11 +1100,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Net.HttpResponseParser.HttpResponseParser
   nameWithType: HttpResponseParser.HttpResponseParser
-- uid: Apod.Logic.Net.HttpResponseParser.ParseMultipleApodsAsync(System.Net.Http.HttpResponseMessage)
+- uid: Apod.Logic.Net.HttpResponseParser.ParseMultipleApodsAsync(HttpResponseMessage)
   name: ParseMultipleApodsAsync(HttpResponseMessage)
-  href: api/Apod.Logic.Net.HttpResponseParser.html#Apod_Logic_Net_HttpResponseParser_ParseMultipleApodsAsync_System_Net_Http_HttpResponseMessage_
-  commentId: M:Apod.Logic.Net.HttpResponseParser.ParseMultipleApodsAsync(System.Net.Http.HttpResponseMessage)
-  fullName: Apod.Logic.Net.HttpResponseParser.ParseMultipleApodsAsync(System.Net.Http.HttpResponseMessage)
+  href: api/Apod.Logic.Net.HttpResponseParser.html#Apod_Logic_Net_HttpResponseParser_ParseMultipleApodsAsync_HttpResponseMessage_
+  commentId: M:Apod.Logic.Net.HttpResponseParser.ParseMultipleApodsAsync(HttpResponseMessage)
+  fullName: Apod.Logic.Net.HttpResponseParser.ParseMultipleApodsAsync(HttpResponseMessage)
   nameWithType: HttpResponseParser.ParseMultipleApodsAsync(HttpResponseMessage)
 - uid: Apod.Logic.Net.HttpResponseParser.ParseMultipleApodsAsync*
   name: ParseMultipleApodsAsync
@@ -1113,11 +1113,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Net.HttpResponseParser.ParseMultipleApodsAsync
   nameWithType: HttpResponseParser.ParseMultipleApodsAsync
-- uid: Apod.Logic.Net.HttpResponseParser.ParseSingleApodAsync(System.Net.Http.HttpResponseMessage)
+- uid: Apod.Logic.Net.HttpResponseParser.ParseSingleApodAsync(HttpResponseMessage)
   name: ParseSingleApodAsync(HttpResponseMessage)
-  href: api/Apod.Logic.Net.HttpResponseParser.html#Apod_Logic_Net_HttpResponseParser_ParseSingleApodAsync_System_Net_Http_HttpResponseMessage_
-  commentId: M:Apod.Logic.Net.HttpResponseParser.ParseSingleApodAsync(System.Net.Http.HttpResponseMessage)
-  fullName: Apod.Logic.Net.HttpResponseParser.ParseSingleApodAsync(System.Net.Http.HttpResponseMessage)
+  href: api/Apod.Logic.Net.HttpResponseParser.html#Apod_Logic_Net_HttpResponseParser_ParseSingleApodAsync_HttpResponseMessage_
+  commentId: M:Apod.Logic.Net.HttpResponseParser.ParseSingleApodAsync(HttpResponseMessage)
+  fullName: Apod.Logic.Net.HttpResponseParser.ParseSingleApodAsync(HttpResponseMessage)
   nameWithType: HttpResponseParser.ParseSingleApodAsync(HttpResponseMessage)
 - uid: Apod.Logic.Net.HttpResponseParser.ParseSingleApodAsync*
   name: ParseSingleApodAsync
@@ -1138,17 +1138,17 @@ references:
   commentId: M:Apod.Logic.Net.IApodUriBuilder.GetApodUri
   fullName: Apod.Logic.Net.IApodUriBuilder.GetApodUri()
   nameWithType: IApodUriBuilder.GetApodUri()
-- uid: Apod.Logic.Net.IApodUriBuilder.GetApodUri(System.DateTime)
+- uid: Apod.Logic.Net.IApodUriBuilder.GetApodUri(DateTime)
   name: GetApodUri(DateTime)
-  href: api/Apod.Logic.Net.IApodUriBuilder.html#Apod_Logic_Net_IApodUriBuilder_GetApodUri_System_DateTime_
-  commentId: M:Apod.Logic.Net.IApodUriBuilder.GetApodUri(System.DateTime)
-  fullName: Apod.Logic.Net.IApodUriBuilder.GetApodUri(System.DateTime)
+  href: api/Apod.Logic.Net.IApodUriBuilder.html#Apod_Logic_Net_IApodUriBuilder_GetApodUri_DateTime_
+  commentId: M:Apod.Logic.Net.IApodUriBuilder.GetApodUri(DateTime)
+  fullName: Apod.Logic.Net.IApodUriBuilder.GetApodUri(DateTime)
   nameWithType: IApodUriBuilder.GetApodUri(DateTime)
-- uid: Apod.Logic.Net.IApodUriBuilder.GetApodUri(System.DateTime,System.DateTime)
+- uid: Apod.Logic.Net.IApodUriBuilder.GetApodUri(DateTime,DateTime)
   name: GetApodUri(DateTime, DateTime)
-  href: api/Apod.Logic.Net.IApodUriBuilder.html#Apod_Logic_Net_IApodUriBuilder_GetApodUri_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Net.IApodUriBuilder.GetApodUri(System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Net.IApodUriBuilder.GetApodUri(System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Net.IApodUriBuilder.html#Apod_Logic_Net_IApodUriBuilder_GetApodUri_DateTime_DateTime_
+  commentId: M:Apod.Logic.Net.IApodUriBuilder.GetApodUri(DateTime,DateTime)
+  fullName: Apod.Logic.Net.IApodUriBuilder.GetApodUri(DateTime, DateTime)
   nameWithType: IApodUriBuilder.GetApodUri(DateTime, DateTime)
 - uid: Apod.Logic.Net.IApodUriBuilder.GetApodUri(System.Int32)
   name: GetApodUri(Int32)
@@ -1175,17 +1175,17 @@ references:
   commentId: M:Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync
   fullName: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync()
   nameWithType: IHttpRequester.SendHttpRequestAsync()
-- uid: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(System.DateTime)
+- uid: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(DateTime)
   name: SendHttpRequestAsync(DateTime)
-  href: api/Apod.Logic.Net.IHttpRequester.html#Apod_Logic_Net_IHttpRequester_SendHttpRequestAsync_System_DateTime_
-  commentId: M:Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(System.DateTime)
-  fullName: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(System.DateTime)
+  href: api/Apod.Logic.Net.IHttpRequester.html#Apod_Logic_Net_IHttpRequester_SendHttpRequestAsync_DateTime_
+  commentId: M:Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(DateTime)
+  fullName: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(DateTime)
   nameWithType: IHttpRequester.SendHttpRequestAsync(DateTime)
-- uid: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(System.DateTime,System.DateTime)
+- uid: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(DateTime,DateTime)
   name: SendHttpRequestAsync(DateTime, DateTime)
-  href: api/Apod.Logic.Net.IHttpRequester.html#Apod_Logic_Net_IHttpRequester_SendHttpRequestAsync_System_DateTime_System_DateTime_
-  commentId: M:Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(System.DateTime,System.DateTime)
-  fullName: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(System.DateTime, System.DateTime)
+  href: api/Apod.Logic.Net.IHttpRequester.html#Apod_Logic_Net_IHttpRequester_SendHttpRequestAsync_DateTime_DateTime_
+  commentId: M:Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(DateTime,DateTime)
+  fullName: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(DateTime, DateTime)
   nameWithType: IHttpRequester.SendHttpRequestAsync(DateTime, DateTime)
 - uid: Apod.Logic.Net.IHttpRequester.SendHttpRequestAsync(System.Int32)
   name: SendHttpRequestAsync(Int32)
@@ -1206,11 +1206,11 @@ references:
   commentId: T:Apod.Logic.Net.IHttpResponseParser
   fullName: Apod.Logic.Net.IHttpResponseParser
   nameWithType: IHttpResponseParser
-- uid: Apod.Logic.Net.IHttpResponseParser.ParseMultipleApodsAsync(System.Net.Http.HttpResponseMessage)
+- uid: Apod.Logic.Net.IHttpResponseParser.ParseMultipleApodsAsync(HttpResponseMessage)
   name: ParseMultipleApodsAsync(HttpResponseMessage)
-  href: api/Apod.Logic.Net.IHttpResponseParser.html#Apod_Logic_Net_IHttpResponseParser_ParseMultipleApodsAsync_System_Net_Http_HttpResponseMessage_
-  commentId: M:Apod.Logic.Net.IHttpResponseParser.ParseMultipleApodsAsync(System.Net.Http.HttpResponseMessage)
-  fullName: Apod.Logic.Net.IHttpResponseParser.ParseMultipleApodsAsync(System.Net.Http.HttpResponseMessage)
+  href: api/Apod.Logic.Net.IHttpResponseParser.html#Apod_Logic_Net_IHttpResponseParser_ParseMultipleApodsAsync_HttpResponseMessage_
+  commentId: M:Apod.Logic.Net.IHttpResponseParser.ParseMultipleApodsAsync(HttpResponseMessage)
+  fullName: Apod.Logic.Net.IHttpResponseParser.ParseMultipleApodsAsync(HttpResponseMessage)
   nameWithType: IHttpResponseParser.ParseMultipleApodsAsync(HttpResponseMessage)
 - uid: Apod.Logic.Net.IHttpResponseParser.ParseMultipleApodsAsync*
   name: ParseMultipleApodsAsync
@@ -1219,11 +1219,11 @@ references:
   isSpec: "True"
   fullName: Apod.Logic.Net.IHttpResponseParser.ParseMultipleApodsAsync
   nameWithType: IHttpResponseParser.ParseMultipleApodsAsync
-- uid: Apod.Logic.Net.IHttpResponseParser.ParseSingleApodAsync(System.Net.Http.HttpResponseMessage)
+- uid: Apod.Logic.Net.IHttpResponseParser.ParseSingleApodAsync(HttpResponseMessage)
   name: ParseSingleApodAsync(HttpResponseMessage)
-  href: api/Apod.Logic.Net.IHttpResponseParser.html#Apod_Logic_Net_IHttpResponseParser_ParseSingleApodAsync_System_Net_Http_HttpResponseMessage_
-  commentId: M:Apod.Logic.Net.IHttpResponseParser.ParseSingleApodAsync(System.Net.Http.HttpResponseMessage)
-  fullName: Apod.Logic.Net.IHttpResponseParser.ParseSingleApodAsync(System.Net.Http.HttpResponseMessage)
+  href: api/Apod.Logic.Net.IHttpResponseParser.html#Apod_Logic_Net_IHttpResponseParser_ParseSingleApodAsync_HttpResponseMessage_
+  commentId: M:Apod.Logic.Net.IHttpResponseParser.ParseSingleApodAsync(HttpResponseMessage)
+  fullName: Apod.Logic.Net.IHttpResponseParser.ParseSingleApodAsync(HttpResponseMessage)
   nameWithType: IHttpResponseParser.ParseSingleApodAsync(HttpResponseMessage)
 - uid: Apod.Logic.Net.IHttpResponseParser.ParseSingleApodAsync*
   name: ParseSingleApodAsync
