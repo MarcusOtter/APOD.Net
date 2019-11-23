@@ -25,21 +25,21 @@ using Apod;
 
 public async Task ExampleMethod()
 {
-  // Set up the client using the default example api key ("DEMO_KEY")
-  var apodClient = new ApodClient();
+    // Set up the client using the default example api key ("DEMO_KEY")
+    var apodClient = new ApodClient();
 
-  // Fetch the current Astronomy Picture of the Day
-  var apodResponse = await apodClient.FetchApodAsync();
+    // Fetch the current Astronomy Picture of the Day
+    var apodResponse = await apodClient.FetchApodAsync();
 
-  // If an error occurs, stop executing
-  if (apodResponse.StatusCode != ApodStatusCode.OK) { return; }
+    // If an error occurs, stop executing
+    if (apodResponse.StatusCode != ApodStatusCode.OK) { return; }
 
-  // Store the information about the Astronomy Picture of the Day
-  var apod = apodResponse.Content;
+    // Store the information about the Astronomy Picture of the Day
+    var apod = apodResponse.Content;
 
-  Console.WriteLine(apod.Title);
-  Console.WriteLine(apod.Explanation);
-  Console.WriteLine(apod.ContentUrl);
+    Console.WriteLine(apod.Title);
+    Console.WriteLine(apod.Explanation);
+    Console.WriteLine(apod.ContentUrl);
 }
 ``` 
 <details>
@@ -62,32 +62,32 @@ using Apod;
 
 public async Task ExampleMethod()
 {
-  // Set up the client using your own API key (recommended)
-  var apodClient = new ApodClient("YOUR_API_KEY_HERE");
+    // Set up the client using your own API key (recommended)
+    var apodClient = new ApodClient("YOUR_API_KEY_HERE");
 
-  // Ask for the Astronomy Pictures of the Day between October 29, 2008 and November 2, 2008
-  var startDate = new DateTime(2008, 10, 29);
-  var endDate = new DateTime(2008, 11, 02);
-  var apodResponse = await apodClient.FetchApodAsync(startDate, endDate);
+    // Ask for the Astronomy Pictures of the Day between October 29, 2008 and November 2, 2008
+    var startDate = new DateTime(2008, 10, 29);
+    var endDate = new DateTime(2008, 11, 02);
+    var apodResponse = await apodClient.FetchApodAsync(startDate, endDate);
 
-  // If an error occurs, write the error code and error message to the console and then stop executing
-  if (apodResponse.StatusCode != ApodStatusCode.OK) 
-  {
-      Console.WriteLine("An error occured.");
-      Console.WriteLine(apodResponse.Error.ErrorCode);
-      Console.WriteLine(apodResponse.Error.ErrorMessage);
-      return; 
-  }
+    // If an error occurs, write the error code and error message to the console and then stop executing
+    if (apodResponse.StatusCode != ApodStatusCode.OK) 
+    {
+        Console.WriteLine("An error occured.");
+        Console.WriteLine(apodResponse.Error.ErrorCode);
+        Console.WriteLine(apodResponse.Error.ErrorMessage);
+        return; 
+    }
 
-  // Iterate through every single returned APOD and write their dates and titles to the console
-  foreach (var apod in apodResponse.AllContent)
-  {
-      var date = apod.Date.ToString("MMMM d, yyyy");
-      Console.WriteLine($"- {date}: \"{apod.Title}\".");
-  }
+    // Iterate through every single returned APOD and write their dates and titles to the console
+    foreach (var apod in apodResponse.AllContent)
+    {
+        var date = apod.Date.ToString("MMMM d, yyyy");
+        Console.WriteLine($"- {date}: \"{apod.Title}\".");
+    }
 
-  // Release the unmanaged resources and disposes of the managed resources used by the System.Net.Http.HttpMessageInvoker.
-  apodClient.Dispose();
+    // Release the unmanaged resources and disposes of the managed resources used by the System.Net.Http.HttpMessageInvoker.
+    apodClient.Dispose();
 }
 ```
 <details>
