@@ -14,7 +14,7 @@ namespace Apod
 
         /// <summary>Fetch all the Astronomy Pictures of the Day between two dates.</summary>
         /// <param name="startDate">The start date. Must be between June 16th 1995 and today's date.</param>
-        /// <param name="endDate">The end date. Must be between the <paramref name="startDate"/> and today's date. Defaults to <see cref="DateTime.Today"/>.</param>
+        /// <param name="endDate">The end date. Must be between the <paramref name="startDate"/> and today's date. Defaults to today's date.</param>
         Task<ApodResponse> FetchApodAsync(DateTime startDate, DateTime endDate);
 
         /// <summary>Fetch an amount of random Astronomy Pictures of the Day.</summary>
