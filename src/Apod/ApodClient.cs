@@ -43,31 +43,31 @@ namespace Apod
         {
             ThrowExceptionIfDisposed();
 
-            var httpResponse = await _httpRequester.SendHttpRequestAsync();
+            var httpResponse = await _httpRequester.SendHttpRequestAsync().ConfigureAwait(false);
 
-            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
+            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse).ConfigureAwait(false);
             if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
-            return await _httpResponseParser.ParseSingleApodAsync(httpResponse);
+            return await _httpResponseParser.ParseSingleApodAsync(httpResponse).ConfigureAwait(false);
         }
 
         /// <summary>Fetch the Astronomy Picture of the Day for a specific date.</summary>
         /// <param name="dateTime">The date to request the APOD for. Must be between June 16th 1995 and today's date.</param>
         public async Task<ApodResponse> FetchApodAsync(DateTime dateTime)
         {
-            if (dateTime.Date == DateTime.Today) { return await FetchApodAsync(); }
+            if (dateTime.Date == DateTime.Today) { return await FetchApodAsync().ConfigureAwait(false); }
 
             ThrowExceptionIfDisposed();
 
             var dateError = _errorHandler.ValidateDate(dateTime);
             if (dateError.ErrorCode != ApodErrorCode.None) { return dateError.ToApodResponse(); }
 
-            var httpResponse = await _httpRequester.SendHttpRequestAsync(dateTime);
+            var httpResponse = await _httpRequester.SendHttpRequestAsync(dateTime).ConfigureAwait(false);
 
-            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
+            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse).ConfigureAwait(false);
             if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
-            return await _httpResponseParser.ParseSingleApodAsync(httpResponse);
+            return await _httpResponseParser.ParseSingleApodAsync(httpResponse).ConfigureAwait(false);
         }
 
         /// <summary>Fetch all the Astronomy Pictures of the Day between two dates.</summary>
@@ -80,12 +80,12 @@ namespace Apod
             var dateError = _errorHandler.ValidateDateRange(startDate, endDate);
             if (dateError.ErrorCode != ApodErrorCode.None) { return dateError.ToApodResponse(); }
 
-            var httpResponse = await _httpRequester.SendHttpRequestAsync(startDate, endDate);
+            var httpResponse = await _httpRequester.SendHttpRequestAsync(startDate, endDate).ConfigureAwait(false);
 
-            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
+            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse).ConfigureAwait(false);
             if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
-            return await _httpResponseParser.ParseMultipleApodsAsync(httpResponse);
+            return await _httpResponseParser.ParseMultipleApodsAsync(httpResponse).ConfigureAwait(false);
         }
 
         /// <summary>Fetch an amount of random Astronomy Pictures of the Day.</summary>
@@ -97,12 +97,12 @@ namespace Apod
             var countError = _errorHandler.ValidateCount(count);
             if (countError.ErrorCode != ApodErrorCode.None) { return countError.ToApodResponse(); }
 
-            var httpResponse = await _httpRequester.SendHttpRequestAsync(count);
+            var httpResponse = await _httpRequester.SendHttpRequestAsync(count).ConfigureAwait(false);
 
-            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse);
+            var responseError = await _errorHandler.ValidateHttpResponseAsync(httpResponse).ConfigureAwait(false);
             if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
-            return await _httpResponseParser.ParseMultipleApodsAsync(httpResponse);
+            return await _httpResponseParser.ParseMultipleApodsAsync(httpResponse).ConfigureAwait(false);
         }
 
         private void ThrowExceptionIfDisposed()

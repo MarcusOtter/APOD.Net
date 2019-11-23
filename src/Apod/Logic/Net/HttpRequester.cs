@@ -28,7 +28,7 @@ namespace Apod.Logic.Net
 
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
             {
-                return await _httpClient.SendAsync(requestMessage);
+                return await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
             }
         }
 
@@ -39,7 +39,7 @@ namespace Apod.Logic.Net
             var uri = _uriBuilder.GetApodUri(dateTime);
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
             {
-                return await _httpClient.SendAsync(requestMessage);
+                return await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
             }
         }
 
@@ -50,7 +50,7 @@ namespace Apod.Logic.Net
             var uri = _uriBuilder.GetApodUri(startDate, endDate);
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
             {
-                return await _httpClient.SendAsync(requestMessage);
+                return await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Apod.Logic.Net
             var uri = _uriBuilder.GetApodUri(count);
             using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri))
             {
-                return await _httpClient.SendAsync(requestMessage);
+                return await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
             }
         }
 

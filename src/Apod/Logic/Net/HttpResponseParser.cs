@@ -29,9 +29,9 @@ namespace Apod.Logic.Net
         public async Task<ApodResponse> ParseSingleApodAsync(HttpResponseMessage httpResponse)
         {
             ApodContent apodContent = null;
-            using (var responseStream = await httpResponse.Content.ReadAsStreamAsync())
+            using (var responseStream = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false))
             {
-                apodContent = await JsonSerializer.DeserializeAsync<ApodContent>(responseStream, _jsonSerializerOptions);
+                apodContent = await JsonSerializer.DeserializeAsync<ApodContent>(responseStream, _jsonSerializerOptions).ConfigureAwait(false);
             }
 
             httpResponse.Dispose();
@@ -43,9 +43,9 @@ namespace Apod.Logic.Net
         public async Task<ApodResponse> ParseMultipleApodsAsync(HttpResponseMessage httpResponse)
         {
             ApodContent[] apodContent = null;
-            using (var responseStream = await httpResponse.Content.ReadAsStreamAsync())
+            using (var responseStream = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false))
             {
-                apodContent = await JsonSerializer.DeserializeAsync<ApodContent[]>(responseStream, _jsonSerializerOptions);
+                apodContent = await JsonSerializer.DeserializeAsync<ApodContent[]>(responseStream, _jsonSerializerOptions).ConfigureAwait(false);
             }
 
             httpResponse.Dispose();

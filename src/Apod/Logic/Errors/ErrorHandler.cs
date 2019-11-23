@@ -68,9 +68,9 @@ namespace Apod.Logic.Errors
             if (IsTimeoutError(httpResponse)) { return _errorBuilder.GetTimeoutError(); }
 
             JsonElement errorObject = default;
-            using (var responseStream = await httpResponse.Content.ReadAsStreamAsync())
+            using (var responseStream = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false))
             {
-                errorObject = await JsonSerializer.DeserializeAsync<JsonElement>(responseStream, _jsonSerializerOptions);
+                errorObject = await JsonSerializer.DeserializeAsync<JsonElement>(responseStream, _jsonSerializerOptions).ConfigureAwait(false);
             }
 
             if (errorObject.ValueKind != JsonValueKind.Object) { return _errorBuilder.GetUnknownError(); }
