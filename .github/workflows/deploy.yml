@@ -23,11 +23,11 @@ jobs:
     - name: Install DocFX
       run: |
         dotnet tool install docfx --tool-path . --version "3.0.0-*" --add-source https://www.myget.org/F/docfx-v3/api/v2
-        echo %cd%
+        pwd
 
     - name: Generate static documentation with DocFX
       run: |
-        echo %cd%
+        pwd
         docfx restore
         docfx build docs/docfx.json
         echo -----
