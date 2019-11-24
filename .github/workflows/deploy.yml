@@ -19,27 +19,17 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.2.402
-    
-    - name: Setup .NET Core 3.0
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.0.100
-    
-    - name: .NET SxS
-      run: |
-        rsync -a ${DOTNET_ROOT/3.0.100/2.2.402}/* $DOTNET_ROOT/
 
     - name: Install DocFX
       run: |
-        dotnet tool install docfx --tool-path "." --version "3.0.0-*" --add-source https://www.myget.org/F/docfx-v3/api/v2
+        dotnet tool install docfx --tool-path "docs" --version "3.0.0-*" --add-source https://www.myget.org/F/docfx-v3/api/v2
 
     - name: Generate static documentation with DocFX
       run: |
+        cd docs
         ls
         ./docfx restore
-        ./docfx build docs/docfx.json
-        echo -----
-        ls docs
+        ./docfx build
         echo -----
         ls docs/api
         echo -----
