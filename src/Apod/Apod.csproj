@@ -9,6 +9,11 @@
     <Authors>Marcus Otterström</Authors>
     <Description>An unofficial .NET wrapper for NASA's Astronomy Picture of the Day API.
 This .NET Standard 2.0 library can be used to asynchronously interface with NASA's Astronomy Picture of the Day API (APOD).</Description>
+    <PackageProjectUrl>https://github.com/LeMorrow/APOD.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LeMorrow/APOD.Net</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>astronomy; photography; space; astronomy-picture-of-the-day; apod; nasa; nasa-apod; nasa-api; api; api-wrapper; dotnet; csharp;</PackageTags>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
