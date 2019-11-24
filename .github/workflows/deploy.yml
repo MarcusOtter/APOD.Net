@@ -23,21 +23,18 @@ jobs:
     - name: Install DocFX
       run: |
         dotnet tool install docfx --tool-path "." --version "3.0.0-*" --add-source https://www.myget.org/F/docfx-v3/api/v2
-        pwd
-        ls
 
     - name: Generate static documentation with DocFX
       run: |
-        pwd
-        ls
-        docfx restore
-        docfx build docs/docfx.json
+        ls docfx
+        docfx/docfx.exe restore
+        docfx/docfx.exe build docs/docfx.json
         echo -----
-        dir docs
+        ls docs
         echo -----
-        dir docs/api
+        ls docs/api
         echo -----
-        dir docs/_site
+        ls docs/_site
 
     - name: Deploy documentation to gh-pages branch
       uses: JamesIves/github-pages-deploy-action@releases/v3
