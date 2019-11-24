@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -21,18 +21,18 @@ jobs:
         dotnet-version: 3.0.100
     
     - name: Install DocFX
-      run: choco install docfx
+      run: dotnet tool install -g docfx --version "3.0.0-*" --add-source https://www.myget.org/F/docfx-v3/api/v2
 
     - name: Generate static documentation with DocFX
       run: |
-        dir docs
-        echo -----
+        docfx restore
         docfx build docs/docfx.json
         echo -----
         dir docs
         echo -----
-        dir docs\api
-
+        dir docs/api
+        echo -----
+        dir docs/_site
 
     - name: Deploy documentation to gh-pages branch
       uses: JamesIves/github-pages-deploy-action@releases/v3
