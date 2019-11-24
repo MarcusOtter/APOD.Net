@@ -25,9 +25,14 @@ jobs:
 
     - name: Generate static documentation with DocFX
       run: |
-        dir
+        dir docs
+        echo -----
         docfx build docs/docfx.json
-        dir
+        echo -----
+        dir docs
+        echo -----
+        dir docs\api
+
 
     - name: Deploy documentation to gh-pages branch
       uses: JamesIves/github-pages-deploy-action@releases/v3
@@ -35,4 +40,4 @@ jobs:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BASE_BRANCH: release
         BRANCH: gh-pages
-        FOLDER: docs/_site
+        FOLDER: docs\_site
