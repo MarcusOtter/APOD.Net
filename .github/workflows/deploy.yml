@@ -21,7 +21,7 @@ jobs:
         dotnet-version: 3.0.100
     
     - name: Install DocFX
-      run: dotnet tool install docfx --version "3.0.0-*" --add-source https://www.myget.org/F/docfx-v3/api/v2
+      run: dotnet tool install docfx --tool-path . --version "3.0.0-*" --add-source https://www.myget.org/F/docfx-v3/api/v2
 
     - name: Generate static documentation with DocFX
       run: |
