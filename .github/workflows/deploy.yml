@@ -1,4 +1,4 @@
-name: .NET Core
+name: Deploy
 
 on: 
   push:
@@ -27,9 +27,14 @@ jobs:
       run: docfx build docs/docfx.json
       
     - name: Deploy documentation to gh-pages branch
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: maxheld83/ghpages@v0.2.1
       with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BASE_BRANCH: release
-        BRANCH: gh-pages
-        FOLDER: docs/_site
+        BUILD_DIR: "docs/_site"
+
+#    - name: Deploy documentation to gh-pages branch
+#      uses: JamesIves/github-pages-deploy-action@releases/v3
+#      with:
+#        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#        BASE_BRANCH: release
+#        BRANCH: gh-pages
+#        FOLDER: docs/_site
