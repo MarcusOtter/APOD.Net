@@ -27,10 +27,8 @@ jobs:
     - name: Generate static documentation with DocFX
       run: |
         ls
-        ls docfx
-        ls docfx/docfx
-        docfx/docfx.exe restore
-        docfx/docfx.exe build docs/docfx.json
+        docfx/docfx restore
+        docfx/docfx build docs/docfx.json
         echo -----
         ls docs
         echo -----
