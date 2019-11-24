@@ -1,0 +1,35 @@
+name: .NET Core
+
+on: 
+  push:
+    branches: 
+      - "release"
+  pull_request:
+    branches: 
+      - "release"
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    
+    - name: Install DocFX
+      run: choco install docfx
+
+    - name: Generate static documentation with DocFX
+      run: docfx build docs/docfx.json
+      
+    - name: Deploy documentation to gh-pages branch
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BASE_BRANCH: release
+        BRANCH: gh-pages
+        FOLDER: docs/_site
