@@ -24,17 +24,15 @@ jobs:
       run: choco install docfx
 
     - name: Generate static documentation with DocFX
-      run: docfx build docs/docfx.json
-      
-    - name: Deploy documentation to gh-pages branch
-      uses: maxheld83/ghpages@v0.2.1
-      with:
-        BUILD_DIR: "docs/_site"
+      run: |
+        dir
+        docfx build docs/docfx.json
+        dir
 
-#    - name: Deploy documentation to gh-pages branch
-#      uses: JamesIves/github-pages-deploy-action@releases/v3
-#      with:
-#        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-#        BASE_BRANCH: release
-#        BRANCH: gh-pages
-#        FOLDER: docs/_site
+    - name: Deploy documentation to gh-pages branch
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BASE_BRANCH: release
+        BRANCH: gh-pages
+        FOLDER: docs/_site
