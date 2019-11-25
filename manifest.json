@@ -4,15 +4,312 @@
   "xrefmap": "xrefmap.yml",
   "files": [
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.ApodClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.ApodClient.html",
+          "hash": "12/J9WFB71AVtCbaOQUqSg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.ApodError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.ApodError.html",
+          "hash": "ef8F8WBqi+V+PqO3J50fKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.ApodErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.ApodErrorCode.html",
+          "hash": "xuqUjTPPMFyzg/jAlWEGwQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.ApodResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.ApodResponse.html",
+          "hash": "DXlcS5fwSqjlUhc+hIPnNA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.ApodStatusCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.ApodStatusCode.html",
+          "hash": "tAfNmM+zUkMJopqcv34NCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.IApodClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.IApodClient.html",
+          "hash": "jM1j8yGEQlOu4vXKY/J+rw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.DefaultsFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.DefaultsFactory.html",
+          "hash": "jOlr46uU62rjYRKMDl7phg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Errors.ErrorBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Errors.ErrorBuilder.html",
+          "hash": "4HFBlVYDEjHsQnU4bxuMUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Errors.ErrorHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Errors.ErrorHandler.html",
+          "hash": "xNu7+sRzopyPTfOFJxU/+Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Errors.IErrorBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Errors.IErrorBuilder.html",
+          "hash": "PO+Bol7cn/igw//3TpPAXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Errors.IErrorHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Errors.IErrorHandler.html",
+          "hash": "q/g7Z9w5pgaMincWr5shOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Errors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Errors.html",
+          "hash": "loLI8o+Fr6734R7LBNNCOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.ApodUriBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.ApodUriBuilder.html",
+          "hash": "NsdJ/KuP3j19uer+NVblCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.Dtos.ApodContent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.Dtos.ApodContent.html",
+          "hash": "cTogNQpgkwixTlir6NGRvw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.Dtos.MediaType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.Dtos.MediaType.html",
+          "hash": "imEjEoWJfUvBiXSG4jwTWQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.Dtos.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.Dtos.html",
+          "hash": "RknX8Tj30EXYun8mWv2QHg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.HttpRequester.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.HttpRequester.html",
+          "hash": "Wwxe3xPY00zoEtTLXweA7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.HttpResponseParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.HttpResponseParser.html",
+          "hash": "jdlHvjKd+ykVvp8ZjYxqmQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.IApodUriBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.IApodUriBuilder.html",
+          "hash": "JB2MZrfrOlB2dV0SIPJXrA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.IHttpRequester.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.IHttpRequester.html",
+          "hash": "2A94nATA5N/xUFYMklONQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.IHttpResponseParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.IHttpResponseParser.html",
+          "hash": "EteWcuxsRt6bk0YyOFdlfg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.Net.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.Net.html",
+          "hash": "HWx3KSvlUNuVbGHrlvrhYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.Logic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.Logic.html",
+          "hash": "5A7+gULIQfx9fhWU35TsLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Apod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Apod.html",
+          "hash": "Z1KlXk2H3VHW4F0H5wfPzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "K9igK7DyaiR6fKGJ6KhToA=="
+          "hash": "jubVK9vM/wQh22cFwRfjjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "UcdoDYagwnQ04P6pctsrPg=="
         }
       },
       "is_incremental": false,
@@ -24,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "examples/intro.html",
-          "hash": "+S4mXdGLlQ4OqAJ2yd/V6Q=="
+          "hash": "6Qxp8sXR7eNdwNPYQbz03g=="
         }
       },
       "is_incremental": false,
@@ -59,7 +356,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "BXaz/YU7M8FdauFTxOvvtg=="
+          "hash": "0rVzeX1PSWJHycxsFEMuhQ=="
         }
       },
       "is_incremental": false,
@@ -71,7 +368,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "0C1wtv2h4u7bGkFyI0+94Q=="
+          "hash": "qbLIgTFjjx1l/HjVGzfOfA=="
         }
       },
       "is_incremental": false,
@@ -100,6 +397,12 @@
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 3,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 24,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
