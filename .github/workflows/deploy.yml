@@ -51,12 +51,6 @@ jobs:
       with:
         name: site
     
-    - name: Do some debug logging
-      run: |
-       dir site
-       echo --------------
-       dir
-    
     - name: Deploy site to gh-pages branch
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
