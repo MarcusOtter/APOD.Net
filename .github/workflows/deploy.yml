@@ -26,14 +26,12 @@ jobs:
         nuget-version: 'latest'
 
     - name: Install DocFX
-      run: nuget install docfx.console
+      run: nuget install docfx.console -Version 2.47.0
     
-    - name: Generate site
+    - name: Generate site with DocFX
       run: |
-       docfx build docs/docfx.json
-       dir
-       dir docs
-       dir docs/_site
+       docfx.console.2.47.0\tools\docfx.exe metadata docs/docfx.json
+       docfx.console.2.47.0\tools\docfx.exe build docs/docfx.json
       
     - name: Upload site artifact
       uses: actions/upload-artifact@v1
