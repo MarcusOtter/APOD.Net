@@ -24,10 +24,10 @@ APOD.Net is a .NET library used to asynchronously interface with [NASA's Astrono
 ¹ - Uses `System.Text.Json` for deserializing the JSON. This is built-in as part of the `.NET Core 3.0` framework but is installed as a NuGet package to be compatible with the targeted `.NET Standard 2.0`. [Read more about System.Text.Json here](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview).
 
 ## 🔍 Table of contents
-- [Adding APOD.Net to your project](#adding-apodnet-to-your-project)
-    - [Option 1 - Visual Studio PM Console](#option-1-visual-studio-pm-console)
-    - [Option 2 - Visual Studio PM UI](#option-2-visual-studio-pm-ui)
-    - [Option 3 - dotnet.exe CLI](#option-3-dotnetexe-cli)
+- [Adding APOD.Net to your project](#-adding-apodnet-to-your-project)
+    - [Option 1 - Visual Studio PM Console](#option-1---visual-studio-pm-console)
+    - [Option 2 - Visual Studio PM UI](#option-2---visual-studio-pm-ui)
+    - [Option 3 - dotnet.exe CLI](#option-3---dotnetexe-cli)
 - [Getting started](#getting-started)
     - [Setting up the client](#setting-up-the-client)
     - [Making your first request](#making-your-first-request)
@@ -163,7 +163,6 @@ November 2, 2008: "Spicules: Jets on the Sun".
 
 </p>
 </details>
-<br>
 
 ## More examples
 You can find more examples in [the documentation](https://lemorrow.github.io/APOD.Net/examples/).
@@ -171,7 +170,8 @@ You can find more examples in [the documentation](https://lemorrow.github.io/APO
 ## FAQ
 A list of some of the frequently asked questions. Can't see your question here? Feel free to [open an issue](https://github.com/LeMorrow/APOD.Net/issues/new/choose)!
 ### Disposable object created by 'new ApodClient()' is never disposed
-![A warning in visual studio saying "Disposable object created by 'new ApodClient()' is never disposed"](docs/images/apodclient-dispose.png)<br>
+![A warning in visual studio saying "Disposable object created by 'new ApodClient()' is never disposed"](docs/images/apodclient-dispose.png)
+
 Since the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) contains an [HttpRequester](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.HttpRequester) which in turn contains an [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0)
 that needs to be disposed, the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) is responsible for cleaning up the [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0). To get rid of this warning, call `Dispose()` on the client when you are done using it. The client will become unusable after calling this method.
 ```cs
