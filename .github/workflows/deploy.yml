@@ -21,11 +21,13 @@ jobs:
         dotnet-version: 3.0.100
     
     - name: Install DocFX
-      run: choco install docfx
+      run: nuget install docfx.console
     
     - name: Generate site
       run: |
        docfx build docs/docfx.json
+       dir
+       dir docs
        dir docs/_site
       
     - name: Upload site artifact
