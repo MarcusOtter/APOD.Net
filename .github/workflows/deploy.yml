@@ -9,36 +9,56 @@ on:
       - "release"
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  generate_docs:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Setup .NET Core 3.0
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    
+    - name: Install DocFX
+      run: choco install docfx
+    
+    - name: Generate site
+      run: |
+       docfx build docs/docfx.json
+       dir docs/_site
+      
+    - name: Upload site artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: site
+        path: docs/_site
+  
+  # Two different jobs because JamesIves/github-pages-deploy-action does not run on windows
+  # and DocFX cannot easily be installed on ubuntu. 
+  
+  deploy:
+    needs: generate_docs
+    runs-on: ubuntu-latest 
 
     steps:
     - uses: actions/checkout@v1
     
-    - name: Setup .NET Core 2.2
-      uses: actions/setup-dotnet@v1
+    - name: Download site artifact
+      uses: actions/download-artifact@v1
       with:
-        dotnet-version: 2.2.402
-
-    - name: Install DocFX
+        name: site
+    
+    - name: Do some debug logging
       run: |
-        dotnet tool install docfx --tool-path "docs" --version "3.0.0-*" --add-source https://www.myget.org/F/docfx-v3/api/v2
-
-    - name: Generate static documentation with DocFX
-      run: |
-        cd docs
-        ls
-        ./docfx restore
-        ./docfx build
-        echo -----
-        ls docs/api
-        echo -----
-        ls docs/_site
-
-    - name: Deploy documentation to gh-pages branch
+       dir site
+       echo --------------
+       dir
+    
+    - name: Deploy site to gh-pages branch
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         BASE_BRANCH: release
         BRANCH: gh-pages
-        FOLDER: docs/_site
+        FOLDER: site
