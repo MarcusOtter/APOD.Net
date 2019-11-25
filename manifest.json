@@ -1,315 +1,18 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/marcu_000/Documents/Projects/APOD.Net/docs",
+  "source_base_path": "D:/a/APOD.Net/APOD.Net/docs",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.ApodClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.ApodClient.html",
-          "hash": "6EdzZIDtlB1ouleyp9ZUiw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.ApodError.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.ApodError.html",
-          "hash": "Azhi3UUkt6mvQBjbdVz5Xg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.ApodErrorCode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.ApodErrorCode.html",
-          "hash": "IgJqe5TTtMSA1X7z/W40tA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.ApodResponse.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.ApodResponse.html",
-          "hash": "AwiS7MkhFNrtf4ed3gEf8Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.ApodStatusCode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.ApodStatusCode.html",
-          "hash": "wrt/WmJHA72bT+Ck0tVhqQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.IApodClient.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.IApodClient.html",
-          "hash": "smaBYYthS/+wu244JJ0N+A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.DefaultsFactory.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.DefaultsFactory.html",
-          "hash": "WcnM7WA3Z03lVDRZ3N7wdQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Errors.ErrorBuilder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Errors.ErrorBuilder.html",
-          "hash": "ZE68M++NIuakslbZG8SuFg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Errors.ErrorHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Errors.ErrorHandler.html",
-          "hash": "/IDuNGCfCOYfj6cnX6aQIQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Errors.IErrorBuilder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Errors.IErrorBuilder.html",
-          "hash": "X2hXzbsrwEbo179OPYbmUQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Errors.IErrorHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Errors.IErrorHandler.html",
-          "hash": "r2QiOBZx+9ueAuS552Migw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Errors.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Errors.html",
-          "hash": "loLI8o+Fr6734R7LBNNCOw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.ApodUriBuilder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.ApodUriBuilder.html",
-          "hash": "Js0Am8xKkioZeV/gwIrazg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.Dtos.ApodContent.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.Dtos.ApodContent.html",
-          "hash": "7phL6clIZepB7d4f2+2EgQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.Dtos.MediaType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.Dtos.MediaType.html",
-          "hash": "HhLccUe7FQcPe5/9bs4yqg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.Dtos.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.Dtos.html",
-          "hash": "RknX8Tj30EXYun8mWv2QHg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.HttpRequester.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.HttpRequester.html",
-          "hash": "wPJ8bq6NqipoFI5wZ8pS5w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.HttpResponseParser.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.HttpResponseParser.html",
-          "hash": "wfJZdNJRECQLjuURZ2QXPw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.IApodUriBuilder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.IApodUriBuilder.html",
-          "hash": "SUzCpycc1Vj1Hmyx+sOi4Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.IHttpRequester.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.IHttpRequester.html",
-          "hash": "NB3S5Pc+pOQiurmAYYrFAQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.IHttpResponseParser.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.IHttpResponseParser.html",
-          "hash": "eHuLaGvHzbqYEg4/IpMk7Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.Net.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.Net.html",
-          "hash": "HWx3KSvlUNuVbGHrlvrhYQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.Logic.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.Logic.html",
-          "hash": "5A7+gULIQfx9fhWU35TsLQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Apod.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Apod.html",
-          "hash": "Z1KlXk2H3VHW4F0H5wfPzw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "+EegCYLmQau572VRCloIPw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "api/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/toc.html",
-          "hash": "UcdoDYagwnQ04P6pctsrPg=="
+          "hash": "K9igK7DyaiR6fKGJ6KhToA=="
         }
       },
       "is_incremental": false,
@@ -321,7 +24,7 @@
       "output": {
         ".html": {
           "relative_path": "examples/intro.html",
-          "hash": "C2054pQ/I0J5jS0AZehdJQ=="
+          "hash": "+S4mXdGLlQ4OqAJ2yd/V6Q=="
         }
       },
       "is_incremental": false,
@@ -356,7 +59,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "QML4U3wly8n7ta/bsTMJ0g=="
+          "hash": "BXaz/YU7M8FdauFTxOvvtg=="
         }
       },
       "is_incremental": false,
@@ -368,7 +71,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "qbLIgTFjjx1l/HjVGzfOfA=="
+          "hash": "0C1wtv2h4u7bGkFyI0+94Q=="
         }
       },
       "is_incremental": false,
@@ -386,13 +89,6 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -406,10 +102,11 @@
           "total_file_count": 3,
           "skipped_file_count": 0
         },
-        "ManagedReferenceDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 24,
+          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }
