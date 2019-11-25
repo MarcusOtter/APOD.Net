@@ -4,9 +4,6 @@ on:
   push:
     branches: 
       - "release"
-  pull_request:
-    branches: 
-      - "release"
 
 jobs:
   generate_docs:
@@ -39,10 +36,10 @@ jobs:
         name: site
         path: docs/_site
   
-  # Two different jobs because JamesIves/github-pages-deploy-action does not run on windows
+  # Two different jobs for building/deploying docs because JamesIves/github-pages-deploy-action does not run on windows
   # and DocFX cannot easily be installed on ubuntu. 
   
-  deploy:
+  deploy_docs:
     needs: generate_docs
     runs-on: ubuntu-latest 
 
