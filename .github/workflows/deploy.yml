@@ -20,6 +20,11 @@ jobs:
       with:
         dotnet-version: 3.0.100
     
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+        nuget-version: 'latest'
+
     - name: Install DocFX
       run: nuget install docfx.console
     
