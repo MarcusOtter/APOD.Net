@@ -78,14 +78,14 @@ var client = new ApodClient("YOUR_API_KEY_HERE");
 ```
 
 ### Making your first request
-There are multiple different [available methods](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#methods) on the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient), but for this simple example we are going to get the Astronomy Picture of the Day from my most recent birthday. I would put your birthday here but I have no idea when that is. If I did, GitHub wouldn't be doing their GDPR right.
+There are numerous [available methods](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#methods) on the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient), but for this simple example we are going to get the Astronomy Picture of the Day from my most recent birthday. I would put your birthday here but I have no idea when that is. If I did, GitHub wouldn't be doing their GDPR right.
 ```cs
 var date = new DateTime(2019, 06, 04);
 var result = await client.FetchApodAsync(date);
 ```
 
 ### Interpreting the response
-The method we used in the example above, [ApodClient.FetchApodAsync(DateTime)](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_),  returns an [ApodResponse](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse). Instead of being impatient and immediately reading our APOD content we should make sure that the client didn't encounter any errors in along the way.
+The method we used in the example above, [ApodClient.FetchApodAsync(DateTime)](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_),  returns an [ApodResponse](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse). Instead of being impatient and immediately reading our APOD content we should make sure that the client didn't encounter any errors along the way.
 ```cs
 if (result.StatusCode != ApodStatusCode.OK)
 {
@@ -168,7 +168,7 @@ November 2, 2008: "Spicules: Jets on the Sun".
 You can find more examples in [the documentation](https://lemorrow.github.io/APOD.Net/examples/).
 
 ## FAQ
-A list of some of the frequently asked questions. Can't see your question here? Feel free to [open an issue](https://github.com/LeMorrow/APOD.Net/issues/new/choose)!
+Can't find your question here? Feel free to [open an issue](https://github.com/LeMorrow/APOD.Net/issues/new/choose)!
 ### Disposable object created by 'new ApodClient()' is never disposed
 ![A warning in visual studio saying "Disposable object created by 'new ApodClient()' is never disposed"](docs/images/apodclient-dispose.png)
 
