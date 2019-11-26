@@ -109,7 +109,7 @@ The API key you provided was invalid. Get one at https://api.nasa.gov/.
 </details>
 <br>
 
-When we are sure that there were no errors we can read the content from the response. The [ApodContent](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent) has properties containing information about the Astronomy Picture of the Day, such as [Title](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent#Apod_Logic_Net_Dtos_ApodContent_Title), [Explanation](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent#Apod_Logic_Net_Dtos_ApodContent_Explanation), [Date](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent.html#Apod_Logic_Net_Dtos_ApodContent_Date), and [ContentUrl](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent.html#Apod_Logic_Net_Dtos_ApodContent_ContentUrl).
+When we are certain that there were no errors we can read the content from the response. The [ApodContent](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent) contains all the information about the Astronomy Picture of the Day. You can access properties such as [Title](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent#Apod_Logic_Net_Dtos_ApodContent_Title), [Explanation](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent#Apod_Logic_Net_Dtos_ApodContent_Explanation), [Date](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent.html#Apod_Logic_Net_Dtos_ApodContent_Date), and [ContentUrl](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.Dtos.ApodContent.html#Apod_Logic_Net_Dtos_ApodContent_ContentUrl).
 
 
 In the request we made previously we're expecting to get exactly **one** APOD, since we made a request for a specific date. To get our APOD, we read the value of the [Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_Content) field.
@@ -149,7 +149,7 @@ Example request
 ```cs
 var startDate = new DateTime(2008, 10, 29);
 var endDate = new DateTime(2008, 11, 02);
-var apodResponse = await apodClient.FetchApodAsync(startDate, endDate);
+var response = await apodClient.FetchApodAsync(startDate, endDate);
 ```
 
 Example response
