@@ -169,6 +169,7 @@ You can find more examples in [the documentation](https://lemorrow.github.io/APO
 
 ## FAQ
 Can't find your question here? Feel free to [open an issue](https://github.com/LeMorrow/APOD.Net/issues/new/choose)!
+
 ### Disposable object created by 'new ApodClient()' is never disposed
 ![A warning in visual studio saying "Disposable object created by 'new ApodClient()' is never disposed"](docs/images/apodclient-dispose.png)
 
@@ -177,6 +178,9 @@ that needs to be disposed, the [ApodClient](https://lemorrow.github.io/APOD.Net/
 ```cs
 client.Dispose();
 ```
+
+### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent) has more than one APOD?
+[ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
 
 ### What do I use the [ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_) for?
 This is so you can override any of the behavior of the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) if you'd like. If you want to go above and beyond, you can make your own client that implements [IApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.IApodClient).
