@@ -61,7 +61,7 @@ There are many different ways to add NuGet packages to your project. Below are s
     ```
 
 ## 🌟 Getting started
-To start using APOD.Net after installing, add the using directive.
+This guide is intended to be read in sequencial order as every topic builds on the preceding one. They share the same context. To get started, add the using directive.
 ```cs
 using Apod;
 ```
@@ -78,7 +78,7 @@ var client = new ApodClient("YOUR_API_KEY_HERE");
 ```
 
 ### Making your first request
-There are numerous [available methods](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#methods) on the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient), but for this simple example we are going to get the Astronomy Picture of the Day from my most recent birthday. I would put your birthday here but I have no idea when that is. If I did, GitHub wouldn't be doing their GDPR right.
+There are numerous [available methods](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#methods) on the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient), but for this simple example we are going to get the Astronomy Picture of the Day from my most recent birthday using [ApodClient.FetchApodAsync(DateTime)](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_). I would get the APOD for your birthday, but I have no idea when that is. If I did, GitHub wouldn't be doing their GDPR right.
 ```cs
 var date = new DateTime(2019, 06, 04);
 var result = await client.FetchApodAsync(date);
