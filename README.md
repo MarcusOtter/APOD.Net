@@ -16,7 +16,7 @@ APOD.Net is a .NET library used to asynchronously interface with [NASA's Astrono
 - 🚀 Fast, deadlock-free asynchronous library made in pure C# **without external dependencies**. ¹ 
 - 💻 Cross-platform support, targets **.NET Standard 2.0** which is supported by .NET Core 2.0+, .NET Framework 4.6.1+ and many more. [Click here for a full list of implementation support](https://docs.microsoft.com/en-us/dotnet/standard/net-standard).
 - 🔓 Gives you **access to all the _undocumented features_ of NASA's API**, such as getting all APODs between two dates and getting random APODs.
-- 📦 **Takes care of everything you shouldn't have to care about**. HTTP requests, mapping the JSON responses to .NET objects, validating input, etc.
+- 🔧 **Takes care of everything you shouldn't have to care about**. HTTP requests, mapping the JSON responses to .NET objects, validating input, etc.
 - ✏️ **Frictionless and easy to implement**. One API request is one method call, as it should be.
 - 📖 Continuously updated **documentation**! [Click here to visit the docs](https://lemorrow.github.io/APOD.Net/).
 - 💉 Completely **dependency injection-friendly** which allows you to **easily override any functionality** with your own implementations.
@@ -24,19 +24,19 @@ APOD.Net is a .NET library used to asynchronously interface with [NASA's Astrono
 ¹ - Uses `System.Text.Json` for deserializing the JSON. This is built-in as part of the `.NET Core 3.0` framework but is installed as a NuGet package to be compatible with the targeted `.NET Standard 2.0`. [Read more about System.Text.Json here](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview).
 
 ## 🔍 Table of contents
-- [Adding APOD.Net to your project](#-adding-apodnet-to-your-project)
+- [ 📦 Adding APOD.Net to your project](#-adding-apodnet-to-your-project)
     - [Option 1 - Visual Studio PM Console](#option-1---visual-studio-pm-console)
     - [Option 2 - Visual Studio PM UI](#option-2---visual-studio-pm-ui)
     - [Option 3 - dotnet.exe CLI](#option-3---dotnetexe-cli)
-- [Getting started](#getting-started)
+- [ 🌟 Getting started](#-getting-started)
     - [Setting up the client](#setting-up-the-client)
     - [Making your first request](#making-your-first-request)
     - [Interpreting the response](#interpreting-the-response)
-- [More examples](#more-examples)
-- [FAQ](#faq)
-- [License](#license)
+- [ 📁 More examples](#-more-examples)
+- [ 💡 FAQ](#-faq)
+- [ 📘 License](#-license)
 
-## 📁 Adding APOD.Net to your project
+## 📦 Adding APOD.Net to your project
 There are many different ways to add NuGet packages to your project. Below are some of the most common methods. Refer to [this guide](https://docs.microsoft.com/en-us/nuget/install-nuget-client-tools) if you can't find a method that suits you.
 
 ### Option 1 - Visual Studio PM Console
@@ -60,8 +60,8 @@ There are many different ways to add NuGet packages to your project. Below are s
     dotnet add package APOD.Net
     ```
 
-## Getting started
-To start using APOD.Net after installing, add the using directive.
+## 🌟 Getting started
+This guide is intended to be read in sequencial order as every topic builds on the preceding one. They share the same context. To get started, add the using directive.
 ```cs
 using Apod;
 ```
@@ -78,14 +78,14 @@ var client = new ApodClient("YOUR_API_KEY_HERE");
 ```
 
 ### Making your first request
-There are multiple different [available methods](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#methods) on the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient), but for this simple example we are going to get the Astronomy Picture of the Day from my most recent birthday. I would put your birthday here but I have no idea when that is. If I did, GitHub wouldn't be doing their GDPR right.
+There are numerous [available methods](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#methods) on the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient), but for this simple example we are going to get the Astronomy Picture of the Day from my most recent birthday using [ApodClient.FetchApodAsync(DateTime)](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_). I would get the APOD for your birthday, but I have no idea when that is. If I did, GitHub wouldn't be doing their GDPR right.
 ```cs
 var date = new DateTime(2019, 06, 04);
 var result = await client.FetchApodAsync(date);
 ```
 
 ### Interpreting the response
-The method we used in the example above, [ApodClient.FetchApodAsync(DateTime)](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_),  returns an [ApodResponse](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse). Instead of being impatient and immediately reading our APOD content we should make sure that the client didn't encounter any errors in along the way.
+The method we used in the example above, [ApodClient.FetchApodAsync(DateTime)](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_),  returns an [ApodResponse](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse). Instead of being impatient and immediately reading our APOD content we should make sure that the client didn't encounter any errors along the way.
 ```cs
 if (result.StatusCode != ApodStatusCode.OK)
 {
@@ -164,11 +164,16 @@ November 2, 2008: "Spicules: Jets on the Sun".
 </p>
 </details>
 
-## More examples
+## 📁 More examples
 You can find more examples in [the documentation](https://lemorrow.github.io/APOD.Net/examples/).
 
-## FAQ
-A list of some of the frequently asked questions. Can't see your question here? Feel free to [open an issue](https://github.com/LeMorrow/APOD.Net/issues/new/choose)!
+## 💡 FAQ
+Can't find your question here? Feel free to [open an issue](https://github.com/LeMorrow/APOD.Net/issues/new/choose)!
+
+* [Disposable object created by 'new ApodClient()' is never disposed](https://github.com/LeMorrow/APOD.Net#disposable-object-created-by-new-apodclient-is-never-disposed)
+* [What does ApodResponse.Content return if ApodResponse.AllContent has more than one APOD?](https://github.com/LeMorrow/APOD.Net/tree/improve-documentation#what-does-apodresponsecontent-return-if-apodresponseallcontent-has-more-than-one-apod)
+* [What do I use the ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor for?](https://github.com/LeMorrow/APOD.Net/tree/improve-documentation#what-do-i-use-the-apodclientstring-ihttprequester-ihttpresponseparser-ierrorhandler-constructor-for)
+
 ### Disposable object created by 'new ApodClient()' is never disposed
 ![A warning in visual studio saying "Disposable object created by 'new ApodClient()' is never disposed"](docs/images/apodclient-dispose.png)
 
@@ -178,8 +183,19 @@ that needs to be disposed, the [ApodClient](https://lemorrow.github.io/APOD.Net/
 client.Dispose();
 ```
 
+If you are only going to use the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) once in your application, you can construct and use it in a [using statement](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement). The client will not be usable outside the block and will be disposed of correctly.
+```cs
+using (var client = new ApodClient("YOUR_API_KEY_HERE"))
+{
+    // Use client here
+}
+```
+
+### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent) has more than one APOD?
+[ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
+
 ### What do I use the [ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_) for?
 This is so you can override any of the behavior of the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) if you'd like. If you want to go above and beyond, you can make your own client that implements [IApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.IApodClient).
 
-## License
+## 📘 License
 APOD.Net is licensed under the MIT License. Read the full license [here](https://github.com/LeMorrow/APOD.Net/blob/master/LICENSE).
