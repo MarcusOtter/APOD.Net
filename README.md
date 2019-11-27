@@ -179,6 +179,14 @@ that needs to be disposed, the [ApodClient](https://lemorrow.github.io/APOD.Net/
 client.Dispose();
 ```
 
+If you are only going to use the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) once in your application, you can construct and use it in a [using statement](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement). The client will not be usable outside the block and will be disposed of correctly.
+```cs
+using (var client = new ApodClient("YOUR_API_KEY_HERE"))
+{
+    // Use client here
+}
+```
+
 ### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent) has more than one APOD?
 [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
 
