@@ -10,7 +10,7 @@ namespace GetTodaysApod
     {
         public static async Task Run()
         {
-            var client = new ApodClient();
+            using var client = new ApodClient();
             var response = await client.FetchApodAsync();
 
             if (response.StatusCode != ApodStatusCode.OK)
@@ -20,9 +20,8 @@ namespace GetTodaysApod
                 return;
             }
 
-            Console.WriteLine("");
-
-            client.Dispose();
+            Console.WriteLine(response.Content.Title);
+            Console.WriteLine(response.Content.Explanation);
         }
     }
 }
