@@ -4,7 +4,7 @@
     /// Contains information about errors that occured in the request.
     /// </summary>
     /// <remarks>
-    /// The <see cref="ApodError"/>s aim to give you more information than the API would about what went wrong and what could be done to fix the problem.
+    /// The <see cref="ApodError"/> aims to give you more information than the API would about what went wrong and what could be done to fix the problem.
     /// If you feel like it the information could be more concise in any way, make sure to open a pull request with your
     /// proposed changes to the <see cref="Logic.Errors.ErrorBuilder"/> and/or the <see cref="Logic.Errors.ErrorHandler"/> here:
     /// <a href="https://github.com/LeMorrow/APOD.Net/compare">https://github.com/LeMorrow/APOD.Net/compare</a>
