@@ -14,8 +14,8 @@ APOD.Net is a .NET library used to asynchronously interface with [NASA's Astrono
 
 ## ⚡ Features
 - 🚀 Fast, deadlock-free asynchronous library made in pure C# **without external dependencies**. ¹ 
-- 💻 Cross-platform support, targets **.NET Standard 2.0** which is supported by .NET Core 2.0+, .NET Framework 4.6.1+ and many more. [Click here for a full list of implementation support](https://docs.microsoft.com/en-us/dotnet/standard/net-standard).
 - 🔓 Gives you **access to all the _undocumented features_ of NASA's API**, such as getting all APODs between two dates and getting random APODs.
+- 💻 Cross-platform support, targets **.NET Standard 2.0** which is supported by .NET Core 2.0+, .NET Framework 4.6.1+ and many more. [Click here for a full list of implementation support](https://docs.microsoft.com/en-us/dotnet/standard/net-standard).
 - 🔧 **Takes care of everything you shouldn't have to care about**. HTTP requests, mapping the JSON responses to .NET objects, validating input, etc.
 - ✏️ **Frictionless and easy to implement**. One API request is one method call, as it should be.
 - 📖 Continuously updated **documentation**! [Click here to visit the docs](https://lemorrow.github.io/APOD.Net/).
