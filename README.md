@@ -10,7 +10,7 @@
 </p>
 
 # APOD.Net
-APOD.Net is a .NET library used to asynchronously interface with [NASA's Astronomy Picture of the Day API](https://api.nasa.gov/#apod) (APOD). The API features a different image or photograph of our universe each day, along with a brief explanation written by a professional astronomer.
+APOD.Net is a .NET library used to asynchronously interface with [NASA's Astronomy Picture of the Day API](https://api.nasa.gov/#apod) (APOD). The API features a different image or photograph of our universe each day, along with a brief explanation written by a professional astronomer. [Here's what today's picture looks like](https://apod.nasa.gov/apod/astropix.html)!
 
 ## ⚡ Features
 - 🚀 Fast, deadlock-free asynchronous library made in pure C# **without external dependencies**. ¹ 
