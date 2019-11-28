@@ -191,6 +191,12 @@ using (var client = new ApodClient("YOUR_API_KEY_HERE"))
 }
 ```
 
+Bonus tip: If you are using C# 8.0 or later, you can use the alternative syntax for the using statement that doesn't require braces.
+The client will be disposed of when it falls out of scope.
+```cs
+using var client = new ApodClient("YOUR_API_KEY_HERE");
+```
+
 ### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent) has more than one APOD?
 [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
 
