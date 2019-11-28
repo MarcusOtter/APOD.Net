@@ -6,7 +6,6 @@ namespace Apod.Logic.Net
     public class ApodUriBuilder : IApodUriBuilder
     {
         private readonly string _apiKey;
-        /// <summary>The base URI to make the HTTP GET request to.</summary>
         private readonly string _baseUri;
         private readonly string _dateFormat;
 

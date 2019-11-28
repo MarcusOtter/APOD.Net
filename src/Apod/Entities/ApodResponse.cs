@@ -4,8 +4,6 @@ namespace Apod
 {
     public class ApodResponse
     {
-        // TODO: Add ints for ratelimit limit and ratelimit remaining
-        // TODO: Add apod url (won't work for multiple content..)
         public readonly ApodStatusCode StatusCode;
         public readonly ApodContent[] AllContent;
         public readonly ApodContent Content;
@@ -15,7 +13,7 @@ namespace Apod
         {
             StatusCode = statusCode;
             AllContent = allContent;
-            // Set the Content to the latest entry from AllContent.
+            // Set the Content to the latest entry from AllContent
             Content = AllContent?[AllContent.Length > 1 ? AllContent.Length - 1 : 0];
             Error = error;
         }
