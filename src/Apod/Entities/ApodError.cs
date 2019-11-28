@@ -27,6 +27,8 @@
     /// Dates must be between June 16 1995 and November 28 2019.
     /// </code>
     /// </example>
+    /// <seealso cref="ApodResponse"/>
+    /// <seealso cref="ApodErrorCode"/>
     public class ApodError
     {
         /// <summary>
