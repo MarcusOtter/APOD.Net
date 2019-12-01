@@ -205,13 +205,15 @@ Can't find your question here? Feel free to [open an issue](https://github.com/L
 Read the chapter "[Disposing the client](#disposing-the-client)".
 
 ### When do new APODs get published by NASA?
-The images are published at 00:00 UTC-4 since the code runs local to Eastern Time. 
+The images are published at 00:00 UTC-4 since the code runs local to Eastern Time.
 
 ### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent) has more than one APOD?
 [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
 
 ### What do I use the [ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_) for?
-This is so you can override any of the behavior of the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) if you'd like. If you want to go above and beyond, you can make your own client that implements [IApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.IApodClient).
+You can use this constructor to override the behaviour of the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) to your liking. Maybe you know some secret optimizing tricks (if you do, [open a pull request](https://github.com/LeMorrow/APOD.Net/compare)) or maybe you don't need any error handling.
+
+If you're really ambitious, you can even write your implementation of [IApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.IApodClient).
 
 ## 📘 License
 APOD.Net is licensed under the MIT License. Read the full license [here](https://github.com/LeMorrow/APOD.Net/blob/master/LICENSE).
