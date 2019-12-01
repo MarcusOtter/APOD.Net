@@ -164,6 +164,30 @@ November 2, 2008: "Spicules: Jets on the Sun".
 </p>
 </details>
 
+### Disposing the client
+Since the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) contains an [HttpRequester](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.HttpRequester) which in turn contains an [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0)
+that needs to be disposed, the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) is responsible for cleaning up the [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0).
+
+
+To do this, call `Dispose()` on the client when you are done using it. The client will become unusable after calling this method.
+```cs
+client.Dispose();
+```
+
+If you are only going to use the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) once in your application, you can construct and use it in a [using statement](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement). The client will not be usable outside the block and will be disposed of correctly.
+```cs
+using (var client = new ApodClient("YOUR_API_KEY_HERE"))
+{
+    // Use client here
+}
+```
+
+💡 Bonus tip: If you are using C# 8.0 or later, you can use the alternative syntax for the using statement that doesn't require braces.
+The client will be disposed of when it falls out of scope.
+```cs
+using var client = new ApodClient("YOUR_API_KEY_HERE");
+```
+
 ## 📁 More examples
 You can find more examples in [the documentation](https://lemorrow.github.io/APOD.Net/examples/).
 
@@ -177,25 +201,7 @@ Can't find your question here? Feel free to [open an issue](https://github.com/L
 ### Disposable object created by 'new ApodClient()' is never disposed
 ![A warning in visual studio saying "Disposable object created by 'new ApodClient()' is never disposed"](docs/images/apodclient-dispose.png)
 
-Since the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) contains an [HttpRequester](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.HttpRequester) which in turn contains an [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0)
-that needs to be disposed, the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) is responsible for cleaning up the [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0). To get rid of this warning, call `Dispose()` on the client when you are done using it. The client will become unusable after calling this method.
-```cs
-client.Dispose();
-```
-
-If you are only going to use the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) once in your application, you can construct and use it in a [using statement](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement). The client will not be usable outside the block and will be disposed of correctly.
-```cs
-using (var client = new ApodClient("YOUR_API_KEY_HERE"))
-{
-    // Use client here
-}
-```
-
-Bonus tip: If you are using C# 8.0 or later, you can use the alternative syntax for the using statement that doesn't require braces.
-The client will be disposed of when it falls out of scope.
-```cs
-using var client = new ApodClient("YOUR_API_KEY_HERE");
-```
+Read the chapter "[Disposing the client](#disposing-the-client)".
 
 ### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent) has more than one APOD?
 [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
