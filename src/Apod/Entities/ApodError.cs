@@ -102,8 +102,7 @@
         /// The default constructor for an <see cref="ApodError"/>.
         /// </summary>
         /// <remarks>
-        /// Unless you are overriding behaviour in the <see cref="Logic.Errors.ErrorBuilder"/> 
-        /// and/or the <see cref="Logic.Errors.ErrorHandler"/>, you should not need to call this constructor.
+        /// Unless you are overriding internal behaviour, you should not need to call this constructor.
         /// </remarks>
         /// <param name="errorCode">The <see cref="ErrorCode"/> value.</param>
         /// <param name="errorMessage">The <see cref="ErrorMessage"/> value.</param>
@@ -118,8 +117,7 @@
         /// and an <see cref="ApodError"/> of this instance.
         /// </summary>
         /// <remarks>
-        /// Unless you are overriding behaviour in the <see cref="Logic.Errors.ErrorHandler"/>,
-        /// you should not need to call this method.
+        /// Unless you are overriding internal behaviour, you should not need to call this method.
         /// </remarks>
         /// <returns>
         /// The new <see cref="ApodResponse"/>.
