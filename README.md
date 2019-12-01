@@ -197,6 +197,7 @@ Can't find your question here? Feel free to [open an issue](https://github.com/L
 * [Disposable object created by 'new ApodClient()' is never disposed](#disposable-object-created-by-new-apodclient-is-never-disposed)
 * [When do new APODs get published by NASA?](#when-do-new-apods-get-published-by-nasa)
 * [What does ApodResponse.Content return if ApodResponse.AllContent has more than one APOD?](#what-does-apodresponsecontent-return-if-apodresponseallcontent-has-more-than-one-apod)
+* [What do I use the ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor for?](#what-do-i-use-the-apodclientstring-ihttprequester-ihttpresponseparser-ierrorhandler-constructor-for)
 
 ### Disposable object created by 'new ApodClient()' is never disposed
 ![A warning in visual studio saying "Disposable object created by 'new ApodClient()' is never disposed"](docs/images/apodclient-dispose.png)
