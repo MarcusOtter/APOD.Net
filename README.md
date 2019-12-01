@@ -194,14 +194,17 @@ You can find more examples in [the documentation](https://lemorrow.github.io/APO
 ## 💡 FAQ
 Can't find your question here? Feel free to [open an issue](https://github.com/LeMorrow/APOD.Net/issues/new/choose)!
 
-* [Disposable object created by 'new ApodClient()' is never disposed](https://github.com/LeMorrow/APOD.Net#disposable-object-created-by-new-apodclient-is-never-disposed)
-* [What does ApodResponse.Content return if ApodResponse.AllContent has more than one APOD?](https://github.com/LeMorrow/APOD.Net/tree/improve-documentation#what-does-apodresponsecontent-return-if-apodresponseallcontent-has-more-than-one-apod)
-* [What do I use the ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor for?](https://github.com/LeMorrow/APOD.Net/tree/improve-documentation#what-do-i-use-the-apodclientstring-ihttprequester-ihttpresponseparser-ierrorhandler-constructor-for)
+* [Disposable object created by 'new ApodClient()' is never disposed](#disposable-object-created-by-new-apodclient-is-never-disposed)
+* [When do new APODs get published by NASA?](#when-do-new-apods-get-published-by-nasa)
+* [What does ApodResponse.Content return if ApodResponse.AllContent has more than one APOD?](#what-does-apodresponsecontent-return-if-apodresponseallcontent-has-more-than-one-apod)
 
 ### Disposable object created by 'new ApodClient()' is never disposed
 ![A warning in visual studio saying "Disposable object created by 'new ApodClient()' is never disposed"](docs/images/apodclient-dispose.png)
 
 Read the chapter "[Disposing the client](#disposing-the-client)".
+
+### When do new APODs get published by NASA?
+The images are published at 00:00 UTC-4 since the code runs local to Eastern Time. 
 
 ### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent) has more than one APOD?
 [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
