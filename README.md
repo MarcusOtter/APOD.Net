@@ -61,12 +61,12 @@ There are many different ways to add NuGet packages to your project. Below are s
     ```
 
 ## 🌟 Getting started
-This guide is intended to be read in sequencial order as every topic builds on the preceding one. They share the same context. To get started, add the using directive.
+This guide is intended to be read in sequencial order as every topic builds on the preceding one. They share the same context. To get started, add the [using directive](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive).
 ```cs
 using Apod;
 ```
 ### Setting up the client
-If you are new and just want to explore the API, you can create a new [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) using the parameterless constructor.
+If you are new and just want to explore the API, you can create a new [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) using the [parameterless constructor](http://localhost:8080/api/Apod.ApodClient.html#Apod_ApodClient_FetchApodAsync).
 ```cs
 var client = new ApodClient();
 ```
