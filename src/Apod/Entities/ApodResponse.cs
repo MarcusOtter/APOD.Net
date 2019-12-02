@@ -46,11 +46,9 @@ namespace Apod
         /// </value>
         /// <remarks>
         /// If the <see cref="StatusCode"/> is <see cref="ApodStatusCode.OK"/> 
-        /// you can safely assume that this array is initialized and has the amount of results that you expect from your request.
+        /// you can safely assume that this array is initialized.
         /// </remarks>
         /// <example>
-        /// <para><b>Example 1. Fetching the Astronomy Picture of the Day for a specific date</b></para>
-        /// <para>We expect one result since we're asking for one specific date.</para>
         /// <code>
         /// var date = new DateTime(2000, 01, 01);
         /// var response = await client.FetchApodAsync(date);
@@ -60,23 +58,6 @@ namespace Apod
         /// <br/>
         /// </example>
         /// <example>
-        /// <para><b>Example 2. Fetching all Astronomy Pictures of the Day between two dates</b></para>
-        /// <para>
-        /// Note that <see cref="ApodClient.FetchApodAsync(System.DateTime, System.DateTime)"/> has inclusive bounds. 
-        /// Therefore we expect three results (February 22, February 23, and February 24).
-        /// </para>
-        /// <code>
-        /// var startDate = new DateTime(2019, 02, 22);
-        /// var endDate = new DateTime(2019, 02, 24);
-        /// var response = await client.FetchApodAsync(startDate, endDate);
-        /// Console.WriteLine(response.AllContent?.Length);
-        /// </code>
-        /// <para>Output: <c>3</c></para>
-        /// <br/>
-        /// </example>
-        /// <example>
-        /// <para><b>Example 3. Fetching 5 random Astronomy Pictures of the Day</b></para>
-        /// <para>We expect five results.</para>
         /// <code>
         /// var response = await client.FetchApodAsync(5);
         /// Console.WriteLine(response.AllContent?.Length);
