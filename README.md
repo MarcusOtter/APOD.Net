@@ -219,9 +219,7 @@ The table below will likely change in the future. Thanks, timezones.<br>
 [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
 
 ### What do I use the [ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_) for?
-You can use this constructor to override the behaviour of the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) to your liking. Maybe you know some secret optimizing tricks (if you do, [open a pull request](https://github.com/LeMorrow/APOD.Net/compare)) or maybe you don't need any error handling.
-
-If you're really ambitious, you can even write your implementation of [IApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.IApodClient).
+You can use this constructor to override the behaviour of the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient) to your liking. Maybe you know some secret optimizing tricks (if you do, [open a pull request](https://github.com/LeMorrow/APOD.Net/compare)) or maybe you want custom error handling. In that case you can inject your own implementation of [IErrorHandler](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Errors.IErrorHandler.html).
 
 ## 📘 License
 APOD.Net is licensed under the MIT License. Read the full license [here](https://github.com/LeMorrow/APOD.Net/blob/master/LICENSE).
