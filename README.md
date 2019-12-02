@@ -72,7 +72,7 @@ var client = new ApodClient();
 ```
 This will use the API key `DEMO_KEY` which is provided by NASA as a way to explore their APIs. It has a rate limit of 50 requests **daily** per IP address.
 
-For developing and using your application, you should [sign up for an API key](https://api.nasa.gov/ "Generate API Key - api.nasa.gov") which has a rate limit of 1000 requests **hourly** per IP address. To initialize the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") with your API key, use the [ApodClient(String) constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_ "ApodClient(String) constructor - APOD.Net Documentation").
+For developing and using your application, you should [sign up for an API key](https://api.nasa.gov#signUp "Generate API Key - api.nasa.gov") which has a rate limit of 1000 requests **hourly** per IP address. To initialize the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") with your API key, use the [ApodClient(String) constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_ "ApodClient(String) constructor - APOD.Net Documentation").
 ```cs
 var client = new ApodClient("YOUR_API_KEY_HERE");
 ```
