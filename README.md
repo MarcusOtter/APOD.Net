@@ -208,12 +208,13 @@ Read the chapter "[Disposing the client](#disposing-the-client)".
 Because of daylight saving time, it depends. NASA is running the code in the [Eastern Time Zone](https://en.wikipedia.org/wiki/Eastern_Time_Zone).
 
 The table below will likely change in the future. Thanks, timezones.<br>
-*Want to learn more about the problems with timezones? Watch [this](https://www.youtube.com/watch?v=-5wpm-gesOY) youtube video from Computerphile (featuring Tom Scott).*
 
 | Time period start        | Time period end          | Time of publication |
 | ------------------------ | ------------------------ | ------------------- |
 | Second Sunday in March   | First Sunday in November | 00:00 UTC-04:00     |
 | First Sunday in November | Second Sunday in March   | 00:00 UTC-05:00     |
+
+*Want to learn more about the problems with timezones? Watch [this](https://www.youtube.com/watch?v=-5wpm-gesOY) youtube video from Computerphile (featuring Tom Scott).*
 
 ### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent) has more than one APOD?
 [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content) will return the APOD with the most recent date.
