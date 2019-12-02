@@ -8,7 +8,6 @@
     /// </remarks>
     /// <example>
     /// <code>
-    /// var response = await client.FetchApodAsync();
     /// if (response.StatusCode != ApodStatusCode.OK)
     /// {
     ///     // handle errors
@@ -28,7 +27,7 @@
 
         /// <summary>
         /// The response does not contain any APODs. 
-        /// See <see cref="ApodResponse.Error"/> for more information about the error.
+        /// See the <see cref="ApodResponse.Error"/> of the <see cref="ApodResponse"/> for more information about the error.
         /// </summary>
         Error
     }
