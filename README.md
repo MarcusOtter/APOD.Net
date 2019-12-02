@@ -149,7 +149,7 @@ Example request
 ```cs
 var startDate = new DateTime(2008, 10, 29);
 var endDate = new DateTime(2008, 11, 02);
-var response = await apodClient.FetchApodAsync(startDate, endDate);
+var response = await client.FetchApodAsync(startDate, endDate);
 ```
 
 Example response
