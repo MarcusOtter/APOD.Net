@@ -6,6 +6,8 @@ namespace Apod.Logic.Net.Dtos
     /// <summary>
     /// Contains information about the digital content of an Astronomy Picture of the Day.
     /// </summary>
+    /// <seealso cref="ApodResponse"/>
+    /// <seealso cref="ApodError"/>
     public class ApodContent : IEquatable<ApodContent>
     {
         /// <summary>
