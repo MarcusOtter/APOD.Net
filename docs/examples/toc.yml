@@ -1,4 +1,9 @@
-- name: Information about the examples
+- name: Examples
   href: index.md
-- name: Fetch today's APOD
+- name: Before you start
+  href: info.md
+- name: Write today's APOD title to the console
   href: today.md
+- name: Download all APODs between two dates
+  href: download.md
+  
