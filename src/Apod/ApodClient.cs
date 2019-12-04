@@ -77,6 +77,8 @@ namespace Apod
         {
             ThrowExceptionIfDisposed();
 
+            if (endDate.Date == DateTime.Today) { endDate = default; }
+
             var dateError = _errorHandler.ValidateDateRange(startDate, endDate);
             if (dateError.ErrorCode != ApodErrorCode.None) { return dateError.ToApodResponse(); }
 
