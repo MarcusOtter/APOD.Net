@@ -1,7 +1,7 @@
 ---
-name: Unknown error
+name: Unknown ApodError
 about: Report an ApodError with error code ApodErrorCode.Unknown
-title: Unknown error
+title: Unknown ApodError
 labels: bug
 assignees: LeMorrow
 
