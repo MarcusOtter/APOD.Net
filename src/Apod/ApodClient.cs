@@ -66,7 +66,10 @@ namespace Apod
         /// <param name="apiKey">Your API key from https://api.nasa.gov.</param>
         /// <param name="httpRequester">The <see cref="IHttpRequester"/> to use for interacting with the API.</param>
         /// <param name="httpResponseParser">The <see cref="IHttpResponseParser"/> to use for parsing the data from the <paramref name="httpRequester"/>.</param>
-        /// <param name="errorHandler">The <see cref="IErrorHandler"/> to handle any errors with the request.</param>   
+        /// <param name="errorHandler">The <see cref="IErrorHandler"/> to handle any errors with the request.</param>
+        /// <example>
+        /// See <a href="../examples/errorhandler.md">Override the IErrorHandler</a> for an example on how to implement and use any of these interfaces.
+        /// </example>
         public ApodClient(string apiKey, IHttpRequester httpRequester = null, IHttpResponseParser httpResponseParser = null, IErrorHandler errorHandler = null)
         {
             _httpRequester = httpRequester ?? DefaultsFactory.GetHttpRequester(apiKey);
