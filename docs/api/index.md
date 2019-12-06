@@ -6,5 +6,5 @@ The other namespaces are for understanding the inner workings of the library and
 ## Useful links
 * [ApodClient](Apod.ApodClient.yml)
 * [ApodResponse](Apod.ApodResponse.yml)
-* [ApodContent](Apod.Logic.Net.Dtos.ApodContent.yml)
+* [ApodContent](Apod.ApodContent.yml)
 * [ApodError](Apod.ApodError.yml)

@@ -1,6 +1,4 @@
-﻿using Apod.Logic.Net.Dtos;
-
-namespace Apod
+﻿namespace Apod
 {
     /// <summary>
     /// Contains information about the response from a request to the API.

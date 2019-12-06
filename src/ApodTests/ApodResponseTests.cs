@@ -1,6 +1,5 @@
 ﻿using Xunit;
 using Apod;
-using Apod.Logic.Net.Dtos;
 using System;
 
 namespace ApodTests

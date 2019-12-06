@@ -1,4 +1,4 @@
-﻿namespace Apod.Logic.Net.Dtos
+﻿namespace Apod
 {
     /// <summary>
     /// Information about an <see cref="ApodContent"/>'s type of media.

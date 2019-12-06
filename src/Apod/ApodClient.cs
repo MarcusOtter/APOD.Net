@@ -20,7 +20,7 @@ namespace Apod
     /// </remarks>
     /// <seealso cref="ApodResponse"/>
     /// <seealso cref="ApodError"/>
-    /// <seealso cref="Logic.Net.Dtos.ApodContent"/>
+    /// <seealso cref="ApodContent"/>
     public class ApodClient : IApodClient, IDisposable
     {
         private bool _disposed;
