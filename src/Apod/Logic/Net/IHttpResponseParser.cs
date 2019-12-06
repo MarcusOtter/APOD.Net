@@ -5,7 +5,7 @@ namespace Apod.Logic.Net
 {
     public interface IHttpResponseParser
     {
-        Task<ApodResponse> ParseSingleApodAsync(HttpResponseMessage httpResponse);
-        Task<ApodResponse> ParseMultipleApodsAsync(HttpResponseMessage httpResponse);
+        ValueTask<ApodResponse> ParseSingleApodAsync(HttpResponseMessage httpResponse);
+        ValueTask<ApodResponse> ParseMultipleApodsAsync(HttpResponseMessage httpResponse);
     }
 }

@@ -40,6 +40,7 @@ namespace Apod
 
         /// <summary>Fetch the current Astronomy Picture of the Day.</summary>
         public async Task<ApodResponse> FetchApodAsync()
+        public async ValueTask<ApodResponse> FetchApodAsync()
         {
             ThrowExceptionIfDisposed();
 
@@ -92,7 +93,7 @@ namespace Apod
 
         /// <summary>Fetch an amount of random Astronomy Pictures of the Day.</summary>
         /// <param name="count">The amount of APODs to fetch. Must be positive and cannot exceed 100.</param>
-        public async Task<ApodResponse> FetchApodAsync(int count)
+        public async ValueTask<ApodResponse> FetchApodAsync(int count)
         {
             ThrowExceptionIfDisposed();
 

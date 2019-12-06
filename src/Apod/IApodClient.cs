@@ -7,10 +7,11 @@ namespace Apod
     {
         /// <summary>Fetch the current Astronomy Picture of the Day.</summary>
         Task<ApodResponse> FetchApodAsync();
+        ValueTask<ApodResponse> FetchApodAsync();
 
         /// <summary>Fetch the Astronomy Picture of the Day for a specific date.</summary>
         /// <param name="dateTime">The date to request the APOD for. Must be between June 16th 1995 and today's date.</param>
-        Task<ApodResponse> FetchApodAsync(DateTime dateTime);
+        ValueTask<ApodResponse> FetchApodAsync(DateTime dateTime);
 
         /// <summary>Fetch all the Astronomy Pictures of the Day between two dates.</summary>
         /// <param name="startDate">The start date. Must be between June 16th 1995 and today's date.</param>

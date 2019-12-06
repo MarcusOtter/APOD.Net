@@ -61,7 +61,7 @@ namespace Apod.Logic.Errors
             return new ApodError(ApodErrorCode.None);
         }
 
-        public async Task<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
+        public async ValueTask<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
         {
             if (httpResponse.IsSuccessStatusCode) { return new ApodError(ApodErrorCode.None); }
 

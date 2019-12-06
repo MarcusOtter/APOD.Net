@@ -26,7 +26,7 @@ namespace Apod.Logic.Net
             return options;
         }
 
-        public async Task<ApodResponse> ParseSingleApodAsync(HttpResponseMessage httpResponse)
+        public async ValueTask<ApodResponse> ParseSingleApodAsync(HttpResponseMessage httpResponse)
         {
             ApodContent apodContent = null;
             using (var responseStream = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false))
@@ -40,7 +40,7 @@ namespace Apod.Logic.Net
             return new ApodResponse(ApodStatusCode.OK, apodArray);
         }
 
-        public async Task<ApodResponse> ParseMultipleApodsAsync(HttpResponseMessage httpResponse)
+        public async ValueTask<ApodResponse> ParseMultipleApodsAsync(HttpResponseMessage httpResponse)
         {
             ApodContent[] apodContent = null;
             using (var responseStream = await httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false))
