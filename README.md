@@ -216,6 +216,11 @@ The table below will likely change in the future. Thanks, time zones.<br>
 
 *Want to learn more about the problems with time zones? Watch [this](https://www.youtube.com/watch?v=-5wpm-gesOY "The Problem with Time & Timezones - youtube.com") youtube video from Computerphile (featuring Tom Scott).*
 
+### When was the first APOD published?
+The first APOD was published June 16th 1995 ([link](https://apod.nasa.gov/apod/ap950616.html)). However, the next 3 dates, June 17th, June 18th and June 19th, do not have any APODs. 
+
+In conclusion, there has been an Astronomy Picture of the Day every single day from June 20th 1995 and onward.
+
 ### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent "ApodResponse.AllContent - APOD.Net Documentation") has more than one APOD?
 [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") will return the APOD with the most recent date.
 
