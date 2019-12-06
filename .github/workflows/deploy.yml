@@ -22,6 +22,16 @@ jobs:
         nuget-api-key: ${{ secrets.NUGET_API_KEY }}
         nuget-version: 'latest'
 
+    - name: Create NuGet package
+      run: dotnet pack src/Apod/Apod.csproj -c Release --no-build --output nupkgs
+      
+    - name: Publish NuGet package
+      env:
+        nuget_api_key: ${{ secrets.NUGET_API_KEY }}
+      run: |
+        cd nupkgs
+        dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key $nuget_api_key
+      
     - name: Install DocFX
       run: nuget install docfx.console -Version 2.47.0
     
