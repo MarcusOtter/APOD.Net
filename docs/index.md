@@ -4,12 +4,12 @@ APOD.Net is a .NET library used to asynchronously interface with [NASA's Astrono
 You can find more information in the [GitHub repository](https://github.com/LeMorrow/APOD.Net).
 
 ## Quick links
-- [Examples](https://lemorrow.github.io/APOD.Net/examples/)
-- [API Documentation](https://lemorrow.github.io/APOD.Net/api/)
-- [GitHub repository](https://github.com/LeMorrow/APOD.Net)
+- **[Examples](https://lemorrow.github.io/APOD.Net/examples/)**
+- **[API Documentation](https://lemorrow.github.io/APOD.Net/api/)**
+- **[GitHub repository](https://github.com/LeMorrow/APOD.Net)**
 
 ## Getting started
-Information about installing and getting started with this library can be found in the [GitHub repository](https://github.com/LeMorrow/APOD.Net).
+Information about installing and getting started with this library can be found in the [GitHub repository](https://github.com/LeMorrow/APOD.Net) or by reading one of the [Examples](https://lemorrow.github.io/APOD.Net/examples/).
 
 ## Additional resources
 - [NuGet](https://www.nuget.org/packages/APOD.Net/)
