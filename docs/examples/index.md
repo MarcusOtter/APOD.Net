@@ -10,4 +10,4 @@ If you encounter problems or have any questions, feel free to [open an issue](ht
 
 - [Write today's APOD title to the console](today.md)
 - [Download all APODs between two dates](download.md)
-- Item 3
+- [Override the IErrorHandler](errorhandler.md)

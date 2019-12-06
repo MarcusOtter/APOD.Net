@@ -6,4 +6,5 @@
   href: today.md
 - name: Download all APODs between two dates
   href: download.md
-  
+- name: Override the IErrorHandler
+  href: errorhandler.md
