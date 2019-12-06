@@ -20,7 +20,7 @@ namespace Apod.Logic.Net
         private HttpClient GetDefaultHttpClient()
             => new HttpClient();
 
-        public async Task<HttpResponseMessage> SendHttpRequestAsync()
+        public async ValueTask<HttpResponseMessage> SendHttpRequestAsync()
         {
             ThrowExceptionIfDisposed();
 
@@ -32,7 +32,7 @@ namespace Apod.Logic.Net
             }
         }
 
-        public async Task<HttpResponseMessage> SendHttpRequestAsync(DateTime dateTime)
+        public async ValueTask<HttpResponseMessage> SendHttpRequestAsync(DateTime dateTime)
         {
             ThrowExceptionIfDisposed();
 
@@ -43,7 +43,7 @@ namespace Apod.Logic.Net
             }
         }
 
-        public async Task<HttpResponseMessage> SendHttpRequestAsync(DateTime startDate, DateTime endDate = default)
+        public async ValueTask<HttpResponseMessage> SendHttpRequestAsync(DateTime startDate, DateTime endDate = default)
         {
             ThrowExceptionIfDisposed();
 
@@ -54,7 +54,7 @@ namespace Apod.Logic.Net
             }
         }
 
-        public async Task<HttpResponseMessage> SendHttpRequestAsync(int count)
+        public async ValueTask<HttpResponseMessage> SendHttpRequestAsync(int count)
         {
             ThrowExceptionIfDisposed();
 
