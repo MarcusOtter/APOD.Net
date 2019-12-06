@@ -39,7 +39,6 @@ namespace Apod
         }
 
         /// <summary>Fetch the current Astronomy Picture of the Day.</summary>
-        public async Task<ApodResponse> FetchApodAsync()
         public async ValueTask<ApodResponse> FetchApodAsync()
         {
             ThrowExceptionIfDisposed();
@@ -54,7 +53,7 @@ namespace Apod
 
         /// <summary>Fetch the Astronomy Picture of the Day for a specific date.</summary>
         /// <param name="dateTime">The date to request the APOD for. Must be between June 16th 1995 and today's date.</param>
-        public async Task<ApodResponse> FetchApodAsync(DateTime dateTime)
+        public async ValueTask<ApodResponse> FetchApodAsync(DateTime dateTime)
         {
             if (dateTime.Date == DateTime.Today) { return await FetchApodAsync().ConfigureAwait(false); }
 
@@ -74,7 +73,7 @@ namespace Apod
         /// <summary>Fetch all the Astronomy Pictures of the Day between two dates.</summary>
         /// <param name="startDate">The start date. Must be between June 16th 1995 and today's date.</param>
         /// <param name="endDate">The end date. Must be between the <paramref name="startDate"/> and today's date. Defaults to today's date.</param>
-        public async Task<ApodResponse> FetchApodAsync(DateTime startDate, DateTime endDate = default)
+        public async ValueTask<ApodResponse> FetchApodAsync(DateTime startDate, DateTime endDate = default)
         {
             ThrowExceptionIfDisposed();
 
