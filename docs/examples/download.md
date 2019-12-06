@@ -1,5 +1,5 @@
 # Download all APODs between two dates
-This example shows how to download all APOD images between two dates to a folder on your computer. It assumes intermediate knowledge in C#.
+This example shows how to download all APOD images between two dates to a folder on your computer. Intermediate knowledge in C# is assumed.
 
 The project targets .NET Core 3.0 but will work with any platform version that [supports .NET Standard 2.0](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) (small changes may be required for different target frameworks).
 
@@ -203,3 +203,80 @@ With the current values of `directoryPath` and `fileName`, it will place the ima
 **Example output**
 ![Screenshot of application running and downloaded images](../images/download-example.png)
 Note: The application skips 2019-10-01 because the content is a youtube video [as you can see here](https://apod.nasa.gov/apod/ap191001.html).
+
+<br>
+
+## Full example code
+```cs
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.IO;
+using Apod;
+
+namespace today
+{
+    public class Program
+    {
+        public static async Task Main()
+        {
+            using var apodClient = new ApodClient();
+            using var httpClient = new HttpClient();
+
+            var startDate = GetValidDate("Enter a date between 1995-06-16 and today's date in an yyyy-MM-dd format.");
+            var endDate = GetValidDate("Enter another date between the first date and today's date in an yyyy-MM-dd format.");
+
+            Console.WriteLine("Fetching APOD data..");
+            var response = await apodClient.FetchApodAsync(startDate, endDate);
+
+            if (response.StatusCode != ApodStatusCode.OK)
+            {
+                Console.WriteLine(response.Error.ErrorCode);
+                Console.WriteLine(response.Error.ErrorMessage);
+                return;
+            }
+
+            foreach (var apod in response.AllContent)
+            {
+                if (apod.MediaType != MediaType.Image) { continue; }
+
+                var uri = new Uri(apod.ContentUrl);
+                var directoryPath = @"images/";
+                var fileName = apod.Date.ToString("yyyy-MM-dd");
+                Console.WriteLine($"Downloading image for {fileName}");
+                await DownloadImageToFileAsync(uri, directoryPath, fileName, httpClient);
+            }
+
+            Console.WriteLine("Download complete!");
+        }
+
+        private static async Task DownloadImageToFileAsync(Uri imageUri, string directoryPath, string fileName, HttpClient httpClient)
+        {
+            // Get the file extension
+            var uriWithoutQuery = imageUri.GetLeftPart(UriPartial.Path);
+            var fileExtension = Path.GetExtension(uriWithoutQuery);
+
+            // Create file path and ensure directory exists
+            var path = Path.Combine(directoryPath, $"{fileName}{fileExtension}");
+            Directory.CreateDirectory(directoryPath);
+
+            // Download the image and write to the file
+            var imageBytes = await httpClient.GetByteArrayAsync(imageUri);
+            await File.WriteAllBytesAsync(path, imageBytes);
+        }
+
+        private static DateTime GetValidDate(string prompt)
+        {
+            Console.WriteLine(prompt);
+
+            DateTime date;
+            while (!DateTime.TryParse(Console.ReadLine(), out date))
+            {
+                Console.WriteLine("That is not a valid date. Try again.");
+            }
+
+            return date;
+        }
+    }
+}
+```
