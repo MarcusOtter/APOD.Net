@@ -7,7 +7,7 @@
     /// Not to be confused with <see cref="ApodStatusCode"/>.
     /// </remarks>
     /// <example>
-    /// <code>
+    /// <code language="csharp">
     /// var error = response.Error;
     /// switch (error.ErrorCode)
     /// {

@@ -37,7 +37,7 @@ namespace Apod
         /// To prevent rate limiting, it is recommended to sign up for your own API key at <a href="https://api.nasa.gov">https://api.nasa.gov</a> and use the other constructor.
         /// </remarks>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// var client = new ApodClient();
         /// </code>
         /// </example>
@@ -50,7 +50,7 @@ namespace Apod
         /// Your API key from <a href="https://api.nasa.gov">https://api.nasa.gov</a>.
         /// </param>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// var client = new ApodClient("YOUR_API_KEY_HERE");
         /// </code>
         /// </example>
@@ -85,7 +85,7 @@ namespace Apod
         /// Read more: <a href="https://github.com/LeMorrow/APOD.Net#when-do-new-apods-get-published-by-nasa">https://github.com/LeMorrow/APOD.Net#when-do-new-apods-get-published-by-nasa</a>.
         /// </remarks>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// using var client = new ApodClient();
         /// 
         /// var response = await client.FetchApodAsync();
@@ -122,7 +122,7 @@ namespace Apod
         /// </para>
         /// </remarks>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// using var client = new ApodClient();
         ///
         /// var date = new DateTime(2004, 04, 09);
@@ -173,7 +173,7 @@ namespace Apod
         /// </para>
         /// </remarks>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// using var client = new ApodClient();
         ///
         /// var startDate = new DateTime(2008, 10, 29);
@@ -210,7 +210,7 @@ namespace Apod
         /// Fetch an amount of random Astronomy Pictures of the Day.
         /// </summary>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// using var client = new ApodClient();
         ///
         /// var amount = 3;

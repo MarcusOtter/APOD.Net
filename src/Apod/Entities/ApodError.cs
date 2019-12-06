@@ -10,7 +10,7 @@
     /// <a href="https://github.com/LeMorrow/APOD.Net/compare">https://github.com/LeMorrow/APOD.Net/compare</a>
     /// </remarks>
     /// <example>
-    /// <code>
+    /// <code language="csharp">
     /// if (response.StatusCode != ApodStatusCode.OK)
     /// {
     ///     var error = response.Error;
@@ -21,7 +21,7 @@
     /// </code>
     /// 
     /// Example output (where the current date is November 28 2019)
-    /// <code>
+    /// <code language="csharp">
     /// An error occured.
     /// DateOutOfRange
     /// Dates must be between June 16 1995 and November 28 2019.
@@ -46,7 +46,7 @@
         /// </para>
         /// </remarks>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// var error = response.Error;
         /// switch (error.ErrorCode)
         /// {
@@ -82,7 +82,7 @@
         /// <a href="https://github.com/LeMorrow/APOD.Net/compare">https://github.com/LeMorrow/APOD.Net/compare</a>
         /// </remarks>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// if (response.StatusCode != ApodStatusCode.OK)
         /// {
         ///     Console.WriteLine("An error occured.");
@@ -91,7 +91,7 @@
         /// </code>
         /// 
         /// Example output
-        /// <code>
+        /// <code language="csharp">
         /// An error occured.
         /// The count must be positive and cannot exceed 100.
         /// </code>

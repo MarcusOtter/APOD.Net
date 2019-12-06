@@ -8,7 +8,7 @@
     /// before trying to access any content.
     /// </remarks>
     /// <example>
-    /// <code>
+    /// <code language="csharp">
     /// using var client = new ApodClient();
     /// var response = await client.FetchApodAsync();
     ///
@@ -47,7 +47,7 @@
         /// you can safely assume that this array is initialized.
         /// </remarks>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// var date = new DateTime(2000, 01, 01);
         /// var response = await client.FetchApodAsync(date);
         /// Console.WriteLine(response1.AllContent?.Length);
@@ -56,7 +56,7 @@
         /// <br/>
         /// </example>
         /// <example>
-        /// <code>
+        /// <code language="csharp">
         /// var response = await client.FetchApodAsync(5);
         /// Console.WriteLine(response.AllContent?.Length);
         /// </code>
