@@ -3,7 +3,7 @@ This is a very basic example that will write the title of today's Astronomy Pict
 
 This example targets .NET Core 3.0 but will work with any platform version that [supports .NET Standard 2.0](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) (small changes may be required for different target frameworks).
 
-## Setting up the project
+## Creating the project
 Start by creating a .NET Core (or .NET framework) Console App.
 Read [this quickstart guide](https://docs.microsoft.com/en-us/visualstudio/ide/quickstart-csharp-console?view=vs-2019) if you are unsure how to do this.
 
@@ -21,6 +21,7 @@ See [Adding APOD.Net to your project](https://github.com/LeMorrow/APOD.Net#-addi
 Once the install finishes you are ready to start using APOD.Net.
 
 ## Implementation
+### Setup
 To get started with APOD.Net and to verify the installation, add the [using directive](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive) for the `Apod` namespace in your `Program.cs`.
 ```cs
 using Apod;
@@ -50,6 +51,7 @@ Note that we added another using directive for `System.Threading.Tasks`.
 
 <br>
 
+### Making the request
 The first thing we need is a new instance of an <xref:Apod.ApodClient>. We initialize it with our API key in our `Main()` method
 ```cs
 public static async Task Main()
@@ -72,6 +74,7 @@ public static async Task Main()
 
 <br>
 
+### Error handling
 Now we need to make sure that there were no errors with the request, which we can do with the <xref:Apod.ApodResponse.StatusCode>. If an error did occur, we want to write it to the console.
 ```cs
 public static async Task Main()
@@ -90,7 +93,8 @@ public static async Task Main()
 
 <br>
 
-Now we can safely read the <xref:Apod.ApodResponse.Content> and write the <xref:Apod.Logic.Net.Dtos.ApodContent.Title> to the console. We'll also add `Console.ReadLine()` to the end of the program so the console window stays open instead of instantly closing as the program terminates.
+### Reading the response
+Now we can safely read the <xref:Apod.ApodResponse.Content> and write the <xref:Apod.ApodContent.Title> to the console. We'll also add `Console.ReadLine()` to the end of the program so the console window stays open instead of instantly closing as the program terminates.
 ```cs
 public static async Task Main()
 {
@@ -109,9 +113,11 @@ public static async Task Main()
 }
 ```
 
+<br>
+
 And we're done! This program will write the title of today's APOD to the console and wait for you to press the `Enter` key before terminating.
 
-There are many more properties in the <xref:Apod.Logic.Net.Dtos.ApodContent> that you can use, for example <xref:Apod.Logic.Net.Dtos.ApodContent.ContentUrl>, <xref:Apod.Logic.Net.Dtos.ApodContent.Explanation> and <xref:Apod.Logic.Net.Dtos.ApodContent.Date> to name a few.
+There are many more properties in the <xref:Apod.ApodContent> that you can use, for example <xref:Apod.ApodContent.ContentUrl>, <xref:Apod.ApodContent.Explanation> and <xref:Apod.ApodContent.Date> to name a few.
 
 ## Full example code
 ```cs
@@ -140,5 +146,4 @@ namespace Example
         }
     }
 }
-
 ```
