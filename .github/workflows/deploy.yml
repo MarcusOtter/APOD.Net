@@ -23,7 +23,7 @@ jobs:
         nuget-version: 'latest'
 
     - name: Create NuGet package
-      run: dotnet pack src/Apod/Apod.csproj -c Release --no-build --output nupkgs
+      run: dotnet pack src/Apod/Apod.csproj -c Release --output nupkgs
       
     - name: Publish NuGet package
       env:
