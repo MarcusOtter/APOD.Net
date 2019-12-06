@@ -34,7 +34,7 @@ namespace Apod
         /// </summary>
         /// <remarks>
         /// The API key "DEMO_KEY" has an hourly limit of 30 requests per IP adress and a daily limit of 50 requests per IP address.
-        /// To prevent rate limiting, it is recommended to sign up for your own API key at https://api.nasa.gov and use the other constructor.
+        /// To prevent rate limiting, it is recommended to sign up for your own API key at <a href="https://api.nasa.gov">https://api.nasa.gov</a> and use the other constructor.
         /// </remarks>
         /// <example>
         /// <code>
@@ -47,7 +47,7 @@ namespace Apod
         /// Creates a new instance of an Astronomy Picture of the Day client.
         /// </summary>
         /// <param name="apiKey">
-        /// Your API key from https://api.nasa.gov.
+        /// Your API key from <a href="https://api.nasa.gov">https://api.nasa.gov</a>.
         /// </param>
         /// <example>
         /// <code>
