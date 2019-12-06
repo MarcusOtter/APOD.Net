@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net;
 using Apod;
-using Apod.Logic.Net.Dtos;
 
 namespace ApodTests
 {

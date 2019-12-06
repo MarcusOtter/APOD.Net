@@ -1,0 +1,70 @@
+name: Deploy
+
+on: 
+  push:
+    branches: 
+      - "release"
+
+jobs:
+  generate_docs:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Setup .NET Core 3.0
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.0.100
+    
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+        nuget-version: 'latest'
+
+    - name: Create NuGet package
+      run: dotnet pack src/Apod/Apod.csproj -c Release --no-build --output nupkgs
+      
+    - name: Publish NuGet package
+      env:
+        nuget_api_key: ${{ secrets.NUGET_API_KEY }}
+      run: |
+        cd nupkgs
+        dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key $nuget_api_key
+      
+    - name: Install DocFX
+      run: nuget install docfx.console -Version 2.47.0
+    
+    - name: Generate site with DocFX
+      run: |
+       docfx.console.2.47.0\tools\docfx.exe metadata docs/docfx.json
+       docfx.console.2.47.0\tools\docfx.exe build docs/docfx.json
+      
+    - name: Upload site artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: site
+        path: docs/_site
+  
+  # Two different jobs for building/deploying docs because JamesIves/github-pages-deploy-action does not run on windows
+  # and DocFX cannot easily be installed on ubuntu. 
+  
+  deploy_docs:
+    needs: generate_docs
+    runs-on: ubuntu-latest 
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Download site artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: site
+    
+    - name: Deploy site to gh-pages branch
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BASE_BRANCH: release
+        BRANCH: gh-pages
+        FOLDER: site

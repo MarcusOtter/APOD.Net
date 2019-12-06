@@ -9,6 +9,6 @@ namespace Apod.Logic.Errors
         ApodError ValidateDate(DateTime dateTime);
         ApodError ValidateDateRange(DateTime startDate, DateTime endDate = default);
         ApodError ValidateCount(int count);
-        Task<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse);
+        ValueTask<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse);
     }
 }

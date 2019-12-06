@@ -61,7 +61,7 @@ namespace Apod.Logic.Errors
             return new ApodError(ApodErrorCode.None);
         }
 
-        public async Task<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
+        public async ValueTask<ApodError> ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
         {
             if (httpResponse.IsSuccessStatusCode) { return new ApodError(ApodErrorCode.None); }
 
@@ -127,7 +127,9 @@ namespace Apod.Logic.Errors
         /// Checks if the <paramref name="dateTime"/> is between the first valid date and the last valid date (inclusive).
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> to check.</param>
-        /// <returns>Whether or not the <paramref name="dateTime"/> is within the allowed range.</returns>
+        /// <returns>
+        /// Whether or not the <paramref name="dateTime"/> is within the allowed range.
+        /// </returns>
         private bool DateIsInRange(DateTime dateTime)
             => (DateTime.Compare(dateTime, _lastValidDate.AddDays(1)) < 0) // The date is before or equal to the last valid date
             && (DateTime.Compare(dateTime, _firstValidDate.AddDays(-1)) > 0); // The date is after or equal to the first valid date

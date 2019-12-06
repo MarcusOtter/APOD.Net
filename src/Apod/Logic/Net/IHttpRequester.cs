@@ -6,9 +6,9 @@ namespace Apod.Logic.Net
 {
     public interface IHttpRequester : IDisposable
     {
-        Task<HttpResponseMessage> SendHttpRequestAsync();
-        Task<HttpResponseMessage> SendHttpRequestAsync(DateTime dateTime);
-        Task<HttpResponseMessage> SendHttpRequestAsync(DateTime startDate, DateTime endDate = default);
-        Task<HttpResponseMessage> SendHttpRequestAsync(int count);
+        ValueTask<HttpResponseMessage> SendHttpRequestAsync();
+        ValueTask<HttpResponseMessage> SendHttpRequestAsync(DateTime dateTime);
+        ValueTask<HttpResponseMessage> SendHttpRequestAsync(DateTime startDate, DateTime endDate = default);
+        ValueTask<HttpResponseMessage> SendHttpRequestAsync(int count);
     }
 }
