@@ -1,6 +1,6 @@
-﻿using Apod.Logic.Net.Dtos;
-using System;
+﻿using System;
 using Xunit;
+using Apod;
 
 namespace ApodTests
 {

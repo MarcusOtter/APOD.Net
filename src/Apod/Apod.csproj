@@ -16,6 +16,11 @@ This .NET Standard 2.0 library can be used to asynchronously interface with NASA
     <Version>0.1.0</Version>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="4.6.0" />
   </ItemGroup>
