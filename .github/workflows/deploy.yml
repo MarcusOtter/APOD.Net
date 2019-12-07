@@ -27,10 +27,10 @@ jobs:
       
     - name: Publish NuGet package
       env:
-        nuget_api_key: ${{ secrets.NUGET_API_KEY }}
+        nuget-key: ${{ secrets.NUGET_API_KEY }}
       run: |
         cd nupkgs
-        dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key $nuget_api_key
+        dotnet nuget push *.nupkg --source https://api.nuget.org/v3/index.json --api-key $nuget-key
       
     - name: Install DocFX
       run: nuget install docfx.console -Version 2.47.0
