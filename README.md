@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  :warning: <b>CD and Documentation is currently broken. Sorry for the inconvenience!</b> :warning:
+  :warning: <b>Continuous deployment is currently not working. Sorry for the inconvenience!</b> :warning:
 </p>
 
 # APOD.Net
