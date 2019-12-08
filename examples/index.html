@@ -5,17 +5,17 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>APOD.Net Documentation </title>
+    <title>Examples </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="APOD.Net Documentation ">
+    <meta name="title" content="Examples ">
     <meta name="generator" content="docfx 2.47.0.0">
     
-    <link rel="shortcut icon" href="favicon.ico">
-    <link rel="stylesheet" href="styles/docfx.vendor.css">
-    <link rel="stylesheet" href="styles/docfx.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <meta property="docfx:navrel" content="toc.html">
+    <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
     
@@ -34,8 +34,8 @@
                 <span class="icon-bar"></span>
               </button>
               
-              <a class="navbar-brand" href="index.html">
-                <img id="logo" class="svg" src="logo.svg" alt="">
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="navbar">
@@ -57,26 +57,27 @@
         </div>
       </header>
       <div role="main" class="container body-content hide-when-search">
-        <div class="article row grid">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="apodnet-documentation">APOD.Net Documentation</h1>
+<h1 id="examples">Examples</h1>
 
-<p>APOD.Net is a .NET library used to asynchronously interface with <a href="https://api.nasa.gov#apod" title="Official API documentation - api.nasa.gov">NASA's Astronomy Picture of the Day API</a> (APOD). The API features a different image or photograph of our universe each day, along with a brief explanation written by a professional astronomer. <a href="https://apod.nasa.gov/apod/astropix.html" title="Astronomy Picture of the Day - apod.nasa.gov">Here's what today's picture looks like</a>!</p>
-<p>You can find more information in the <a href="https://github.com/LeMorrow/APOD.Net">GitHub repository</a>.</p>
-<h2 id="quick-links">Quick links</h2>
+<p>Read the &quot;<a href="info.html">Before you start</a>&quot; article before reading the examples.</p>
+<p>Every example will cover setting up a new project and installing the library using <a href="https://visualstudio.microsoft.com/downloads/">Microsoft Visual Studio 2019</a>.
+If you only want to read the implementation, go to the <strong>Implementation</strong> section of the example.</p>
+<p>If you encounter problems or have any questions, feel free to <a href="https://github.com/LeMorrow/APOD.Net/issues/new/choose">open an issue</a>!</p>
+<h2 id="list-of-examples">List of examples</h2>
 <ul>
-<li><strong><a href="https://lemorrow.github.io/APOD.Net/examples/">Examples</a></strong></li>
-<li><strong><a href="https://lemorrow.github.io/APOD.Net/api/">API Documentation</a></strong></li>
-<li><strong><a href="https://github.com/LeMorrow/APOD.Net">GitHub repository</a></strong></li>
-</ul>
-<h2 id="getting-started">Getting started</h2>
-<p>Information about installing and getting started with this library can be found in the <a href="https://github.com/LeMorrow/APOD.Net">GitHub repository</a> or by reading one of the <a href="https://lemorrow.github.io/APOD.Net/examples/">Examples</a>.</p>
-<h2 id="additional-resources">Additional resources</h2>
-<ul>
-<li><a href="https://www.nuget.org/packages/APOD.Net/">NuGet</a></li>
-<li><a href="https://github.com/LeMorrow/APOD.Net/actions">CI status</a></li>
-<li><a href="https://coveralls.io/github/LeMorrow/APOD.Net?branch=master">Test coverage</a></li>
+<li><a href="today.html">Write today's APOD title to the console</a></li>
+<li><a href="download.html">Download all APODs between two dates</a></li>
+<li><a href="errorhandler.html">Override the IErrorHandler</a></li>
 </ul>
 </article>
           </div>
@@ -86,7 +87,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/docs/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/docs/examples/index.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
@@ -112,8 +113,8 @@
       </footer>
     </div>
     
-    <script type="text/javascript" src="styles/docfx.vendor.js"></script>
-    <script type="text/javascript" src="styles/docfx.js"></script>
-    <script type="text/javascript" src="styles/main.js"></script>
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
   </body>
 </html>

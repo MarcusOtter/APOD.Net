@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Write today's APOD title to the console </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Write today's APOD title to the console ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="write-todays-apod-title-to-the-console">Write today's APOD title to the console</h1>
+
+<p>This is a very basic example that will write the title of today's Astronomy Picture of the Day to the console window.</p>
+<p>This example targets .NET Core 3.0 but will work with any platform version that <a href="https://docs.microsoft.com/en-us/dotnet/standard/net-standard">supports .NET Standard 2.0</a> (small changes may be required for different target frameworks).</p>
+<h2 id="creating-the-project">Creating the project</h2>
+<p>Start by creating a .NET Core (or .NET framework) Console App.
+Read <a href="https://docs.microsoft.com/en-us/visualstudio/ide/quickstart-csharp-console?view=vs-2019">this quickstart guide</a> if you are unsure how to do this.</p>
+<h2 id="installing-apodnet">Installing APOD.Net</h2>
+<p>There are multiple ways of installing a NuGet package.
+See <a href="https://github.com/LeMorrow/APOD.Net#-adding-apodnet-to-your-project">Adding APOD.Net to your project</a> in the README for other examples.</p>
+<ol>
+<li>Open your new project in Visual Studio and open the Package Manager Console (<code>Tools</code> &gt; <code>NuGet Package Manager</code> &gt; <code>Package Manager Console</code>).</li>
+<li>In the Package Manager Console window, write the following command to add the latest version of APOD.Net to your project.
+<pre><code class="lang-powershell">Install-Package APOD.Net
+</code></pre>
+</li>
+</ol>
+<br>
+<p>Once the install finishes you are ready to start using APOD.Net.</p>
+<h2 id="implementation">Implementation</h2>
+<h3 id="setup">Setup</h3>
+<p>To get started with APOD.Net and to verify the installation, add the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">using directive</a> for the <code>Apod</code> namespace in your <code>Program.cs</code>.</p>
+<pre><code class="lang-cs">using Apod;
+</code></pre>
+<p>If you get errors, run <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore"><code>dotnet restore</code></a>, restart visual studio and try again. If it still doesn't work, feel free to <a href="https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=bug_report.md">open an issue</a>.</p>
+<br>
+<p>Since APOD.Net is an asynchronous library we are going to make our <code>Main()</code> method asynchronous, which is a language feature from C# 7.1. If you don't have access to C# 7.1, read <a href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7-1#async-main">this article</a> for workarounds.</p>
+<pre><code class="lang-cs">using System;
+using System.Threading.Tasks;
+using Apod;
+
+namespace Example
+{
+    public class Program
+    {
+        public static async Task Main()
+        {
+            Console.WriteLine(&quot;Hello World!&quot;);
+        }
+    }
+}
+</code></pre>
+<p>Note that we added another using directive for <code>System.Threading.Tasks</code>.</p>
+<br>
+<h3 id="making-the-request">Making the request</h3>
+<p>The first thing we need is a new instance of an <a class="xref" href="../api/Apod.ApodClient.html">ApodClient</a>. We initialize it with our API key in our <code>Main()</code> method</p>
+<pre><code class="lang-cs">public static async Task Main()
+{
+    using var client = new ApodClient(&quot;YOUR_API_KEY_HERE&quot;);
+}
+</code></pre>
+<br>
+<p>To get today's APOD, we want to use <a class="xref" href="../api/Apod.ApodClient.html#Apod_ApodClient_FetchApodAsync">FetchApodAsync()</a> and save the response.</p>
+<pre><code class="lang-cs">public static async Task Main()
+{
+    using var client = new ApodClient(&quot;YOUR_API_KEY_HERE&quot;);
+    var response = client.FetchApodAsync();
+}
+</code></pre>
+<br>
+<h3 id="error-handling">Error handling</h3>
+<p>Now we need to make sure that there were no errors with the request, which we can do with the <a class="xref" href="../api/Apod.ApodResponse.html#Apod_ApodResponse_StatusCode">StatusCode</a>. If an error did occur, we want to write it to the console.</p>
+<pre><code class="lang-cs">public static async Task Main()
+{
+    using var client = new ApodClient(&quot;YOUR_API_KEY_HERE&quot;);
+    var response = await client.FetchApodAsync();
+
+    if (response.StatusCode != ApodStatusCode.OK)
+    {
+        Console.WriteLine(response.Error.ErrorCode);
+        Console.WriteLine(response.Error.ErrorMessage);
+        return;
+    }
+}
+</code></pre>
+<br>
+<h3 id="reading-the-response">Reading the response</h3>
+<p>Now we can safely read the <a class="xref" href="../api/Apod.ApodResponse.html#Apod_ApodResponse_Content">Content</a> and write the <a class="xref" href="../api/Apod.ApodContent.html#Apod_ApodContent_Title">Title</a> to the console. We'll also add <code>Console.ReadLine()</code> to the end of the program so the console window stays open instead of instantly closing as the program terminates.</p>
+<pre><code class="lang-cs">public static async Task Main()
+{
+    using var client = new ApodClient(&quot;YOUR_API_KEY_HERE&quot;);
+    var response = await client.FetchApodAsync();
+
+    if (response.StatusCode != ApodStatusCode.OK)
+    {
+        Console.WriteLine(response.Error.ErrorCode);
+        Console.WriteLine(response.Error.ErrorMessage);
+        return;
+    }
+
+    Console.WriteLine(response.Content.Title);
+    Console.ReadLine();
+}
+</code></pre>
+<br>
+<p>And we're done! This program will write the title of today's APOD to the console and wait for you to press the <code>Enter</code> key before terminating.</p>
+<p>There are many more properties in the <a class="xref" href="../api/Apod.ApodContent.html">ApodContent</a> that you can use, for example <a class="xref" href="../api/Apod.ApodContent.html#Apod_ApodContent_ContentUrl">ContentUrl</a>, <a class="xref" href="../api/Apod.ApodContent.html#Apod_ApodContent_Explanation">Explanation</a> and <a class="xref" href="../api/Apod.ApodContent.html#Apod_ApodContent_Date">Date</a> to name a few.</p>
+<h2 id="full-example-code">Full example code</h2>
+<pre><code class="lang-cs">using System;
+using System.Threading.Tasks;
+using Apod;
+
+namespace Example
+{
+    public class Program
+    {
+        public static async Task Main()
+        {
+            using var client = new ApodClient(&quot;YOUR_API_KEY_HERE&quot;);
+            var response = await client.FetchApodAsync();
+
+            if (response.StatusCode != ApodStatusCode.OK)
+            {
+                Console.WriteLine(response.Error.ErrorCode);
+                Console.WriteLine(response.Error.ErrorMessage);
+                return;
+            }
+
+            Console.WriteLine(response.Content.Title);
+            Console.ReadLine();
+        }
+    }
+}
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/docs/examples/today.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

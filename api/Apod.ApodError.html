@@ -73,11 +73,12 @@
   
   <h1 id="Apod_ApodError" data-uid="Apod.ApodError" class="text-break">Class ApodError
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Contains information about errors that occured in the request.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ApodError</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apod.html">Apod</a></h6>
@@ -86,18 +87,38 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class ApodError : object</code></pre>
   </div>
+  <h5 id="Apod_ApodError_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The <a class="xref" href="Apod.ApodError.html">ApodError</a> aims to give you more information than the API would about what went wrong and what could be done to fix the problem.
+If you feel like it the information could be more concise in any way, make sure to open a pull request with your
+proposed changes to the <a class="xref" href="Apod.Logic.Errors.ErrorBuilder.html">ErrorBuilder</a> and/or the <a class="xref" href="Apod.Logic.Errors.ErrorHandler.html">ErrorHandler</a> here:
+<a href="https://github.com/LeMorrow/APOD.Net/compare">https://github.com/LeMorrow/APOD.Net/compare</a></p>
+</div>
+  <h5 id="Apod_ApodError_examples"><strong>Examples</strong></h5>
+  <pre><code class="lang-csharp">if (response.StatusCode != ApodStatusCode.OK)
+{
+    var error = response.Error;
+    Console.WriteLine(&quot;An error occured.&quot;);
+    Console.WriteLine(error.ErrorCode);
+    Console.WriteLine(error.ErrorMessage);
+}</code></pre>
+<p>Example output (where the current date is November 28 2019)</p>
+<pre><code class="lang-csharp">An error occured.
+DateOutOfRange
+Dates must be between June 16 1995 and November 28 2019.</code></pre>
+
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodError__ctor_Apod_ApodErrorCode_System_String_.md&amp;value=---%0Auid%3A%20Apod.ApodError.%23ctor(Apod.ApodErrorCode%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodError__ctor_Apod_ApodErrorCode_System_String_.md&amp;value=---%0Auid%3A%20Apod.ApodError.%23ctor(Apod.ApodErrorCode%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/Entities/ApodError.cs/#L8">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/Entities/ApodError.cs/#L109">View Source</a>
   </span>
   <a id="Apod_ApodError__ctor_" data-uid="Apod.ApodError.#ctor*"></a>
   <h4 id="Apod_ApodError__ctor_Apod_ApodErrorCode_System_String_" data-uid="Apod.ApodError.#ctor(Apod.ApodErrorCode,System.String)">ApodError(ApodErrorCode, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The default constructor for an <a class="xref" href="Apod.ApodError.html">ApodError</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -116,26 +137,32 @@
       <tr>
         <td><a class="xref" href="Apod.ApodErrorCode.html">ApodErrorCode</a></td>
         <td><span class="parametername">errorCode</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="Apod.ApodError.html#Apod_ApodError_ErrorCode">ErrorCode</a> value.</p>
+</td>
       </tr>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">errorMessage</span></td>
-        <td></td>
+        <td><p>The <a class="xref" href="Apod.ApodError.html#Apod_ApodError_ErrorMessage">ErrorMessage</a> value.</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodError__ctor_Apod_ApodErrorCode_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Unless you are overriding internal behaviour, you should not need to call this constructor.</p>
+</div>
   <h3 id="fields">Fields
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodError_ErrorCode.md&amp;value=---%0Auid%3A%20Apod.ApodError.ErrorCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodError_ErrorCode.md&amp;value=---%0Auid%3A%20Apod.ApodError.ErrorCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/Entities/ApodError.cs/#L5">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/Entities/ApodError.cs/#L71">View Source</a>
   </span>
   <h4 id="Apod_ApodError_ErrorCode" data-uid="Apod.ApodError.ErrorCode">ErrorCode</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The error code.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -152,19 +179,50 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Apod.ApodErrorCode.html">ApodErrorCode</a></td>
-        <td></td>
+        <td><p>The error code.</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodError_ErrorCode_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Useful if you want to make different behaviours depending on the type of error.</p>
+<p>If you get the error code <a class="xref" href="Apod.ApodErrorCode.html#Apod_ApodErrorCode_Unknown">Unknown</a>, make sure to open an issue here: 
+<a href="https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=unknown-error.md&amp;title=Unknown+error">
+    https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=unknown-error.md&amp;title=Unknown+error
+</a>
+</p>
+</div>
+  <h5 id="Apod_ApodError_ErrorCode_examples">Examples</h5>
+  <pre><code class="lang-csharp">var error = response.Error;
+switch (error.ErrorCode)
+{
+    case ApodErrorCode.DateOutOfRange:
+        Console.WriteLine(error.ErrorMessage);
+        break;
+
+    case ApodErrorCode.Timeout:
+        Console.WriteLine(&quot;Try with dates that are closer together.&quot;);
+        break;
+
+    case ApodErrorCode.OverRateLimit:
+        Console.WriteLine(&quot;You have made too many requests. Come back in a bit.&quot;);
+        break;
+
+    default:
+        Console.WriteLine(&quot;An error occured. Try again.&quot;);
+        break;
+}</code></pre>
+
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodError_ErrorMessage.md&amp;value=---%0Auid%3A%20Apod.ApodError.ErrorMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodError_ErrorMessage.md&amp;value=---%0Auid%3A%20Apod.ApodError.ErrorMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/Entities/ApodError.cs/#L6">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/Entities/ApodError.cs/#L99">View Source</a>
   </span>
   <h4 id="Apod_ApodError_ErrorMessage" data-uid="Apod.ApodError.ErrorMessage">ErrorMessage</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Information regarding what went wrong and hints for how to resolve it.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -180,23 +238,41 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><p>Information regarding what went wrong and hints for how to resolve it.</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodError_ErrorMessage_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If you feel like this message could be more concise, make sure to open a pull request with your
+proposed changes to the <a class="xref" href="Apod.Logic.Errors.ErrorBuilder.html">ErrorBuilder</a> here:
+<a href="https://github.com/LeMorrow/APOD.Net/compare">https://github.com/LeMorrow/APOD.Net/compare</a></p>
+</div>
+  <h5 id="Apod_ApodError_ErrorMessage_examples">Examples</h5>
+  <pre><code class="lang-csharp">if (response.StatusCode != ApodStatusCode.OK)
+{
+    Console.WriteLine(&quot;An error occured.&quot;);
+    Console.WriteLine(response.Error.ErrorMessage);
+}</code></pre>
+<p>Example output</p>
+<pre><code class="lang-csharp">An error occured.
+The count must be positive and cannot exceed 100.</code></pre>
+
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodError_ToApodResponse.md&amp;value=---%0Auid%3A%20Apod.ApodError.ToApodResponse%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodError_ToApodResponse.md&amp;value=---%0Auid%3A%20Apod.ApodError.ToApodResponse%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/Entities/ApodError.cs/#L14">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/Entities/ApodError.cs/#L125">View Source</a>
   </span>
   <a id="Apod_ApodError_ToApodResponse_" data-uid="Apod.ApodError.ToApodResponse*"></a>
   <h4 id="Apod_ApodError_ToApodResponse" data-uid="Apod.ApodError.ToApodResponse">ToApodResponse()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Apod.ApodResponse.html">ApodResponse</a> with a <a class="xref" href="Apod.ApodStatusCode.html">ApodStatusCode</a> of <a class="xref" href="Apod.ApodStatusCode.html#Apod_ApodStatusCode_Error">Error</a>
+and an <a class="xref" href="Apod.ApodError.html">ApodError</a> of this instance.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -213,10 +289,19 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Apod.ApodResponse.html">ApodResponse</a></td>
-        <td></td>
+        <td><p>The new <a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>.</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodError_ToApodResponse_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Unless you are overriding internal behaviour, you should not need to call this method.</p>
+</div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Apod.ApodResponse.html">ApodResponse</a></div>
+      <div><a class="xref" href="Apod.ApodErrorCode.html">ApodErrorCode</a></div>
+  </div>
 </article>
           </div>
           
@@ -225,10 +310,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodError.md&amp;value=---%0Auid%3A%20Apod.ApodError%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodError.md&amp;value=---%0Auid%3A%20Apod.ApodError%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/Entities/ApodError.cs/#L3" class="contribution-link">View Source</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/Entities/ApodError.cs/#L32" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

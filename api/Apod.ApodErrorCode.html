@@ -73,7 +73,8 @@
   
   <h1 id="Apod_ApodErrorCode" data-uid="Apod.ApodErrorCode" class="text-break">Enum ApodErrorCode
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>The error code of an <a class="xref" href="Apod.ApodError.html">ApodError</a>.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apod.html">Apod</a></h6>
   <h6><strong>Assembly</strong>: Apod.dll</h6>
@@ -81,6 +82,30 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public enum ApodErrorCode : int</code></pre>
   </div>
+  <h5 id="Apod_ApodErrorCode_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Not to be confused with <a class="xref" href="Apod.ApodStatusCode.html">ApodStatusCode</a>.</p>
+</div>
+  <h5 id="Apod_ApodErrorCode_examples"><strong>Examples</strong></h5>
+  <pre><code class="lang-csharp">var error = response.Error;
+switch (error.ErrorCode)
+{
+    case ApodErrorCode.DateOutOfRange:
+        Console.WriteLine(error.ErrorMessage);
+        break;
+
+    case ApodErrorCode.Timeout:
+        Console.WriteLine(&quot;Try with dates that are closer together.&quot;);
+        break;
+
+    case ApodErrorCode.OverRateLimit:
+        Console.WriteLine(&quot;You have made too many requests. Come back in a bit.&quot;);
+        break;
+
+    default:
+        Console.WriteLine(&quot;An error occured. Try again.&quot;);
+        break;
+}</code></pre>
+
   <h3 id="fields">Fields
   </h3>
   <table class="table table-bordered table-striped table-condensed">
@@ -93,50 +118,76 @@
     <tbody>
       <tr>
         <td id="Apod_ApodErrorCode_ApiKeyInvalid">ApiKeyInvalid</td>
-        <td></td>
+        <td><p>Your API key was invalid.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_ApiKeyMissing">ApiKeyMissing</td>
-        <td></td>
+        <td><p>You did not provide an API key.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_BadRequest">BadRequest</td>
-        <td></td>
+        <td><p>The API returned a BadRequest error that this library did not catch. </p>
+<p>If you get an error with this code, please file a bug report at 
+<a href="https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=bug_report.md&amp;title=">
+    https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=bug_report.md&amp;title=
+</a></p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_CountOutOfRange">CountOutOfRange</td>
-        <td></td>
+        <td><p>The count that you provided was outside of the allowed range.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_DateOutOfRange">DateOutOfRange</td>
-        <td></td>
+        <td><p>One of the dates you provided were outside of the allowed range.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_InternalServiceError">InternalServiceError</td>
-        <td></td>
+        <td><p>The server had an internal error.</p>
+<p>This could for example mean that it timed out without giving a proper timeout error
+or that NASA&apos;s API servers are down currently.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_None">None</td>
-        <td></td>
+        <td><p>The previous request was successful.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_OverRateLimit">OverRateLimit</td>
-        <td></td>
+        <td><p>You have done too many requests in the past hour.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_StartDateAfterEndDate">StartDateAfterEndDate</td>
-        <td></td>
+        <td><p>The start date was after the end date.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_Timeout">Timeout</td>
-        <td></td>
+        <td><p>The server timed out. Try making smaller requests or try again later.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodErrorCode_Unknown">Unknown</td>
-        <td></td>
+        <td><p>You have encountered a completely unkown bug. Congratulations!</p>
+<p>Please take a few seconds and tell us what you did here:
+<a href="https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=unknown-error.md&amp;title=Unknown+error">
+    https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=unknown-error.md&amp;title=Unknown+error
+</a></p>
+</td>
       </tr>
     </tbody>
   </thead></thead></table>
+  <h5 id="Apod_ApodErrorCode_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Apod.ApodError.html">ApodError</a></div>
+      <div><a class="xref" href="Apod.ApodStatusCode.html">ApodStatusCode</a></div>
+  </div>
 </article>
           </div>
           
@@ -145,10 +196,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodErrorCode.md&amp;value=---%0Auid%3A%20Apod.ApodErrorCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodErrorCode.md&amp;value=---%0Auid%3A%20Apod.ApodErrorCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/Entities/ApodErrorCode.cs/#L3" class="contribution-link">View Source</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/Entities/ApodErrorCode.cs/#L34" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

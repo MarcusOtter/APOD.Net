@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Override the IErrorHandler </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Override the IErrorHandler ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="override-the-ierrorhandler">Override the IErrorHandler</h1>
+
+<p>This example shows how to override the <a class="xref" href="../api/Apod.Logic.Errors.IErrorHandler.html">IErrorHandler</a> in the <a class="xref" href="../api/Apod.ApodClient.html">ApodClient</a> for your needs. You can use this guide as a reference for overloading any other interface in the library. Intermediate knowledge in C# is assumed.</p>
+<p>The project targets .NET Core 3.0 but will work with any platform version that <a href="https://docs.microsoft.com/en-us/dotnet/standard/net-standard">supports .NET Standard 2.0</a> (small changes may be required for different target frameworks).</p>
+<h2 id="creating-the-project">Creating the project</h2>
+<p>Start by creating a .NET Core (or .NET framework) Console App.
+Read <a href="https://docs.microsoft.com/en-us/visualstudio/ide/quickstart-csharp-console?view=vs-2019">this quickstart guide</a> if you are unsure how to do this.</p>
+<h2 id="installing-apodnet">Installing APOD.Net</h2>
+<p>There are multiple ways of installing a NuGet package.
+See <a href="https://github.com/LeMorrow/APOD.Net#-adding-apodnet-to-your-project">Adding APOD.Net to your project</a> in the README for other examples.</p>
+<ol>
+<li>Open your new project in Visual Studio and open the Package Manager Console (<code>Tools</code> &gt; <code>NuGet Package Manager</code> &gt; <code>Package Manager Console</code>).</li>
+<li>In the Package Manager Console window, write the following command to add the latest version of APOD.Net to your project.
+<pre><code class="lang-powershell">Install-Package APOD.Net
+</code></pre>
+</li>
+</ol>
+<br>
+<p>Once the install finishes you are ready to start using APOD.Net.</p>
+<h2 id="implementation">Implementation</h2>
+<h3 id="setup">Setup</h3>
+<p>To get started with APOD.Net and to verify the installation, add the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">using directive</a> for the <code>Apod</code> namespace in your <code>Program.cs</code>.</p>
+<pre><code class="lang-cs">using Apod;
+</code></pre>
+<p>If you get errors, run <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore"><code>dotnet restore</code></a>, restart visual studio and try again. If it still doesn't work, feel free to <a href="https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=bug_report.md">open an issue</a>.</p>
+<br>
+<p>Since APOD.Net is an asynchronous library we are going to make our <code>Main()</code> method asynchronous, which is a language feature from C# 7.1. If you don't have access to C# 7.1, read <a href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7-1#async-main">this article</a> for workarounds.</p>
+<pre><code class="lang-cs">using System;
+using System.Threading.Tasks;
+using Apod;
+
+namespace Example
+{
+    public class Program
+    {
+        public static async Task Main()
+        {
+            Console.WriteLine(&quot;Hello World!&quot;);
+        }
+    }
+}
+</code></pre>
+<p>Note that we added another using directive for <code>System.Threading.Tasks</code>.</p>
+<br>
+<h3 id="creating-the-custom-ierrorhandler">Creating the custom IErrorHandler</h3>
+<p>To override the <a class="xref" href="../api/Apod.Logic.Errors.IErrorHandler.html">IErrorHandler</a> in the <a class="xref" href="../api/Apod.ApodClient.html">ApodClient</a>, we'll create a new class that implements <a class="xref" href="../api/Apod.Logic.Errors.IErrorHandler.html">IErrorHandler</a>. In Visual Studio, add a new class (<code>Project</code> &gt; <code>Add Class...</code>) and name it something suitable for your use case. We'll go with <code>CustomErrorHandler.cs</code> for this example.</p>
+<p>First off, add the using directive for <code>Apod.Logic.Errors</code>.</p>
+<pre><code class="lang-cs">using Apod.Logic.Errors;
+</code></pre>
+<br>
+<p>Next, imlpement <a class="xref" href="../api/Apod.Logic.Errors.IErrorHandler.html">IErrorHandler</a> (which should add the following code for you).</p>
+<pre><code class="lang-cs">using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Apod;
+using Apod.Logic.Errors;
+
+namespace Example
+{
+    public class CustomErrorHandler : IErrorHandler
+    {
+        public ApodError ValidateCount(int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApodError ValidateDate(DateTime dateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApodError ValidateDateRange(DateTime startDate, DateTime endDate = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask&lt;ApodError&gt; ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+</code></pre>
+<br>
+<p>Now we can start writing our custom behaviour for the methods. It's very useful to use the <a href="https://github.com/LeMorrow/APOD.Net/blob/master/src/Apod/Logic/Errors/ErrorHandler.cs">source code of the default implementation</a> of <a class="xref" href="../api/Apod.Logic.Errors.IErrorHandler.html">IErrorHandler</a> as a reference if you're not sure about what a method is supposed to do. It can also be useful to look how the <a class="xref" href="../api/Apod.Logic.Errors.IErrorHandler.html">IErrorHandler</a> is used in the <a href="https://github.com/LeMorrow/APOD.Net/blob/master/src/Apod/ApodClient.cs">source code of the ApodClient</a>.</p>
+<p>For this example, let's say we need <code>ValidateCount</code> to depend on the current day of the month. The users can only get 5 or less APODs on the 5th, 14 or less APODs on the 14th, and so on.</p>
+<pre><code class="lang-cs">public ApodError ValidateCount(int count)
+{
+    var today = DateTime.Today;
+    var countIsValid = today.Day &lt;= count;
+
+    if (countIsValid) 
+    {
+        return new ApodError(ApodErrorCode.None);
+    }
+
+    if (DateTime.DaysInMonth(today.Year, today.Month) &lt; count)
+    {
+        return new ApodError(ApodErrorCode.CountOutOfRange, 
+            $&quot;There aren't {count} days in {today.ToString(&quot;MMMM&quot;)}&quot;);
+    }
+
+    return new ApodError(ApodErrorCode.CountOutOfRange, 
+        $&quot;You have to wait until the {count} {today.ToString(&quot;MMMM&quot;)} to get that many APODs.&quot;);
+}
+</code></pre>
+<br>
+<p>Next, we'll implement <code>ValidateHttpResponseAsync</code>. For this example, we don't care which type of error it was, if any. We just want to know if there was an error or not, which we can do synchronously.</p>
+<pre><code class="lang-cs">public ValueTask&lt;ApodError&gt; ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
+{
+    if (httpResponse.IsSuccessStatusCode) 
+    {
+        var noError = new ApodError(ApodErrorCode.None);
+        return new ValueTask&lt;ApodError&gt;(noError);
+    }
+
+    var error = new ApodError(ApodErrorCode.BadRequest, &quot;An error occured.&quot;);
+    return new ValueTask&lt;ApodError&gt;(error);
+}
+</code></pre>
+<br>
+<p>We'll assume <code>ValidateDate()</code> and <code>ValidateDateRange()</code> are never going to be called and leave them as is.</p>
+<p><code>CustomErrorHandler.cs</code> result:</p>
+<pre><code class="lang-cs">using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Apod;
+using Apod.Logic.Errors;
+
+namespace Example
+{
+    public class CustomErrorHandler : IErrorHandler
+    {
+        public ApodError ValidateCount(int count)
+        {
+            var today = DateTime.Today;
+            var countIsValid = count &lt;= today.Day;
+
+            if (countIsValid) 
+            {
+                return new ApodError(ApodErrorCode.None);
+            }
+
+            if (DateTime.DaysInMonth(today.Year, today.Month) &lt; count)
+            {
+                return new ApodError(ApodErrorCode.CountOutOfRange, 
+                    $&quot;There aren't {count} days in {today.ToString(&quot;MMMM&quot;)}.&quot;);
+            }
+
+            return new ApodError(ApodErrorCode.CountOutOfRange, 
+                $&quot;You have to wait until {today.ToString(&quot;MMMM&quot;)} {count} to get that many APODs.&quot;);
+        }
+
+        public ApodError ValidateDate(DateTime dateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApodError ValidateDateRange(DateTime startDate, DateTime endDate = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask&lt;ApodError&gt; ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
+        {
+            if (httpResponse.IsSuccessStatusCode) 
+            {
+                var noError = new ApodError(ApodErrorCode.None);
+                return new ValueTask&lt;ApodError&gt;(noError);
+            }
+
+            var error = new ApodError(ApodErrorCode.BadRequest, &quot;An error occured.&quot;);
+            return new ValueTask&lt;ApodError&gt;(error);
+        }
+    }
+}
+</code></pre>
+<br>
+<h3 id="using-our-custom-error-handler">Using our custom error handler</h3>
+<p>Overriding the error handler in the client is easy. Back in our <code>Program.cs</code>, we create a new instance of our <code>CustomErrorHandler</code> and then inject it with the <a class="xref" href="../api/Apod.ApodClient.html#Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_">ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler)</a> constructor.</p>
+<pre><code class="lang-cs">public static async Task Main()
+{
+    var errorHandler = new CustomErrorHandler();
+    using var client = new ApodClient(&quot;DEMO_KEY&quot;, errorHandler: errorHandler);
+}
+</code></pre>
+<p>The client will now use our custom IErrorHandler to validate the requests.</p>
+<br>
+<h2 id="full-example-code">Full example code</h2>
+<p>Below is an example project that uses the <code>CustomErrorHandler</code>. We won't go into detail how it's built, but it's similar to a very simplified version of <a href="download.html">Download all APODs between two dates</a>.</p>
+<pre><code class="lang-cs">// Program.cs
+using System;
+using System.Threading.Tasks;
+using Apod;
+
+namespace Example
+{
+    public class Program
+    {
+        public static async Task Main()
+        {
+            var errorHandler = new CustomErrorHandler();
+            using var client = new ApodClient(&quot;DEMO_KEY&quot;, errorHandler: errorHandler);
+
+            var amount = GetValidInt(&quot;How many astronomy pictures would you like?&quot;);
+            var response = await client.FetchApodAsync(amount);
+
+            if (response.StatusCode != ApodStatusCode.OK)
+            {
+                Console.WriteLine(response.Error.ErrorMessage);
+                return;
+            }
+
+            foreach (var apod in response.AllContent)
+            {
+                Console.WriteLine(apod.ContentUrl);
+            }
+        }
+
+        private static int GetValidInt(string prompt)
+        {
+            Console.WriteLine(prompt);
+
+            int result;
+            while (!int.TryParse(Console.ReadLine(), out result))
+            {
+                Console.WriteLine(&quot;That is not a valid integer. Try again.&quot;);
+            }
+
+            return result;
+        }
+    }
+}
+</code></pre>
+<pre><code class="lang-cs">// CustomErrorHandler.cs
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Apod;
+using Apod.Logic.Errors;
+
+namespace Example
+{
+    public class CustomErrorHandler : IErrorHandler
+    {
+        public ApodError ValidateCount(int count)
+        {
+            var today = DateTime.Today;
+            var countIsValid = count &lt;= today.Day;
+
+            if (countIsValid) 
+            {
+                return new ApodError(ApodErrorCode.None);
+            }
+
+            if (DateTime.DaysInMonth(today.Year, today.Month) &lt; count)
+            {
+                return new ApodError(ApodErrorCode.CountOutOfRange, 
+                    $&quot;There aren't {count} days in {today.ToString(&quot;MMMM&quot;)}.&quot;);
+            }
+
+            return new ApodError(ApodErrorCode.CountOutOfRange,
+                $&quot;You have to wait until {today.ToString(&quot;MMMM&quot;)} {count} to get that many APODs.&quot;);
+        }
+
+        public ApodError ValidateDate(DateTime dateTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApodError ValidateDateRange(DateTime startDate, DateTime endDate = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueTask&lt;ApodError&gt; ValidateHttpResponseAsync(HttpResponseMessage httpResponse)
+        {
+            if (httpResponse.IsSuccessStatusCode) 
+            {
+                var noError = new ApodError(ApodErrorCode.None);
+                return new ValueTask&lt;ApodError&gt;(noError);
+            }
+
+            var error = new ApodError(ApodErrorCode.BadRequest, &quot;An error occured.&quot;);
+            return new ValueTask&lt;ApodError&gt;(error);
+        }
+    }
+}
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/docs/examples/errorhandler.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

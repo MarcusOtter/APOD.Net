@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Download all APODs between two dates </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Download all APODs between two dates ">
+    <meta name="generator" content="docfx 2.47.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="download-all-apods-between-two-dates">Download all APODs between two dates</h1>
+
+<p>This example shows how to download all APOD images between two dates to a folder on your computer. Intermediate knowledge in C# is assumed.</p>
+<p>The project targets .NET Core 3.0 but will work with any platform version that <a href="https://docs.microsoft.com/en-us/dotnet/standard/net-standard">supports .NET Standard 2.0</a> (small changes may be required for different target frameworks).</p>
+<h2 id="creating-the-project">Creating the project</h2>
+<p>Start by creating a .NET Core (or .NET framework) Console App.
+Read <a href="https://docs.microsoft.com/en-us/visualstudio/ide/quickstart-csharp-console?view=vs-2019">this quickstart guide</a> if you are unsure how to do this.</p>
+<h2 id="installing-apodnet">Installing APOD.Net</h2>
+<p>There are multiple ways of installing a NuGet package.
+See <a href="https://github.com/LeMorrow/APOD.Net#-adding-apodnet-to-your-project">Adding APOD.Net to your project</a> in the README for other examples.</p>
+<ol>
+<li>Open your new project in Visual Studio and open the Package Manager Console (<code>Tools</code> &gt; <code>NuGet Package Manager</code> &gt; <code>Package Manager Console</code>).</li>
+<li>In the Package Manager Console window, write the following command to add the latest version of APOD.Net to your project.
+<pre><code class="lang-powershell">Install-Package APOD.Net
+</code></pre>
+</li>
+</ol>
+<br>
+<p>Once the install finishes you are ready to start using APOD.Net.</p>
+<h2 id="implementation">Implementation</h2>
+<h3 id="setup">Setup</h3>
+<p>To get started with APOD.Net and to verify the installation, add the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">using directive</a> for the <code>Apod</code> namespace in your <code>Program.cs</code>.</p>
+<pre><code class="lang-cs">using Apod;
+</code></pre>
+<p>If you get errors, run <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-restore"><code>dotnet restore</code></a>, restart visual studio and try again. If it still doesn't work, feel free to <a href="https://github.com/LeMorrow/APOD.Net/issues/new?assignees=LeMorrow&amp;labels=bug&amp;template=bug_report.md">open an issue</a>.</p>
+<br>
+<p>Since APOD.Net is an asynchronous library we are going to make our <code>Main()</code> method asynchronous, which is a language feature from C# 7.1. If you don't have access to C# 7.1, read <a href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7-1#async-main">this article</a> for workarounds.</p>
+<pre><code class="lang-cs">using System;
+using System.Threading.Tasks;
+using Apod;
+
+namespace Example
+{
+    public class Program
+    {
+        public static async Task Main()
+        {
+            Console.WriteLine(&quot;Hello World!&quot;);
+        }
+    }
+}
+</code></pre>
+<p>Note that we added another using directive for <code>System.Threading.Tasks</code>.</p>
+<br>
+<h3 id="downloading-the-image">Downloading the image</h3>
+<p>APOD.Net version 1.0 does not provide a method to download the images directly. This will likely be included in version 2.0, but for now we'll have to use our own <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0">System.Net.HttpClient</a> to download the image. If you would like this feature on the <a class="xref" href="../api/Apod.ApodClient.html">ApodClient</a> you can make your voice heard and track the progress in <a href="https://github.com/LeMorrow/APOD.Net/issues/37">issue #37</a>.</p>
+<p>We'll create a helper method <code>DownloadImageToFileAsync()</code> that will use an <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0"><code>HttpClient</code></a> to download an image from a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.uri?view=netstandard-2.0"><code>Uri</code></a> and then write the bytes to a file path.</p>
+<p>Read <a href="https://stackoverflow.com/questions/24797485/how-to-download-image-from-url/59167167#59167167">my post on stackoverflow</a> if you want a breakdown of this method.</p>
+<pre><code class="lang-cs">private static async Task DownloadImageToFileAsync(Uri imageUri, string directoryPath,
+                                                   string fileName, HttpClient httpClient)
+{
+    // Get the file extension
+    var uriWithoutQuery = imageUri.GetLeftPart(UriPartial.Path);
+    var fileExtension = Path.GetExtension(uriWithoutQuery);
+
+    // Create file path and ensure directory exists
+    var path = Path.Combine(directoryPath, $&quot;{fileName}{fileExtension}&quot;);
+    Directory.CreateDirectory(directoryPath);
+
+    // Download the image and write to the file
+    var imageBytes = await httpClient.GetByteArrayAsync(imageUri);
+    await File.WriteAllBytesAsync(path, imageBytes);
+}
+</code></pre>
+<p>Note that we need to add the <code>System.Net.Http</code> namespace to use an <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0"><code>HttpClient</code></a> and the <code>System.IO</code> namespace to use the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=netstandard-2.0"><code>File</code></a> class.</p>
+<pre><code class="lang-cs">using System.Net.Http;
+using System.IO;
+</code></pre>
+<br>
+<h3 id="getting-user-input">Getting user input</h3>
+<p>We want the user to specify the dates for the APODs. We'll write another helper method <code>GetValidDate()</code> that parses user input until they give a valid date and then returns that as a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.datetime?view=netstandard-2.0"><code>DateTime</code></a>.</p>
+<pre><code class="lang-cs">private static DateTime GetValidDate(string prompt)
+{
+    Console.WriteLine(prompt);
+
+    DateTime date;
+    while (!DateTime.TryParse(Console.ReadLine(), out date))
+    {
+        Console.WriteLine(&quot;That is not a valid date. Try again.&quot;);
+    }
+
+    return date;
+}
+</code></pre>
+<br>
+<h3 id="putting-it-all-together">Putting it all together</h3>
+<h4 id="creating-the-clients">Creating the clients</h4>
+<p>We start by creating a new instance of a <a href="https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0">System.Net.HttpClient</a> as well as an <a class="xref" href="../api/Apod.ApodClient.html">ApodClient</a>.</p>
+<pre><code class="lang-cs">public static async Task Main()
+{
+    using var apodClient = new ApodClient();
+    using var httpClient = new HttpClient();
+}
+</code></pre>
+<br>
+<h4 id="making-the-request">Making the request</h4>
+<p>Then we prompt the users to input two dates using our helper method <code>GetValidDate()</code> and fetch the APODs between these two dates with &lt;xref:Apod.ApodClient.FetchApodAsync(System.DateTime,System.DateTime)&gt;.</p>
+<pre><code class="lang-cs"> public static async Task Main()
+{
+    using var apodClient = new ApodClient();
+    using var httpClient = new HttpClient();
+
+    var startDate = GetValidDate(&quot;Enter a date between 1995-06-16 and today's date in an yyyy-MM-dd format.&quot;);
+    var endDate = GetValidDate(&quot;Enter another date between the first date and today's date in an yyyy-MM-dd format.&quot;);
+
+    Console.WriteLine(&quot;Fetching APOD data..&quot;);
+    var response = await apodClient.FetchApodAsync(startDate, endDate);
+}
+</code></pre>
+<br>
+<h4 id="error-handling">Error handling</h4>
+<p>Now we need to make sure that there were no errors with the request, which we can do with the <a class="xref" href="../api/Apod.ApodResponse.html#Apod_ApodResponse_StatusCode">StatusCode</a>. If an error did occur, we want to write it to the console.</p>
+<pre><code class="lang-cs">public static async Task Main()
+{
+    using var apodClient = new ApodClient();
+    using var httpClient = new HttpClient();
+
+    var startDate = GetValidDate(&quot;Enter a date between 1995-06-16 and today's date in an yyyy-MM-dd format.&quot;);
+    var endDate = GetValidDate(&quot;Enter another date between the first date and today's date in an yyyy-MM-dd format.&quot;);
+
+    Console.WriteLine(&quot;Fetching APOD data..&quot;);
+    var response = await apodClient.FetchApodAsync(startDate, endDate);
+
+    if (response.StatusCode != ApodStatusCode.OK)
+    {
+        Console.WriteLine(response.Error.ErrorCode);
+        Console.WriteLine(response.Error.ErrorMessage);
+        return;
+    }
+}
+</code></pre>
+<br>
+<h4 id="downloading-the-images">Downloading the images</h4>
+<p>Lastly, we want to loop over every Astronomy Picture of the Day in <a class="xref" href="../api/Apod.ApodResponse.html#Apod_ApodResponse_AllContent">AllContent</a> and download the image with our helper method <code>DownloadImageToFileAsync()</code>. We also need to make sure that the content is actually an image, otherwise we cannot download it.</p>
+<pre><code class="lang-cs">public static async Task Main()
+{
+    using var apodClient = new ApodClient();
+    using var httpClient = new HttpClient();
+
+    var startDate = GetValidDate(&quot;Enter a date between 1995-06-16 and today's date in an yyyy-MM-dd format.&quot;);
+    var endDate = GetValidDate(&quot;Enter another date between the first date and today's date in an yyyy-MM-dd format.&quot;);
+
+    Console.WriteLine(&quot;Fetching APOD data..&quot;);
+    var response = await apodClient.FetchApodAsync(startDate, endDate);
+
+    if (response.StatusCode != ApodStatusCode.OK)
+    {
+        Console.WriteLine(response.Error.ErrorCode);
+        Console.WriteLine(response.Error.ErrorMessage);
+        return;
+    }
+
+    foreach (var apod in response.AllContent)
+    {
+        if (apod.MediaType != MediaType.Image) { continue; }
+
+        var uri = new Uri(apod.ContentUrl);
+        var directoryPath = @&quot;images/&quot;;
+        var fileName = apod.Date.ToString(&quot;yyyy-MM-dd&quot;);
+        Console.WriteLine($&quot;Downloading image for {fileName}&quot;);
+        await DownloadImageToFileAsync(uri, directoryPath, fileName, httpClient);
+    }
+
+    Console.WriteLine(&quot;Download complete!&quot;);
+}
+</code></pre>
+<br>
+<p>And we're done!
+The application asks the user for input and downloads APOD images between the two dates. If the <a class="xref" href="../api/Apod.ApodContent.html#Apod_ApodContent_MediaType">MediaType</a> is not <a class="xref" href="../api/Apod.MediaType.html#Apod_MediaType_Image">Image</a>, the content is not downloaded.</p>
+<p>With the current values of <code>directoryPath</code> and <code>fileName</code>, it will place the images in <code>projectFolder\bin\Debug\netcoreapp3.0\images</code> (assuming the program is running in <code>Debug</code> mode) and name them in the format <code>yyyy-MM-dd.ext</code> where <code>.ext</code> is the extension found in the URI of the image (<a class="xref" href="../api/Apod.ApodContent.html#Apod_ApodContent_ContentUrl">ContentUrl</a>).</p>
+<p><strong>Example output</strong>
+<img src="../images/download-example.png" alt="Screenshot of application running and downloaded images">
+Note: The application skips 2019-10-01 because the content is a youtube video <a href="https://apod.nasa.gov/apod/ap191001.html">as you can see here</a>.</p>
+<br>
+<h2 id="full-example-code">Full example code</h2>
+<pre><code class="lang-cs">using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.IO;
+using Apod;
+
+namespace today
+{
+    public class Program
+    {
+        public static async Task Main()
+        {
+            using var apodClient = new ApodClient();
+            using var httpClient = new HttpClient();
+
+            var startDate = GetValidDate(&quot;Enter a date between 1995-06-16 and today's date in an yyyy-MM-dd format.&quot;);
+            var endDate = GetValidDate(&quot;Enter another date between the first date and today's date in an yyyy-MM-dd format.&quot;);
+
+            Console.WriteLine(&quot;Fetching APOD data..&quot;);
+            var response = await apodClient.FetchApodAsync(startDate, endDate);
+
+            if (response.StatusCode != ApodStatusCode.OK)
+            {
+                Console.WriteLine(response.Error.ErrorCode);
+                Console.WriteLine(response.Error.ErrorMessage);
+                return;
+            }
+
+            foreach (var apod in response.AllContent)
+            {
+                if (apod.MediaType != MediaType.Image) { continue; }
+
+                var uri = new Uri(apod.ContentUrl);
+                var directoryPath = @&quot;images/&quot;;
+                var fileName = apod.Date.ToString(&quot;yyyy-MM-dd&quot;);
+                Console.WriteLine($&quot;Downloading image for {fileName}&quot;);
+                await DownloadImageToFileAsync(uri, directoryPath, fileName, httpClient);
+            }
+
+            Console.WriteLine(&quot;Download complete!&quot;);
+        }
+
+        private static async Task DownloadImageToFileAsync(Uri imageUri, string directoryPath, string fileName, HttpClient httpClient)
+        {
+            // Get the file extension
+            var uriWithoutQuery = imageUri.GetLeftPart(UriPartial.Path);
+            var fileExtension = Path.GetExtension(uriWithoutQuery);
+
+            // Create file path and ensure directory exists
+            var path = Path.Combine(directoryPath, $&quot;{fileName}{fileExtension}&quot;);
+            Directory.CreateDirectory(directoryPath);
+
+            // Download the image and write to the file
+            var imageBytes = await httpClient.GetByteArrayAsync(imageUri);
+            await File.WriteAllBytesAsync(path, imageBytes);
+        }
+
+        private static DateTime GetValidDate(string prompt)
+        {
+            Console.WriteLine(prompt);
+
+            DateTime date;
+            while (!DateTime.TryParse(Console.ReadLine(), out date))
+            {
+                Console.WriteLine(&quot;That is not a valid date. Try again.&quot;);
+            }
+
+            return date;
+        }
+    }
+}
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/docs/examples/download.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

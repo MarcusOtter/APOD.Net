@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace Apod
+    <title>Enum MediaType
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace Apod
+    <meta name="title" content="Enum MediaType
    ">
     <meta name="generator" content="docfx 2.47.0.0">
     
@@ -68,43 +68,58 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Apod">
+            <article class="content wrap" id="_content" data-uid="Apod.MediaType">
   
-  <h1 id="Apod" data-uid="Apod" class="text-break">Namespace Apod
+  
+  <h1 id="Apod_MediaType" data-uid="Apod.MediaType" class="text-break">Enum MediaType
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Information about an <a class="xref" href="Apod.ApodContent.html">ApodContent</a>'s type of media.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
+  <h6><strong>Namespace</strong>: <a class="xref" href="Apod.html">Apod</a></h6>
+  <h6><strong>Assembly</strong>: Apod.dll</h6>
+  <h5 id="Apod_MediaType_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum MediaType : int</code></pre>
+  </div>
+  <h5 id="Apod_MediaType_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+There is currently only one date which does not have media content of type
+<a class="xref" href="Apod.MediaType.html#Apod_MediaType_Image">Image</a> or <a class="xref" href="Apod.MediaType.html#Apod_MediaType_Video">Video</a>.
+</p>
+<p>
+When one tries to fetch the data for the Astronomy Picture of the Day for 2018-10-07
+through the API, it returns an &quot;Internal Service Error&quot;. 
+This is because they decided to have interactive flash content that day, which wasn&apos;t supported by the API.
+This may become supported by this library in a later version.
+</p>
+</div>
+  <h3 id="fields">Fields
   </h3>
-      <h4><a class="xref" href="Apod.ApodClient.html">ApodClient</a></h4>
-      <section><p>A client for interfacing with NASA's Astronomy Picture of the Day API.</p>
-</section>
-      <h4><a class="xref" href="Apod.ApodContent.html">ApodContent</a></h4>
-      <section><p>Contains information about the digital content of an Astronomy Picture of the Day.</p>
-</section>
-      <h4><a class="xref" href="Apod.ApodError.html">ApodError</a></h4>
-      <section><p>Contains information about errors that occured in the request.</p>
-</section>
-      <h4><a class="xref" href="Apod.ApodResponse.html">ApodResponse</a></h4>
-      <section><p>Contains information about the response from a request to the API.</p>
-</section>
-    <h3 id="interfaces">Interfaces
-  </h3>
-      <h4><a class="xref" href="Apod.IApodClient.html">IApodClient</a></h4>
-      <section><p>An interface for a client that interfaces with NASA's Astronomy Picture of the Day API.</p>
-</section>
-    <h3 id="enums">Enums
-  </h3>
-      <h4><a class="xref" href="Apod.ApodErrorCode.html">ApodErrorCode</a></h4>
-      <section><p>The error code of an <a class="xref" href="Apod.ApodError.html">ApodError</a>.</p>
-</section>
-      <h4><a class="xref" href="Apod.ApodStatusCode.html">ApodStatusCode</a></h4>
-      <section><p>The status code of an <a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>.</p>
-</section>
-      <h4><a class="xref" href="Apod.MediaType.html">MediaType</a></h4>
-      <section><p>Information about an <a class="xref" href="Apod.ApodContent.html">ApodContent</a>'s type of media.</p>
-</section>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    <thead>
+    <tbody>
+      <tr>
+        <td id="Apod_MediaType_Image">Image</td>
+        <td><p>The content is a static image.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Apod_MediaType_Video">Video</td>
+        <td><p>The content is a video, typically hosted on youtube or vimeo.</p>
+</td>
+      </tr>
+    </tbody>
+  </thead></thead></table>
+  <h5 id="Apod_MediaType_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Apod.ApodContent.html">ApodContent</a></div>
+  </div>
 </article>
           </div>
           
@@ -112,6 +127,12 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_MediaType.md&amp;value=---%0Auid%3A%20Apod.MediaType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/Logic/Net/Dtos/MediaType.cs/#L19" class="contribution-link">View Source</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

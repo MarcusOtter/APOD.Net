@@ -73,7 +73,8 @@
   
   <h1 id="Apod_ApodStatusCode" data-uid="Apod.ApodStatusCode" class="text-break">Enum ApodStatusCode
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>The status code of an <a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apod.html">Apod</a></h6>
   <h6><strong>Assembly</strong>: Apod.dll</h6>
@@ -81,6 +82,16 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public enum ApodStatusCode : int</code></pre>
   </div>
+  <h5 id="Apod_ApodStatusCode_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Not to be confused with <a class="xref" href="Apod.ApodErrorCode.html">ApodErrorCode</a>.</p>
+</div>
+  <h5 id="Apod_ApodStatusCode_examples"><strong>Examples</strong></h5>
+  <pre><code class="lang-csharp">if (response.StatusCode != ApodStatusCode.OK)
+{
+    // handle errors
+    return;
+}</code></pre>
+
   <h3 id="fields">Fields
   </h3>
   <table class="table table-bordered table-striped table-condensed">
@@ -93,14 +104,23 @@
     <tbody>
       <tr>
         <td id="Apod_ApodStatusCode_Error">Error</td>
-        <td></td>
+        <td><p>The response does not contain any APODs.
+See the <a class="xref" href="Apod.ApodResponse.html#Apod_ApodResponse_Error">Error</a> of the <a class="xref" href="Apod.ApodResponse.html">ApodResponse</a> for more information about the error.</p>
+</td>
       </tr>
       <tr>
         <td id="Apod_ApodStatusCode_OK">OK</td>
-        <td></td>
+        <td><p>The response contains at least one Astronomy Picture of the Day.</p>
+</td>
       </tr>
     </tbody>
   </thead></thead></table>
+  <h5 id="Apod_ApodStatusCode_seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="Apod.ApodResponse.html">ApodResponse</a></div>
+      <div><a class="xref" href="Apod.ApodError.html">ApodError</a></div>
+      <div><a class="xref" href="Apod.ApodErrorCode.html">ApodErrorCode</a></div>
+  </div>
 </article>
           </div>
           
@@ -109,10 +129,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodStatusCode.md&amp;value=---%0Auid%3A%20Apod.ApodStatusCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodStatusCode.md&amp;value=---%0Auid%3A%20Apod.ApodStatusCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/Entities/ApodStatusCode.cs/#L3" class="contribution-link">View Source</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/Entities/ApodStatusCode.cs/#L21" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

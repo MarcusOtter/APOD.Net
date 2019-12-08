@@ -5,11 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace Apod
-   </title>
+    <title>Before you start </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace Apod
-   ">
+    <meta name="title" content="Before you start ">
     <meta name="generator" content="docfx 2.47.0.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
@@ -68,43 +66,25 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Apod">
-  
-  <h1 id="Apod" data-uid="Apod" class="text-break">Namespace Apod
-  </h1>
-  <div class="markdown level0 summary"></div>
-  <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
-  </h3>
-      <h4><a class="xref" href="Apod.ApodClient.html">ApodClient</a></h4>
-      <section><p>A client for interfacing with NASA's Astronomy Picture of the Day API.</p>
-</section>
-      <h4><a class="xref" href="Apod.ApodContent.html">ApodContent</a></h4>
-      <section><p>Contains information about the digital content of an Astronomy Picture of the Day.</p>
-</section>
-      <h4><a class="xref" href="Apod.ApodError.html">ApodError</a></h4>
-      <section><p>Contains information about errors that occured in the request.</p>
-</section>
-      <h4><a class="xref" href="Apod.ApodResponse.html">ApodResponse</a></h4>
-      <section><p>Contains information about the response from a request to the API.</p>
-</section>
-    <h3 id="interfaces">Interfaces
-  </h3>
-      <h4><a class="xref" href="Apod.IApodClient.html">IApodClient</a></h4>
-      <section><p>An interface for a client that interfaces with NASA's Astronomy Picture of the Day API.</p>
-</section>
-    <h3 id="enums">Enums
-  </h3>
-      <h4><a class="xref" href="Apod.ApodErrorCode.html">ApodErrorCode</a></h4>
-      <section><p>The error code of an <a class="xref" href="Apod.ApodError.html">ApodError</a>.</p>
-</section>
-      <h4><a class="xref" href="Apod.ApodStatusCode.html">ApodStatusCode</a></h4>
-      <section><p>The status code of an <a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>.</p>
-</section>
-      <h4><a class="xref" href="Apod.MediaType.html">MediaType</a></h4>
-      <section><p>Information about an <a class="xref" href="Apod.ApodContent.html">ApodContent</a>'s type of media.</p>
-</section>
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="before-you-start">Before you start</h1>
+
+<p>Some important information before getting started with the examples.</p>
+<h2 id="using-an-api-key">Using an API key</h2>
+<p>To make the examples as straightforward as possible, the <a class="xref" href="../api/Apod.ApodClient.html">ApodClient</a> is initialized with a string literal as an API key.</p>
+<pre><code class="lang-cs">var client = new ApodClient(&quot;YOUR_API_KEY_HERE&quot;);
+</code></pre>
+<p>You <strong>should not</strong> include the API key as a string literal in your source code. There are many better ways, a few examples listed below. Remember to add all files with sensitive data to your <code>.gitignore</code>.</p>
+<ul>
+<li>Write an App.config file and use the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.configuration.configurationmanager.appsettings?viewFallbackFrom=netstandard-2.0">ConfigurationManager.AppSettings property</a></li>
+<li>Read from a custom file containing the API key with the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.io.file.readalltext?view=netstandard-2.0#System_IO_File_ReadAllText_System_String_">System.IO.File.ReadAllText method</a></li>
+<li>Set up an environment variable and use <a href="https://docs.microsoft.com/en-us/dotnet/api/system.environment.getenvironmentvariable?view=netstandard-2.0">Environment.GetEnvironmentVariable</a></li>
+<li>Pass your API key as a command line argument and access it with the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/main-and-command-args/command-line-arguments">string[] args</a> in your <code>Main</code> method</li>
+</ul>
+<h2 id="disposing-the-client">Disposing the client</h2>
+<p>There are many different ways of disposing objects in C#. To keep a consistent style in the examples, the alternative syntax for the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement">using statement</a> (demonstrated below) will be used, which was introduced with C# 8. If you do not have access to C# 8, refer to the chapter &quot;<a href="https://github.com/LeMorrow/APOD.Net#disposing-the-client">Disposing the client</a>&quot; in the README for more examples on how to accomplish the same functionality.</p>
+<pre><code class="lang-cs">using var client = new ApodClient();
+</code></pre>
 </article>
           </div>
           
@@ -112,6 +92,9 @@
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
+                  <li>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/docs/examples/info.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">

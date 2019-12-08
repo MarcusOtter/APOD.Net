@@ -73,7 +73,8 @@
   
   <h1 id="Apod_IApodClient" data-uid="Apod.IApodClient" class="text-break">Interface IApodClient
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>An interface for a client that interfaces with NASA's Astronomy Picture of the Day API.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Apod.html">Apod</a></h6>
   <h6><strong>Assembly</strong>: Apod.dll</h6>
@@ -81,23 +82,29 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public interface IApodClient</code></pre>
   </div>
+  <h5 id="Apod_IApodClient_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>See <a class="xref" href="Apod.ApodClient.html">ApodClient</a> for the default implementation.</p>
+<p>
+NASA&apos;s Astronomy Picture of the Day API can be found at <a href="https://api.nasa.gov#apod">https://api.nasa.gov#apod</a>.
+</p>
+</div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_IApodClient_FetchApodAsync.md&amp;value=---%0Auid%3A%20Apod.IApodClient.FetchApodAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_IApodClient_FetchApodAsync.md&amp;value=---%0Auid%3A%20Apod.IApodClient.FetchApodAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/IApodClient.cs/#L9">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/IApodClient.cs/#L21">View Source</a>
   </span>
   <a id="Apod_IApodClient_FetchApodAsync_" data-uid="Apod.IApodClient.FetchApodAsync*"></a>
   <h4 id="Apod_IApodClient_FetchApodAsync" data-uid="Apod.IApodClient.FetchApodAsync">FetchApodAsync()</h4>
-  <div class="markdown level1 summary"><p>Fetch the current Astronomy Picture of the Day.</p>
+  <div class="markdown level1 summary"><p>Fetch the Astronomy Picture of the Day for today's date.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;ApodResponse&gt; FetchApodAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">ValueTask&lt;ApodResponse&gt; FetchApodAsync()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -109,17 +116,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
+        <td><span class="xref">ValueTask</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_IApodClient_FetchApodAsync_DateTime_.md&amp;value=---%0Auid%3A%20Apod.IApodClient.FetchApodAsync(DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_IApodClient_FetchApodAsync_DateTime_.md&amp;value=---%0Auid%3A%20Apod.IApodClient.FetchApodAsync(DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/IApodClient.cs/#L13">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/IApodClient.cs/#L27">View Source</a>
   </span>
   <a id="Apod_IApodClient_FetchApodAsync_" data-uid="Apod.IApodClient.FetchApodAsync*"></a>
   <h4 id="Apod_IApodClient_FetchApodAsync_DateTime_" data-uid="Apod.IApodClient.FetchApodAsync(DateTime)">FetchApodAsync(DateTime)</h4>
@@ -128,7 +135,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;ApodResponse&gt; FetchApodAsync(DateTime dateTime)</code></pre>
+    <pre><code class="lang-csharp hljs">ValueTask&lt;ApodResponse&gt; FetchApodAsync(DateTime dateTime)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -143,7 +150,7 @@
       <tr>
         <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">dateTime</span></td>
-        <td><p>The date to request the APOD for. Must be between June 16th 1995 and today's date.</p>
+        <td><p>The date to request the APOD for. Must be between June 16th 1995 and today's date (inclusive).</p>
 </td>
       </tr>
     </tbody>
@@ -158,26 +165,26 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
+        <td><span class="xref">ValueTask</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_IApodClient_FetchApodAsync_DateTime_DateTime_.md&amp;value=---%0Auid%3A%20Apod.IApodClient.FetchApodAsync(DateTime%2CDateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_IApodClient_FetchApodAsync_DateTime_DateTime_.md&amp;value=---%0Auid%3A%20Apod.IApodClient.FetchApodAsync(DateTime%2CDateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/IApodClient.cs/#L18">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/IApodClient.cs/#L34">View Source</a>
   </span>
   <a id="Apod_IApodClient_FetchApodAsync_" data-uid="Apod.IApodClient.FetchApodAsync*"></a>
   <h4 id="Apod_IApodClient_FetchApodAsync_DateTime_DateTime_" data-uid="Apod.IApodClient.FetchApodAsync(DateTime,DateTime)">FetchApodAsync(DateTime, DateTime)</h4>
-  <div class="markdown level1 summary"><p>Fetch all the Astronomy Pictures of the Day between two dates.</p>
+  <div class="markdown level1 summary"><p>Fetch all the Astronomy Pictures of the Day between two dates (inclusive).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;ApodResponse&gt; FetchApodAsync(DateTime startDate, DateTime endDate)</code></pre>
+    <pre><code class="lang-csharp hljs">ValueTask&lt;ApodResponse&gt; FetchApodAsync(DateTime startDate, DateTime endDate)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -192,13 +199,13 @@
       <tr>
         <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">startDate</span></td>
-        <td><p>The start date. Must be between June 16th 1995 and today's date.</p>
+        <td><p>The start date. Must be between June 16th 1995 and today's date (inclusive).</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">endDate</span></td>
-        <td><p>The end date. Must be between the <code data-dev-comment-type="paramref" class="paramref">startDate</code> and today's date. Defaults to today's date.</p>
+        <td><p>The end date. Must be between the <code data-dev-comment-type="paramref" class="paramref">startDate</code> and today's date (inclusive). Defaults to today's date.</p>
 </td>
       </tr>
     </tbody>
@@ -213,17 +220,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
+        <td><span class="xref">ValueTask</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_IApodClient_FetchApodAsync_System_Int32_.md&amp;value=---%0Auid%3A%20Apod.IApodClient.FetchApodAsync(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_IApodClient_FetchApodAsync_System_Int32_.md&amp;value=---%0Auid%3A%20Apod.IApodClient.FetchApodAsync(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/IApodClient.cs/#L22">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/IApodClient.cs/#L40">View Source</a>
   </span>
   <a id="Apod_IApodClient_FetchApodAsync_" data-uid="Apod.IApodClient.FetchApodAsync*"></a>
   <h4 id="Apod_IApodClient_FetchApodAsync_System_Int32_" data-uid="Apod.IApodClient.FetchApodAsync(System.Int32)">FetchApodAsync(Int32)</h4>
@@ -232,7 +239,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task&lt;ApodResponse&gt; FetchApodAsync(int count)</code></pre>
+    <pre><code class="lang-csharp hljs">ValueTask&lt;ApodResponse&gt; FetchApodAsync(int count)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -245,7 +252,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Int32</span></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
         <td><span class="parametername">count</span></td>
         <td><p>The amount of APODs to fetch. Must be positive and cannot exceed 100.</p>
 </td>
@@ -262,11 +269,15 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
+        <td><span class="xref">ValueTask</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Apod.ApodClient.html">ApodClient</a></div>
+  </div>
 </article>
           </div>
           
@@ -275,10 +286,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_IApodClient.md&amp;value=---%0Auid%3A%20Apod.IApodClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_IApodClient.md&amp;value=---%0Auid%3A%20Apod.IApodClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/IApodClient.cs/#L6" class="contribution-link">View Source</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/IApodClient.cs/#L16" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

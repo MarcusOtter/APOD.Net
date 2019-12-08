@@ -78,7 +78,7 @@
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ApodClient</span></div>
   </div>
   <div classs="implements">
@@ -92,14 +92,23 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class ApodClient : object, IApodClient, IDisposable</code></pre>
   </div>
+  <h5 id="Apod_ApodClient_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>
+Remember to call <a class="xref" href="Apod.ApodClient.html#Apod_ApodClient_Dispose">Dispose()</a> on the client after you&apos;re done using it. 
+Read <a href="https://github.com/LeMorrow/APOD.Net#disposing-the-client">https://github.com/LeMorrow/APOD.Net#disposing-the-client</a> to learn more.
+</p>
+<p>
+NASA&apos;s Astronomy Picture of the Day API can be found at <a href="https://api.nasa.gov#apod">https://api.nasa.gov#apod</a>.
+</p>
+</div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient__ctor.md&amp;value=---%0Auid%3A%20Apod.ApodClient.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient__ctor.md&amp;value=---%0Auid%3A%20Apod.ApodClient.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L23">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L44">View Source</a>
   </span>
   <a id="Apod_ApodClient__ctor_" data-uid="Apod.ApodClient.#ctor*"></a>
   <h4 id="Apod_ApodClient__ctor" data-uid="Apod.ApodClient.#ctor">ApodClient()</h4>
@@ -114,12 +123,15 @@
   <div class="markdown level1 remarks"><p>The API key &quot;DEMO_KEY&quot; has an hourly limit of 30 requests per IP adress and a daily limit of 50 requests per IP address.
 To prevent rate limiting, it is recommended to sign up for your own API key at <a href="https://api.nasa.gov">https://api.nasa.gov</a> and use the other constructor.</p>
 </div>
+  <h5 id="Apod_ApodClient__ctor_examples">Examples</h5>
+  <pre><code class="lang-csharp">var client = new ApodClient();</code></pre>
+
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient__ctor_System_String_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient__ctor_System_String_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L27">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L57">View Source</a>
   </span>
   <a id="Apod_ApodClient__ctor_" data-uid="Apod.ApodClient.#ctor*"></a>
   <h4 id="Apod_ApodClient__ctor_System_String_" data-uid="Apod.ApodClient.#ctor(System.String)">ApodClient(String)</h4>
@@ -141,23 +153,26 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">apiKey</span></td>
         <td><p>Your API key from <a href="https://api.nasa.gov">https://api.nasa.gov</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodClient__ctor_System_String__examples">Examples</h5>
+  <pre><code class="lang-csharp">var client = new ApodClient(&quot;YOUR_API_KEY_HERE&quot;);</code></pre>
+
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.%23ctor(System.String%2CApod.Logic.Net.IHttpRequester%2CApod.Logic.Net.IHttpResponseParser%2CApod.Logic.Errors.IErrorHandler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.%23ctor(System.String%2CApod.Logic.Net.IHttpRequester%2CApod.Logic.Net.IHttpResponseParser%2CApod.Logic.Errors.IErrorHandler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L34">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L73">View Source</a>
   </span>
   <a id="Apod_ApodClient__ctor_" data-uid="Apod.ApodClient.#ctor*"></a>
   <h4 id="Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_" data-uid="Apod.ApodClient.#ctor(System.String,Apod.Logic.Net.IHttpRequester,Apod.Logic.Net.IHttpResponseParser,Apod.Logic.Errors.IErrorHandler)">ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler)</h4>
-  <div class="markdown level1 summary"><p>Creates a new instance of an Astronomy Picture of the Day client.</p>
+  <div class="markdown level1 summary"><p>Creates a new instance of an Astronomy Picture of the Day client, overriding the internal logic.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -175,7 +190,7 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">apiKey</span></td>
         <td><p>Your API key from <a href="https://api.nasa.gov">https://api.nasa.gov</a>.</p>
 </td>
@@ -200,39 +215,54 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This constructor can be used for overriding internal logic in the client.
+The average user should not need to call this constructor.</p>
+</div>
+  <h5 id="Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler__examples">Examples</h5>
+  <p>See <a href="../examples/errorhandler.html">Override the IErrorHandler</a> for an example on how to implement and use any of these interfaces.</p>
+
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient_Dispose.md&amp;value=---%0Auid%3A%20Apod.ApodClient.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient_Dispose.md&amp;value=---%0Auid%3A%20Apod.ApodClient.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L116">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L262">View Source</a>
   </span>
   <a id="Apod_ApodClient_Dispose_" data-uid="Apod.ApodClient.Dispose*"></a>
   <h4 id="Apod_ApodClient_Dispose" data-uid="Apod.ApodClient.Dispose">Dispose()</h4>
-  <div class="markdown level1 summary"><p>Releases the unmanaged resources and disposes of the managed resources used by the System.Net.Http.HttpMessageInvoker.</p>
+  <div class="markdown level1 summary"><p>Releases the unmanaged resources and disposes of the managed resources used by the <see cref="!:System.Net.Http.HttpMessageInvoker"></see>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
   </div>
+  <h5 id="Apod_ApodClient_Dispose_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+Remember to call this method once you are done using the client.
+</p>
+<p>
+Read <a href="https://github.com/LeMorrow/APOD.Net#disposing-the-client">https://github.com/LeMorrow/APOD.Net#disposing-the-client</a> to learn more.
+</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient_FetchApodAsync.md&amp;value=---%0Auid%3A%20Apod.ApodClient.FetchApodAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient_FetchApodAsync.md&amp;value=---%0Auid%3A%20Apod.ApodClient.FetchApodAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L42">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L99">View Source</a>
   </span>
   <a id="Apod_ApodClient_FetchApodAsync_" data-uid="Apod.ApodClient.FetchApodAsync*"></a>
   <h4 id="Apod_ApodClient_FetchApodAsync" data-uid="Apod.ApodClient.FetchApodAsync">FetchApodAsync()</h4>
-  <div class="markdown level1 summary"><p>Fetch the current Astronomy Picture of the Day.</p>
+  <div class="markdown level1 summary"><p>Fetch the Astronomy Picture of the Day for today's date.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;ApodResponse&gt; FetchApodAsync()</code></pre>
+    <pre><code class="lang-csharp hljs">public ValueTask&lt;ApodResponse&gt; FetchApodAsync()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -244,17 +274,30 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
+        <td><span class="xref">ValueTask</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodClient_FetchApodAsync_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>&quot;Today's date&quot; refers to the current date in the Eastern Time Zone.
+Read more: <a href="https://github.com/LeMorrow/APOD.Net#when-do-new-apods-get-published-by-nasa">https://github.com/LeMorrow/APOD.Net#when-do-new-apods-get-published-by-nasa</a>.</p>
+</div>
+  <h5 id="Apod_ApodClient_FetchApodAsync_examples">Examples</h5>
+  <pre><code class="lang-csharp">using var client = new ApodClient();
+
+var response = await client.FetchApodAsync();
+if (response.StatusCode != ApodStatusCode.OK) { return; }
+
+Console.WriteLine(response.Content.Date);
+Console.WriteLine(response.Content.Title);</code></pre>
+
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient_FetchApodAsync_DateTime_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.FetchApodAsync(DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient_FetchApodAsync_DateTime_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.FetchApodAsync(DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L56">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L141">View Source</a>
   </span>
   <a id="Apod_ApodClient_FetchApodAsync_" data-uid="Apod.ApodClient.FetchApodAsync*"></a>
   <h4 id="Apod_ApodClient_FetchApodAsync_DateTime_" data-uid="Apod.ApodClient.FetchApodAsync(DateTime)">FetchApodAsync(DateTime)</h4>
@@ -263,7 +306,7 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;ApodResponse&gt; FetchApodAsync(DateTime dateTime)</code></pre>
+    <pre><code class="lang-csharp hljs">public ValueTask&lt;ApodResponse&gt; FetchApodAsync(DateTime dateTime)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -278,7 +321,7 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
       <tr>
         <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">dateTime</span></td>
-        <td><p>The date to request the APOD for. Must be between June 16th 1995 and today's date.</p>
+        <td><p>The date to request the APOD for. Must be between June 16th 1995 and today's date (inclusive).</p>
 </td>
       </tr>
     </tbody>
@@ -293,26 +336,49 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
+        <td><span class="xref">ValueTask</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodClient_FetchApodAsync_DateTime__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+You do not need to consider time zone differences between your application and NASA&apos;s API.
+If <code data-dev-comment-type="paramref" class="paramref">dateTime</code> has today&apos;s date (according to your local time zone), the method will take care of it accordingly.
+</p>
+<p>
+Note that this means that if you are ahead of the Eastern Time Zone and ask for today&apos;s date after midnight
+you would get an APOD with (for you) yesterday&apos;s date, since that is the most recent one.
+</p>
+</div>
+  <h5 id="Apod_ApodClient_FetchApodAsync_DateTime__examples">Examples</h5>
+  <pre><code class="lang-csharp">using var client = new ApodClient();
+
+var date = new DateTime(2004, 04, 09);
+var response = await client.FetchApodAsync(date);
+
+if (response.StatusCode != ApodStatusCode.OK) { return; }
+
+var content = response.Content;
+
+Console.WriteLine(content.Date);
+Console.WriteLine(content.Title);</code></pre>
+
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient_FetchApodAsync_DateTime_DateTime_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.FetchApodAsync(DateTime%2CDateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient_FetchApodAsync_DateTime_DateTime_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.FetchApodAsync(DateTime%2CDateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L76">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L194">View Source</a>
   </span>
   <a id="Apod_ApodClient_FetchApodAsync_" data-uid="Apod.ApodClient.FetchApodAsync*"></a>
   <h4 id="Apod_ApodClient_FetchApodAsync_DateTime_DateTime_" data-uid="Apod.ApodClient.FetchApodAsync(DateTime,DateTime)">FetchApodAsync(DateTime, DateTime)</h4>
-  <div class="markdown level1 summary"><p>Fetch all the Astronomy Pictures of the Day between two dates.</p>
+  <div class="markdown level1 summary"><p>Fetch all the Astronomy Pictures of the Day between two dates (inclusive).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;ApodResponse&gt; FetchApodAsync(DateTime startDate, DateTime endDate = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public ValueTask&lt;ApodResponse&gt; FetchApodAsync(DateTime startDate, DateTime endDate = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -327,13 +393,13 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
       <tr>
         <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">startDate</span></td>
-        <td><p>The start date. Must be between June 16th 1995 and today's date.</p>
+        <td><p>The start date. Must be between June 16th 1995 and today's date (inclusive).</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">DateTime</span></td>
         <td><span class="parametername">endDate</span></td>
-        <td><p>The end date. Must be between the <code data-dev-comment-type="paramref" class="paramref">startDate</code> and today's date. Defaults to today's date.</p>
+        <td><p>The end date. Must be between the <code data-dev-comment-type="paramref" class="paramref">startDate</code> and today's date (inclusive). Defaults to today's date.</p>
 </td>
       </tr>
     </tbody>
@@ -348,17 +414,45 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
+        <td><span class="xref">ValueTask</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodClient_FetchApodAsync_DateTime_DateTime__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+You do not need to consider time zone differences between your application and NASA&apos;s API.
+If <code data-dev-comment-type="paramref" class="paramref">endDate</code> has today&apos;s date (according to your local time zone), the method will take care of it accordingly.
+</p>
+<p>
+Note that this means that if you are ahead of the Eastern Time Zone and ask for all APODs between yesterday and today just after midnight (locally),
+you would only get one APOD with (for you) yesterday&apos;s date, since a picture for your &quot;today&quot; doesn&apos;t exist yet.
+</p>
+<p>
+It is therefore not possible to safely assume the amount of APODs this method will return,
+since it depends on time zone differences and the current time.
+</p>
+</div>
+  <h5 id="Apod_ApodClient_FetchApodAsync_DateTime_DateTime__examples">Examples</h5>
+  <pre><code class="lang-csharp">using var client = new ApodClient();
+
+var startDate = new DateTime(2008, 10, 29);
+var endDate = new DateTime(2008, 11, 02);
+var response = await client.FetchApodAsync(startDate, endDate);
+
+if (response.StatusCode != ApodStatusCode.OK) { return; }
+
+foreach (var apod in response.AllContent)
+{
+    Console.WriteLine($&quot;{apod.Date}: {apod.Title}&quot;);
+}</code></pre>
+
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient_FetchApodAsync_System_Int32_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.FetchApodAsync(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient_FetchApodAsync_System_Int32_.md&amp;value=---%0Auid%3A%20Apod.ApodClient.FetchApodAsync(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L93">View Source</a>
+    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L231">View Source</a>
   </span>
   <a id="Apod_ApodClient_FetchApodAsync_" data-uid="Apod.ApodClient.FetchApodAsync*"></a>
   <h4 id="Apod_ApodClient_FetchApodAsync_System_Int32_" data-uid="Apod.ApodClient.FetchApodAsync(System.Int32)">FetchApodAsync(Int32)</h4>
@@ -367,7 +461,7 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task&lt;ApodResponse&gt; FetchApodAsync(int count)</code></pre>
+    <pre><code class="lang-csharp hljs">public ValueTask&lt;ApodResponse&gt; FetchApodAsync(int count)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -380,7 +474,7 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Int32</span></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
         <td><span class="parametername">count</span></td>
         <td><p>The amount of APODs to fetch. Must be positive and cannot exceed 100.</p>
 </td>
@@ -397,17 +491,36 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
+        <td><span class="xref">ValueTask</span>&lt;<a class="xref" href="Apod.ApodResponse.html">ApodResponse</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Apod_ApodClient_FetchApodAsync_System_Int32__examples">Examples</h5>
+  <pre><code class="lang-csharp">using var client = new ApodClient();
+
+var amount = 3;
+var response = await client.FetchApodAsync(amount);
+
+if (response.StatusCode != ApodStatusCode.OK) { return; }
+
+foreach (var apod in response.AllContent)
+{
+    Console.WriteLine($&quot;{apod.Date}: {apod.Title}&quot;);
+}</code></pre>
+
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Apod.IApodClient.html">IApodClient</a>
   </div>
   <div>
       <span class="xref">IDisposable</span>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="Apod.ApodResponse.html">ApodResponse</a></div>
+      <div><a class="xref" href="Apod.ApodError.html">ApodError</a></div>
+      <div><a class="xref" href="Apod.ApodContent.html">ApodContent</a></div>
   </div>
 </article>
           </div>
@@ -417,10 +530,10 @@ To prevent rate limiting, it is recommended to sign up for your own API key at <
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/new/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/apiSpec/new?filename=Apod_ApodClient.md&amp;value=---%0Auid%3A%20Apod.ApodClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/new/35fda809655ae60a3fe3c9d333076150b9595315/apiSpec/new?filename=Apod_ApodClient.md&amp;value=---%0Auid%3A%20Apod.ApodClient%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/LeMorrow/APOD.Net/blob/bbe994fa5b2b03adf340fcd0b2a492cb76bb654f/src/Apod/ApodClient.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/LeMorrow/APOD.Net/blob/35fda809655ae60a3fe3c9d333076150b9595315/src/Apod/ApodClient.cs/#L24" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
