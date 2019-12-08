@@ -82,6 +82,19 @@ references:
   isSpec: "True"
   fullName: Apod.ApodClient.FetchApodAsync
   nameWithType: ApodClient.FetchApodAsync
+- uid: Apod.ApodClient.GetPermalink(Apod.ApodContent)
+  name: GetPermalink(ApodContent)
+  href: api/Apod.ApodClient.html#Apod_ApodClient_GetPermalink_Apod_ApodContent_
+  commentId: M:Apod.ApodClient.GetPermalink(Apod.ApodContent)
+  fullName: Apod.ApodClient.GetPermalink(Apod.ApodContent)
+  nameWithType: ApodClient.GetPermalink(ApodContent)
+- uid: Apod.ApodClient.GetPermalink*
+  name: GetPermalink
+  href: api/Apod.ApodClient.html#Apod_ApodClient_GetPermalink_
+  commentId: Overload:Apod.ApodClient.GetPermalink
+  isSpec: "True"
+  fullName: Apod.ApodClient.GetPermalink
+  nameWithType: ApodClient.GetPermalink
 - uid: Apod.ApodContent
   name: ApodContent
   href: api/Apod.ApodContent.html
@@ -467,6 +480,19 @@ references:
   isSpec: "True"
   fullName: Apod.IApodClient.FetchApodAsync
   nameWithType: IApodClient.FetchApodAsync
+- uid: Apod.IApodClient.GetPermalink(Apod.ApodContent)
+  name: GetPermalink(ApodContent)
+  href: api/Apod.IApodClient.html#Apod_IApodClient_GetPermalink_Apod_ApodContent_
+  commentId: M:Apod.IApodClient.GetPermalink(Apod.ApodContent)
+  fullName: Apod.IApodClient.GetPermalink(Apod.ApodContent)
+  nameWithType: IApodClient.GetPermalink(ApodContent)
+- uid: Apod.IApodClient.GetPermalink*
+  name: GetPermalink
+  href: api/Apod.IApodClient.html#Apod_IApodClient_GetPermalink_
+  commentId: Overload:Apod.IApodClient.GetPermalink
+  isSpec: "True"
+  fullName: Apod.IApodClient.GetPermalink
+  nameWithType: IApodClient.GetPermalink
 - uid: Apod.Logic
   name: Apod.Logic
   href: api/Apod.Logic.html
