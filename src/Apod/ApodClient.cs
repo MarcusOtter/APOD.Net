@@ -96,6 +96,7 @@ namespace Apod
         /// </code>
         /// </example>
         /// <exception cref="ObjectDisposedException">Thrown when the client has been disposed.</exception>
+        /// <returns>The response.</returns>
         public async ValueTask<ApodResponse> FetchApodAsync()
         {
             ThrowExceptionIfDisposed();
@@ -138,6 +139,7 @@ namespace Apod
         /// </example>
         /// <exception cref="ObjectDisposedException">Thrown when the client has been disposed.</exception>
         /// <param name="dateTime">The date to request the APOD for. Must be between June 16th 1995 and today's date (inclusive).</param>
+        /// <returns>The response.</returns>
         public async ValueTask<ApodResponse> FetchApodAsync(DateTime dateTime)
         {
             if (dateTime.Date == DateTime.Today) { return await FetchApodAsync().ConfigureAwait(false); }
@@ -191,6 +193,7 @@ namespace Apod
         /// <exception cref="ObjectDisposedException">Thrown when the client has been disposed.</exception>
         /// <param name="startDate">The start date. Must be between June 16th 1995 and today's date (inclusive).</param>
         /// <param name="endDate">The end date. Must be between the <paramref name="startDate"/> and today's date (inclusive). Defaults to today's date.</param>
+        /// <returns>The response.</returns>
         public async ValueTask<ApodResponse> FetchApodAsync(DateTime startDate, DateTime endDate = default)
         {
             ThrowExceptionIfDisposed();
@@ -228,6 +231,7 @@ namespace Apod
         /// </example>
         /// <exception cref="ObjectDisposedException">Thrown when the client has been disposed.</exception>
         /// <param name="count">The amount of APODs to fetch. Must be positive and cannot exceed 100.</param>
+        /// <returns>The response.</returns>
         public async ValueTask<ApodResponse> FetchApodAsync(int count)
         {
             ThrowExceptionIfDisposed();
@@ -241,6 +245,22 @@ namespace Apod
             if (responseError.ErrorCode != ApodErrorCode.None) { return responseError.ToApodResponse(); }
 
             return await _httpResponseParser.ParseMultipleApodsAsync(httpResponse).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get the apod.nasa.gov permalink for an Astronomy Picture of the Day. Example response:
+        /// <a href="https://apod.nasa.gov/apod/ap191208.html">https://apod.nasa.gov/apod/ap191208.html</a>.
+        /// </summary>
+        /// <param name="apodContent">The Astronomy Picture of the Day to get the permalink for.</param>
+        /// <returns>The permalink URL to this APOD.</returns>
+        public string GetPermalink(ApodContent apodContent)
+        {
+            var date = apodContent.Date;
+            var year = date.ToString("yy");
+            var month = date.ToString("MM");
+            var day = date.ToString("dd");
+
+            return $"https://apod.nasa.gov/apod/ap{year}{month}{day}.html";
         }
 
         private void ThrowExceptionIfDisposed()

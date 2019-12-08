@@ -199,6 +199,25 @@ namespace ApodTests
             }
         }
 
+        [Theory]
+        [InlineData("2001-04-10", "https://apod.nasa.gov/apod/ap010410.html")]
+        [InlineData("1965-11-28", "https://apod.nasa.gov/apod/ap651128.html")]
+        [InlineData("2038-08-02", "https://apod.nasa.gov/apod/ap380802.html")]
+        public void GetPermalink_CorrectLink(string dateString, string expected)
+        {
+            var date = DateTime.Parse(dateString);
+            var apod = GetApodContentWithDate(date);
+
+            var actual = _client.GetPermalink(apod);
+
+            Assert.Equal(expected, actual);
+        }
+
+        private ApodContent GetApodContentWithDate(DateTime date)
+        {
+            return new ApodContent { Date = date };
+        }
+
         [Fact]
         public void Constructor_NoArguments_NotNull()
         {
