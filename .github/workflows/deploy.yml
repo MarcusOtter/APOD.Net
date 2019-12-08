@@ -6,8 +6,8 @@ on:
       - "release"
 
 jobs:
-  generate_docs:
-    runs-on: windows-latest
+  publish_package:
+    runs-on: ubuntu-latest
     
     steps:
     - uses: actions/checkout@v1
@@ -17,18 +17,24 @@ jobs:
       with:
         dotnet-version: 3.0.100
     
-    - uses: nuget/setup-nuget@v1
-      with:
-        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-        nuget-version: 'latest'
-
     - name: Create NuGet package
       run: dotnet pack src/Apod/Apod.csproj -c Release --output nupkgs
-      
+        
     - name: Publish NuGet package
       run: dotnet nuget push nupkgs\*.nupkg --source https://api.nuget.org/v3/index.json --api-key $NUGET_KEY
       env:
         NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+
+  generate_docs:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+        nuget-version: 'latest'
       
     - name: Install DocFX
       run: nuget install docfx.console -Version 2.47.0
