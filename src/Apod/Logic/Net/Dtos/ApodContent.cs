@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace Apod
 {
     /// <summary>
-    /// Contains information about the digital content of an Astronomy Picture of the Day.
+    /// Contains information about the digital contents of an Astronomy Picture of the Day.
     /// </summary>
     /// <seealso cref="ApodResponse"/>
     /// <seealso cref="ApodError"/>
