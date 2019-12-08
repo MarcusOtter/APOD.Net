@@ -38,5 +38,13 @@ namespace Apod
         /// </summary>
         /// <param name="count">The amount of APODs to fetch. Must be positive and cannot exceed 100.</param>
         ValueTask<ApodResponse> FetchApodAsync(int count);
+
+        /// <summary>
+        /// Get the apod.nasa.gov permalink for an Astronomy Picture of the Day. Example format:
+        /// <a href="https://apod.nasa.gov/apod/apYYMMDD.html">https://apod.nasa.gov/apod/apYYMMDD.html</a>.
+        /// </summary>
+        /// <param name="apodContent">The Astronomy Picture of the Day to get the permalink for.</param>
+        /// <returns>The permalink URL to this APOD.</returns>
+        string GetPermalink(ApodContent apodContent);
     }
 }

@@ -243,6 +243,22 @@ namespace Apod
             return await _httpResponseParser.ParseMultipleApodsAsync(httpResponse).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Get the apod.nasa.gov permalink for an Astronomy Picture of the Day. Example response:
+        /// <a href="https://apod.nasa.gov/apod/ap191208.html">https://apod.nasa.gov/apod/ap191208.html</a>.
+        /// </summary>
+        /// <param name="apodContent">The Astronomy Picture of the Day to get the permalink for.</param>
+        /// <returns>The permalink URL to this APOD.</returns>
+        public string GetPermalink(ApodContent apodContent)
+        {
+            var date = apodContent.Date;
+            var year = date.ToString("yy");
+            var month = date.ToString("MM");
+            var day = date.ToString("dd");
+
+            return $"https://apod.nasa.gov/apod/ap{year}{month}{day}.html";
+        }
+
         private void ThrowExceptionIfDisposed()
         {
             if (_disposed) { throw new ObjectDisposedException(GetType().FullName); }
