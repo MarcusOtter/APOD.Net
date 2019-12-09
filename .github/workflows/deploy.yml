@@ -34,7 +34,7 @@ jobs:
         name: nupkg
     
     - name: Push package to NuGet.org
-      run: dotnet nuget push nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
 
   # Pushes the .nupkg to Github Package Registry
   push_gpr:
@@ -56,7 +56,7 @@ jobs:
       run: |        
         nuget sources Add -Name "GPR" -Source "https://nuget.pkg.github.com/lemorrow/index.json" -UserName LeMorrow -Password ${{ secrets.GITHUB_TOKEN }}
         nuget setApiKey ${{ secrets.NUGET_API_KEY }} -Source "GPR"
-        nuget push nupkgs\*.nupkg -Source "GPR" -SkipDuplicate
+        nuget push nupkg\*.nupkg -Source "GPR" -SkipDuplicate
 
   # Generates the documentation with DocFX and uploads the static website as an artifact
   generate_docs:
