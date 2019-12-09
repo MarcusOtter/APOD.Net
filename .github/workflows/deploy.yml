@@ -6,7 +6,8 @@ on:
       - "release"
 
 jobs:
-  publish_package:
+  # Creates the .nupkg with dotnet pack and uploads it as an artifact
+  create_package:
     runs-on: ubuntu-latest
     
     steps:
@@ -19,14 +20,56 @@ jobs:
     
     - name: Create NuGet package
       run: dotnet pack src/Apod/Apod.csproj -c Release --output nupkgs
-        
-    - name: Publish NuGet package
-      run: dotnet nuget push nupkgs/*.nupkg --source https://api.nuget.org/v3/index.json --api-key $NUGET_KEY
-      env:
-        NUGET_KEY: ${{ secrets.NUGET_API_KEY }}
+    
+    - name: Upload package artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: nupkg
+        path: nupkgs/*.nupkg
+  
+  # Publishes the .nupkg to NuGet.org
+  publish_nuget:
+    needs: create_package
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download package artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: nupkg
 
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+        nuget-version: 'latest'
+    
+    - name: Publish package to NuGet.org
+      run: nuget push nupkgs/*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate
+
+  # Publishes the .nupkg to Github Package Registry
+  publish_gpr:
+    needs: create_package
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Download package artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: nupkg
+
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
+        nuget-version: 'latest'
+    
+    - name: Publish package to the Github Package Registry
+      run: |
+        nuget sources Add -Name "GPR" -Source "https://nuget.pkg.github.com/lemorrow/index.json" -UserName LeMorrow -Password ${{ secrets.GITHUB_TOKEN }}
+        nuget push nupkgs/*.nupkg -Source "GPR" -SkipDuplicate
+
+  # Generates the documentation with DocFX and uploads the static website as an artifact
   generate_docs:
-    runs-on: windows-latest
+    runs-on: windows-latest # On windows because DocFX was difficult to install on other machines
     
     steps:
     - uses: actions/checkout@v1
@@ -50,15 +93,12 @@ jobs:
         name: site
         path: docs/_site
   
-  # Two different jobs for building/deploying docs because JamesIves/github-pages-deploy-action does not run on windows
-  # and DocFX cannot easily be installed on ubuntu. 
-  
+  # Publishes the documentation website to the gh-pages branch
   deploy_docs:
     needs: generate_docs
     runs-on: ubuntu-latest 
 
     steps:
-    - uses: actions/checkout@v1
     
     - name: Download site artifact
       uses: actions/download-artifact@v1
