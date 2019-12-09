@@ -1,42 +1,24 @@
 name: Deploy
 
-on: 
+on:
   push:
-    branches: 
+    branches:
       - "release"
 
 jobs:
-  # Creates the .nupkg with dotnet pack and uploads it as an artifact
-  create_package:
+  deploy_package:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v1
-    
+
     - name: Setup .NET Core 3.0
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.0.100
-    
+
     - name: Create NuGet package
       run: dotnet pack src/Apod/Apod.csproj -c Release --output nupkgs
-    
-    - name: Upload package artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: nupkg
-        path: nupkgs/*.nupkg
-  
-  # Publishes the .nupkg to NuGet.org
-  publish_nuget:
-    needs: create_package
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Download package artifact
-      uses: actions/download-artifact@v1
-      with:
-        name: nupkg
 
     - uses: nuget/setup-nuget@v1
       with:
@@ -45,22 +27,6 @@ jobs:
     
     - name: Publish package to NuGet.org
       run: nuget push nupkgs/*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate
-
-  # Publishes the .nupkg to Github Package Registry
-  publish_gpr:
-    needs: create_package
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Download package artifact
-      uses: actions/download-artifact@v1
-      with:
-        name: nupkg
-
-    - uses: nuget/setup-nuget@v1
-      with:
-        nuget-api-key: ${{ secrets.NUGET_API_KEY }}
-        nuget-version: 'latest'
     
     - name: Publish package to the Github Package Registry
       run: |
