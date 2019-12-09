@@ -34,7 +34,7 @@ jobs:
         name: nupkg
     
     - name: Push package to NuGet.org
-      run: dotnet nuget push nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push nupkg/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
 
   # Pushes the .nupkg to Github Package Registry
   push_gpr:
