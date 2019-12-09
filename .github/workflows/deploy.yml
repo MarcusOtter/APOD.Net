@@ -25,6 +25,9 @@ jobs:
         nuget-api-key: ${{ secrets.NUGET_API_KEY }}
         nuget-version: 'latest'
     
+    - name: Set NuGet API key
+      run: nuget setApiKey ${{ secrets.NUGET_API_KEY }}
+    
     - name: Publish package to NuGet.org
       run: nuget push nupkgs/*.nupkg -Source https://api.nuget.org/v3/index.json -SkipDuplicate
     
