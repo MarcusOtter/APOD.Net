@@ -15,7 +15,7 @@ jobs:
       NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
     strategy:
       matrix:
-        dotnet: ['2.1.607', '3.0.101', '3.1.100']
+        dotnet: ['3.0.101', '3.1.100']
         os: [macos-latest, windows-latest, ubuntu-latest]
     
     steps:
