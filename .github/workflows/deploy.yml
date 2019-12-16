@@ -45,7 +45,7 @@ jobs:
   # Pushes the .nupkg to Github Package Registry
   push_gpr:
     needs: create_package
-    runs-on: windows-latest # See https://github.com/NuGet/Home/issues/8580
+    runs-on: ubuntu-latest
   
     steps:
     - name: Download package artifact
@@ -53,7 +53,7 @@ jobs:
       with:
         name: nupkg
 
-    - uses: nuget/setup-nuget@v1
+    - uses: NuGet/setup-nuget@v1.0.2
       with:
         nuget-api-key: ${{ secrets.NUGET_API_KEY }}
         nuget-version: 'latest'
