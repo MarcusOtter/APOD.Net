@@ -61,7 +61,6 @@ jobs:
     - name: Push package to the Github Package Registry
       run: |        
         nuget sources Add -Name "GPR" -Source "https://nuget.pkg.github.com/lemorrow/index.json" -UserName LeMorrow -Password ${{ secrets.GITHUB_TOKEN }}
-        nuget setApiKey ${{ secrets.NUGET_API_KEY }} -Source "GPR"
         nuget push nupkg/*.nupkg -Source "GPR" -SkipDuplicate
 
   # Generates the documentation with DocFX and uploads the static website as an artifact
