@@ -214,7 +214,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Apod;
 
-namespace today
+namespace Example
 {
     public class Program
     {
