@@ -32,20 +32,19 @@ jobs:
     - name: Install coverlet
       run: dotnet add src/ApodTests/ApodTests.csproj package coverlet.collector --version 1.2.25-g074a201a91 --source https://www.myget.org/F/coverlet-dev/api/v3/index.json
       
-    - name: Run tests
-      run: dotnet test src/ApodTests/ApodTests.csproj --collect:"XPlat Code Coverage" --settings ./src/ApodTests/.runsettings
-
-    - name: Move coverage output UNIX
+    - name: Run tests UNIX
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
-      run: |
-       ls -R
-       mv src/ApodTests/coverage/**/*.info .
-      
-    - name: Move coverage output WINDOWS
-      if: matrix.os == 'windows-latest'
       run: | 
-       tree /f
+       dotnet test src/ApodTests/ApodTests.csproj --collect:"XPlat Code Coverage" --settings ./src/ApodTests/.runsettings
+       mv src/ApodTests/coverage/**/*.info .
+       ls -R
+
+    - name: Run tests WINDOWS
+      if: matrix.os == 'windows-latest'
+      run: |
+       dotnet test src/ApodTests/ApodTests.csproj --collect:"XPlat Code Coverage" --settings ./src/ApodTests/.runsettings
        move src\ApodTests\coverage\**\*.info .
+       tree /f
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.0.1
