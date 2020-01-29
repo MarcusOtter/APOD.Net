@@ -44,8 +44,8 @@ jobs:
     - name: Move coverage output WINDOWS
       if: matrix.os == 'windows-latest'
       run: | 
-      tree /f
-      move src\ApodTests\coverage\**\*.info .
+       tree /f
+       move src\ApodTests\coverage\**\*.info .
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.0.1
