@@ -36,15 +36,15 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: | 
        dotnet test src/ApodTests/ApodTests.csproj --collect:"XPlat Code Coverage" --settings ./src/ApodTests/.runsettings
+       find .
        mv src/ApodTests/coverage/**/*.info .
-       ls -R
 
     - name: Run tests WINDOWS
       if: matrix.os == 'windows-latest'
       run: |
        dotnet test src/ApodTests/ApodTests.csproj --collect:"XPlat Code Coverage" --settings ./src/ApodTests/.runsettings
-       move src\ApodTests\coverage\**\*.info .
        tree /f
+       move src\ApodTests\coverage\**\*.info .
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.0.1
