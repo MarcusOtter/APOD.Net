@@ -114,11 +114,10 @@ namespace ApodTests
         [InlineData(ApodErrorCode.None,           ApodErrorCode.ApiKeyInvalid, ApodStatusCode.Error)]
         public async Task FetchApodAsync_Today_CorrectApodStatusCode(ApodErrorCode inputError, ApodErrorCode httpResponseError, ApodStatusCode expectedStatusCode)
         {
-            var date = default(DateTime);
             InputHasError(inputError);
             HttpResponseHasError(httpResponseError);
 
-            var actualStatusCode = (await _client.FetchApodAsync(date)).StatusCode;
+            var actualStatusCode = (await _client.FetchApodAsync()).StatusCode;
 
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
