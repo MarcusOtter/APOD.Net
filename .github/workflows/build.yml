@@ -38,7 +38,7 @@ jobs:
     - name: Move coverage output UNIX
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
       run: |
-       tree
+       ls -R
        mv src/ApodTests/coverage/**/*.info .
       
     - name: Move coverage output WINDOWS
