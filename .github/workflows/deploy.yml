@@ -45,7 +45,7 @@ jobs:
   # Pushes the .nupkg to Github Package Registry
   push_gpr:
     needs: create_package
-    runs-on: ubuntu-latest
+    runs-on: windows-latest # See https://github.com/NuGet/Home/issues/8580
   
     steps:
     - name: Download package artifact

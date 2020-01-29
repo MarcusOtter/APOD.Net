@@ -30,13 +30,21 @@ jobs:
       run: dotnet build src/Apod.sln --configuration Release
 
     - name: Install coverlet
-      run: dotnet add src/ApodTests/ApodTests.csproj package coverlet.msbuild
-      
+      run: dotnet add src/ApodTests/ApodTests.csproj package coverlet.collector --version 1.2.25-g074a201a91 --source https://www.myget.org/F/coverlet-dev/api/v3/index.json
+    
     - name: Run tests
-      run: dotnet test src/ApodTests/ApodTests.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput='./coverage/lcov.info'
-      
+      run: dotnet test src/ApodTests/ApodTests.csproj --collect:"XPlat Code Coverage" --settings ./src/ApodTests/.runsettings
+
+    - name: Move test coverage results UNIX
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest'
+      run: mv src/ApodTests/coverage/**/*.info .
+
+    - name: Move test coverage results WINDOWS
+      if: matrix.os == 'windows-latest'
+      run: move src\ApodTests\coverage\**\*.info .
+
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v1.0.1
       with: 
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: src/ApodTests/coverage/lcov.info
+        path-to-lcov: coverage.info
