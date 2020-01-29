@@ -57,6 +57,20 @@ namespace ApodTests
         }
 
         [Fact]
+        public async Task FetchApodAsync_DateRange_SetsEndDateToDefaultIfToday()
+        {
+            var startDate = DateTime.Today.AddDays(-5);
+            var endDate = DateTime.Today;
+
+            InputHasError(ApodErrorCode.None);
+            HttpResponseHasError(ApodErrorCode.None);
+
+            await _client.FetchApodAsync(startDate, endDate);
+
+            AssertEndDateIsDefault();
+        }
+
+        [Fact]
         public async Task FetchApodAsync_Date_DoesNotSendHttpRequestOnInputError()
         {
             var date = default(DateTime);
@@ -163,6 +177,11 @@ namespace ApodTests
             _errorHandler.Verify(x => x.ValidateDate(It.IsAny<DateTime>()), Times.Never);
             _errorHandler.Verify(x => x.ValidateDateRange(It.IsAny<DateTime>(), It.IsAny<DateTime>()), Times.Never);
             _errorHandler.Verify(x => x.ValidateCount(It.IsAny<int>()), Times.Never);
+        }
+
+        private void AssertEndDateIsDefault()
+        {
+            _errorHandler.Verify(x => x.ValidateDateRange(It.IsAny<DateTime>(), It.Is<DateTime>(x => x == default)));
         }
 
         private void AssertHttpRequestNotSent()
