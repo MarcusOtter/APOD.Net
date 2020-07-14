@@ -1,12 +1,12 @@
 <p align="center">
   <a href="#"><img alt="APOD.Net, an unofficial .NET wrapper for NASA's Astronomy Picture of the Day API" src="docs/images/banner.jpg" /></a>
   <em><a href="https://www.nasa.gov/image-feature/revealing-the-milky-way-s-center">Image Credit: NASA, JPL-Caltech, Susan Stolovy (SSC/Caltech) et al.</a></em><br><br>
-  <a href="https://github.com/LeMorrow/APOD.Net/actions?query=workflow%3ABuild"><img src="https://github.com/LeMorrow/APOD.Net/workflows/Build/badge.svg" alt="Build status"></a>
+  <a href="https://github.com/MarcusOtter/APOD.Net/actions?query=workflow%3ABuild"><img src="https://github.com/MarcusOtter/APOD.Net/workflows/Build/badge.svg" alt="Build status"></a>
   <a href="https://coveralls.io/github/LeMorrow/APOD.Net?branch=master"><img src="https://coveralls.io/repos/github/LeMorrow/APOD.Net/badge.svg?branch=master&service=github" alt="Coverage Status" /></a>
   <a href="https://www.nuget.org/packages/APOD.Net/"><img src="https://img.shields.io/nuget/v/APOD.Net" alt="Nuget version" /></a><br>
-  <a href="https://lemorrow.github.io/APOD.Net/"><img src="https://img.shields.io/badge/Read%20the-documentation-informational?logo=github" alt="Read the documentation"></a>
+  <a href="https://marcusotter.github.io/APOD.Net/"><img src="https://img.shields.io/badge/Read%20the-documentation-informational?logo=github" alt="Read the documentation"></a>
   <a href="https://www.nuget.org/packages/APOD.Net/"><img src="https://img.shields.io/nuget/dt/APOD.Net" alt="Download count"/></a>
-  <a href="https://github.com/LeMorrow/APOD.Net/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License badge"></a>
+  <a href="https://github.com/MarcusOtter/APOD.Net/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License badge"></a>
 </p>
 
 # APOD.Net
@@ -18,7 +18,7 @@ APOD.Net is a .NET library used to asynchronously interface with [NASA's Astrono
 - 💻 Cross-platform support, targets **.NET Standard 2.0** which is supported by .NET Core 2.0+, .NET Framework 4.6.1+ and many more. [Click here for a full list of implementation support](https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support ".NET implementation support - docs.microsoft.com").
 - 🔧 **Takes care of everything you shouldn't have to care about**. HTTP requests, mapping the JSON responses to .NET objects, validating input, etc.
 - ✏️ **Frictionless and easy to implement**. One API request is one method call, as it should be.
-- 📖 Continuously updated **documentation**! [Click here to visit the docs](https://lemorrow.github.io/APOD.Net/ "APOD.Net Documentation").
+- 📖 Continuously updated **documentation**! [Click here to visit the docs](https://marcusotter.github.io/APOD.Net/ "APOD.Net Documentation").
 - 💉 Completely **dependency injection-friendly** which allows you to **easily override any functionality** with your own implementations.
 
 ¹ - Uses `System.Text.Json` for deserializing the JSON. This is built-in as part of the `.NET Core 3.0` framework but is installed as a NuGet package to be compatible with the targeted `.NET Standard 2.0`. [Read more about System.Text.Json here](https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-overview "JSON serialization in .NET - docs.microsoft.com").
@@ -66,26 +66,26 @@ This guide is intended to be read in sequencial order as every topic builds on t
 using Apod;
 ```
 ### Setting up the client
-If you are new and just want to explore the API, you can create a new [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") using the [parameterless constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient.html#Apod_ApodClient__ctor "ApodClient() constructor - APOD.Net Documentation").
+If you are new and just want to explore the API, you can create a new [ApodClient](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") using the [parameterless constructor](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient.html#Apod_ApodClient__ctor "ApodClient() constructor - APOD.Net Documentation").
 ```cs
 var client = new ApodClient();
 ```
 This will use the API key `DEMO_KEY` which is provided by NASA as a way to explore their APIs. It has a rate limit of 50 requests **daily** per IP address.
 
-For developing and using your application, you should [sign up for an API key](https://api.nasa.gov#signUp "Generate API Key - api.nasa.gov") which has a rate limit of 1000 requests **hourly** per IP address. To initialize the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") with your API key, use the [ApodClient(String) constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_ "ApodClient(String) constructor - APOD.Net Documentation").
+For developing and using your application, you should [sign up for an API key](https://api.nasa.gov#signUp "Generate API Key - api.nasa.gov") which has a rate limit of 1000 requests **hourly** per IP address. To initialize the [ApodClient](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") with your API key, use the [ApodClient(String) constructor](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_ "ApodClient(String) constructor - APOD.Net Documentation").
 ```cs
 var client = new ApodClient("YOUR_API_KEY_HERE");
 ```
 
 ### Making your first request
-There are numerous [available methods](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#methods "ApodClient Methods - APOD.Net documentation") on the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation"), but for this simple example we are going to get the Astronomy Picture of the Day from my most recent birthday using [ApodClient.FetchApodAsync(DateTime)](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_ "ApodClient.FetchApodAsync(DateTime) - APOD.Net Documentation"). I would get the APOD for your birthday, but I have no idea when that is. If I did, GitHub wouldn't be doing their GDPR right.
+There are numerous [available methods](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient#methods "ApodClient Methods - APOD.Net documentation") on the [ApodClient](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation"), but for this simple example we are going to get the Astronomy Picture of the Day from my most recent birthday using [ApodClient.FetchApodAsync(DateTime)](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_ "ApodClient.FetchApodAsync(DateTime) - APOD.Net Documentation"). I would get the APOD for your birthday, but I have no idea when that is. If I did, GitHub wouldn't be doing their GDPR right.
 ```cs
 var date = new DateTime(2019, 06, 04);
 var response = await client.FetchApodAsync(date);
 ```
 
 ### Interpreting the response
-The method we used in the example above, [ApodClient.FetchApodAsync(DateTime)](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_ "ApodClient.FetchApodAsync(DateTime) - APOD.Net Documentation"),  returns an [ApodResponse](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse "ApodResponse - APOD.Net Documentation"). Instead of being impatient and immediately reading our APOD content we should make sure that the client didn't encounter any errors along the way. If the [ApodResponse.StatusCode](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_StatusCode "ApodResponse.StatusCode - APOD.Net Documentation") is not `OK`, we can get information about what went wrong in the [ApodResponse.Error](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_Error "ApodResponse.Error - APOD.Net Documentation").
+The method we used in the example above, [ApodClient.FetchApodAsync(DateTime)](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient_FetchApodAsync_DateTime_ "ApodClient.FetchApodAsync(DateTime) - APOD.Net Documentation"),  returns an [ApodResponse](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse "ApodResponse - APOD.Net Documentation"). Instead of being impatient and immediately reading our APOD content we should make sure that the client didn't encounter any errors along the way. If the [ApodResponse.StatusCode](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_StatusCode "ApodResponse.StatusCode - APOD.Net Documentation") is not `OK`, we can get information about what went wrong in the [ApodResponse.Error](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_Error "ApodResponse.Error - APOD.Net Documentation").
 ```cs
 if (response.StatusCode != ApodStatusCode.OK)
 {
@@ -109,10 +109,10 @@ The API key you provided was invalid. Get one at https://api.nasa.gov/.
 </details>
 <br>
 
-When we are certain that there were no errors we can read the content from the response. The [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") contains all the information about the Astronomy Picture of the Day. You can access properties such as [Title](https://lemorrow.github.io/APOD.Net/api/Apod.ApodContent#Apod_Logic_Net_Dtos_ApodContent_Title "ApodContent.Title - APOD.Net Documentation"), [Explanation](https://lemorrow.github.io/APOD.Net/api/Apod.ApodContent#Apod_Logic_Net_Dtos_ApodContent_Explanation "ApodContent.Explanation - APOD.Net Documentation"), [Date](https://lemorrow.github.io/APOD.Net/api/Apod.ApodContent.html#Apod_Logic_Net_Dtos_ApodContent_Date "ApodContent.Date - APOD.Net Documentation"), and [ContentUrl](https://lemorrow.github.io/APOD.Net/api/Apod.ApodContent.html#Apod_Logic_Net_Dtos_ApodContent_ContentUrl "ApodContent.ContentUrl - APOD.Net Documentation") (and more).
+When we are certain that there were no errors we can read the content from the response. The [ApodResponse.Content](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") contains all the information about the Astronomy Picture of the Day. You can access properties such as [Title](https://marcusotter.github.io/APOD.Net/api/Apod.ApodContent#Apod_Logic_Net_Dtos_ApodContent_Title "ApodContent.Title - APOD.Net Documentation"), [Explanation](https://marcusotter.github.io/APOD.Net/api/Apod.ApodContent#Apod_Logic_Net_Dtos_ApodContent_Explanation "ApodContent.Explanation - APOD.Net Documentation"), [Date](https://marcusotter.github.io/APOD.Net/api/Apod.ApodContent.html#Apod_Logic_Net_Dtos_ApodContent_Date "ApodContent.Date - APOD.Net Documentation"), and [ContentUrl](https://marcusotter.github.io/APOD.Net/api/Apod.ApodContent.html#Apod_Logic_Net_Dtos_ApodContent_ContentUrl "ApodContent.ContentUrl - APOD.Net Documentation") (and more).
 
 
-In the request we made previously we're expecting to get exactly **one** APOD, since we made a request for a specific date. To get our APOD, we read the value of the [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") field.
+In the request we made previously we're expecting to get exactly **one** APOD, since we made a request for a specific date. To get our APOD, we read the value of the [ApodResponse.Content](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse.html#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") field.
 ```cs
 var apod = response.Content;
 Console.WriteLine(apod.Title);
@@ -133,7 +133,7 @@ If you put your ear to Mars, what would you hear? To find out, and to explore th
 </details>
 <br>
 
-If we're expecting **more than one** APOD from our request (for example if we asked for the APODs between two dates), we can get all of the APODs by reading the value of the [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent "ApodResponse.AllContent - APOD.Net Documentation") field.
+If we're expecting **more than one** APOD from our request (for example if we asked for the APODs between two dates), we can get all of the APODs by reading the value of the [ApodResponse.AllContent](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent "ApodResponse.AllContent - APOD.Net Documentation") field.
 ```cs
 foreach(var apod in response.AllContent)
 {
@@ -165,16 +165,16 @@ November 2, 2008: "Spicules: Jets on the Sun".
 </details>
 
 ### Disposing the client
-Since the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") uses an [HttpRequester](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Net.HttpRequester "HttpRequester - APOD.Net Documentation") which in turn uses an [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0 "HttpClient - docs.microsoft.com")
-which should be disposed, the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") is responsible for cleaning up the [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0 "HttpClient - docs.microsoft.com").
+Since the [ApodClient](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") uses an [HttpRequester](https://marcusotter.github.io/APOD.Net/api/Apod.Logic.Net.HttpRequester "HttpRequester - APOD.Net Documentation") which in turn uses an [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0 "HttpClient - docs.microsoft.com")
+which should be disposed, the [ApodClient](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") is responsible for cleaning up the [HttpClient](https://docs.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=netstandard-2.0 "HttpClient - docs.microsoft.com").
 
 
-To do this, call the [Dispose()](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient.html#Apod_ApodClient_Dispose "Dispose() - APOD.Net Documentation") method on the client when you are done using it. The client will become unusable after calling this method.
+To do this, call the [Dispose()](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient.html#Apod_ApodClient_Dispose "Dispose() - APOD.Net Documentation") method on the client when you are done using it. The client will become unusable after calling this method.
 ```cs
 client.Dispose();
 ```
 
-If you are only going to use the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") once in your application, you can construct and use it in a [using statement](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement "using statement (C# Reference) - docs.microsoft.com"). The client will not be usable outside the block and will be disposed of correctly.
+If you are only going to use the [ApodClient](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") once in your application, you can construct and use it in a [using statement](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-statement "using statement (C# Reference) - docs.microsoft.com"). The client will not be usable outside the block and will be disposed of correctly.
 ```cs
 using (var client = new ApodClient("YOUR_API_KEY_HERE"))
 {
@@ -189,10 +189,10 @@ using var client = new ApodClient("YOUR_API_KEY_HERE");
 ```
 
 ## 📁 More examples
-You can find more examples in [the documentation](https://lemorrow.github.io/APOD.Net/examples/ "Examples - APOD.Net Documentation").
+You can find more examples in [the documentation](https://marcusotter.github.io/APOD.Net/examples/ "Examples - APOD.Net Documentation").
 
 ## 💡 FAQ
-Can't find your question here? Feel free to [open an issue](https://github.com/LeMorrow/APOD.Net/issues/new/choose "Open an issue - github.com/LeMorrow/APOD.Net")!
+Can't find your question here? Feel free to [open an issue](https://github.com/MarcusOtter/APOD.Net/issues/new/choose "Open an issue - github.com/MarcusOtter/APOD.Net")!
 
 * [Disposable object created by 'new ApodClient()' is never disposed](#disposable-object-created-by-new-apodclient-is-never-disposed)
 * [When do new APODs get published by NASA?](#when-do-new-apods-get-published-by-nasa)
@@ -221,11 +221,11 @@ The first APOD was published June 16th 1995 ([link](https://apod.nasa.gov/apod/a
 
 In conclusion, there has been an Astronomy Picture of the Day every single day from June 20th 1995 and onward.
 
-### What does [ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") return if [ApodResponse.AllContent](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent "ApodResponse.AllContent - APOD.Net Documentation") has more than one APOD?
-[ApodResponse.Content](https://lemorrow.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") will return the APOD with the most recent date.
+### What does [ApodResponse.Content](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") return if [ApodResponse.AllContent](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_AllContent "ApodResponse.AllContent - APOD.Net Documentation") has more than one APOD?
+[ApodResponse.Content](https://marcusotter.github.io/APOD.Net/api/Apod.ApodResponse#Apod_ApodResponse_Content "ApodResponse.Content - APOD.Net Documentation") will return the APOD with the most recent date.
 
-### What do I use the [ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_ "ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor - APOD.Net Documentation") for?
-You can use this constructor to override the behaviour of the [ApodClient](https://lemorrow.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") to your liking. Maybe you know some secret optimizing tricks (if you do, [open a pull request](https://github.com/LeMorrow/APOD.Net/compare "Open a pull request - github.com/LeMorrow/APOD.Net")) or maybe you want custom error handling. In that case you can inject your own implementation of [IErrorHandler](https://lemorrow.github.io/APOD.Net/api/Apod.Logic.Errors.IErrorHandler.html "IErrorHandler - APOD.Net Documentation").
+### What do I use the [ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient#Apod_ApodClient__ctor_System_String_Apod_Logic_Net_IHttpRequester_Apod_Logic_Net_IHttpResponseParser_Apod_Logic_Errors_IErrorHandler_ "ApodClient(String, IHttpRequester, IHttpResponseParser, IErrorHandler) constructor - APOD.Net Documentation") for?
+You can use this constructor to override the behaviour of the [ApodClient](https://marcusotter.github.io/APOD.Net/api/Apod.ApodClient "ApodClient - APOD.Net Documentation") to your liking. Maybe you know some secret optimizing tricks (if you do, [open a pull request](https://github.com/MarcusOtter/APOD.Net/compare "Open a pull request - github.com/MarcusOtter/APOD.Net")) or maybe you want custom error handling. In that case you can inject your own implementation of [IErrorHandler](https://marcusotter.github.io/APOD.Net/api/Apod.Logic.Errors.IErrorHandler.html "IErrorHandler - APOD.Net Documentation").
 
 ## 📘 License
-APOD.Net is licensed under the MIT License. Read the full license [here](https://github.com/LeMorrow/APOD.Net/blob/master/LICENSE "LICENSE - github.com/LeMorrow/APOD.Net").
+APOD.Net is licensed under the MIT License. Read the full license [here](https://github.com/MarcusOtter/APOD.Net/blob/master/LICENSE "LICENSE - github.com/MarcusOtter/APOD.Net").
